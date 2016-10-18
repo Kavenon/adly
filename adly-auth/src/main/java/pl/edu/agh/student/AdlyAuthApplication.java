@@ -3,7 +3,6 @@ package pl.edu.agh.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -31,7 +30,6 @@ import java.security.Principal;
 
 @RestController
 @EnableResourceServer
-@EnableAuthorizationServer
 @SpringBootApplication
 @SessionAttributes("authorizationRequest")
 public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
@@ -47,6 +45,7 @@ public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
         registry.addViewController("/login").setViewName("loginForm");
         registry.addViewController("/oauth/confirm_access").setViewName("authorize");
     }
+
     @Configuration
     @Order(-20)
     protected static class LoginConfig extends WebSecurityConfigurerAdapter {

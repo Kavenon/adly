@@ -12,7 +12,7 @@
 </head>
 adfadfaf
 
-<body ng-app="hello" ng-cloak class="ng-cloak">adfadfadf
+<body ng-app="hello" ng-cloak class="ng-cloak">
 <div ng-controller="navigation as nav" class="container">
     <ul class="nav nav-pills" role="tablist">
         <li ng-class="{active:nav.tab('home')}"><a href="#/">home</a></li>
@@ -21,5 +21,9 @@ adfadfaf
     </ul>
 </div>
 <div ng-view class="container"></div>
+
+<script src="assets/lib/angular/angular.min.js"></script>
+<script src="assets/lib/angular/angular-route.min.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>
