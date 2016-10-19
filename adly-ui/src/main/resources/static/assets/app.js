@@ -40,7 +40,7 @@ angular.module('hello', [ 'ngRoute' ]).config(function($routeProvider, $httpProv
 
     }).controller('home', function($http) {
         var self = this;
-        $http.get('resource/reservations/names').then(function(response) {
+        $http.get('resource/accounts/1/surveys').then(function(response) {
             console.log(response);
         })
     });

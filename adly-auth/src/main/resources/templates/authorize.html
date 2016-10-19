@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout">
+<body>
+<th:block layout:fragment="content">
+
+
+    <div class="container">
+        <main id="content" class="widget-login-container" role="main">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 col-xs-10 col-lg-offset-4 col-sm-offset-3 col-xs-offset-1">
+                    <h4 class="widget-login-logo animated fadeInUp">
+                        <i class="fa fa-circle text-gray"></i>
+                        Adly.io
+                        <i class="fa fa-circle text-warning"></i>
+                    </h4>
+                    <section class="widget widget-login animated fadeInUp">
+                        <header>
+                            <h3>Please Confirm</h3>
+
+                            <p class="mt">
+                                Do you authorize <span th:text="${authorizationRequest.clientId}"></span> at  <span th:text="${authorizationRequest.redirectUri}"></span> to access your protected resources?
+                            </p>
+                        </header>
+                        <div class="widget-body">
+                            <form id="confirmationForm" name="confirmationForm"
+                                  th:action="@{../oauth/authorize}" th:method="post" class="display-inline-block">
+                                <input name="user_oauth_approval" value="true" type="hidden" />
+                                <button class="btn btn-primary btn-sm" type="submit">Approve</button>
+                            </form>
+                            <form id="denyForm" name="confirmationForm"
+                                  th:action="@{../oauth/authorize}" th:method="post" class="display-inline-block pull-right">
+                                <input name="user_oauth_approval" value="false" type="hidden" />
+                                <button class="btn btn-sm btn-inverse" type="submit">Deny</button>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <footer class="page-footer">
+            2017 &copy; Adly.io
+        </footer>
+    </div>
+
+</th:block>
+</body>
+</html>

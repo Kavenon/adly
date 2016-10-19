@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import pl.edu.agh.student.service.UserService;
@@ -35,17 +37,21 @@ import java.security.Principal;
 @EnableResourceServer
 @SpringBootApplication
 @SessionAttributes("authorizationRequest")
+
 public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
 
 //    @Autowired
 //    private DataSource dataSource;
 
-
-
 	@RequestMapping("/user")
 	public Principal user(Principal user) {
 		return user;
 	}
+
+    @RequestMapping("/userId")
+    public Long userId(Principal user) {
+        return 1L;
+    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -74,6 +80,12 @@ public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
         }
 
         @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring()
+                    .antMatchers("/fonts/**");
+        }
+
+        @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
             provider.setUserDetailsService(userDetailsService);
@@ -90,22 +102,6 @@ public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
 
         @Autowired
         private AuthenticationManager authenticationManager;
-
-//        @Autowired
-//        private DataSource dataSource;
-
-
-//        private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//
-//        @Bean
-//        public JdbcTokenStore tokenStore() {
-//            return new JdbcTokenStore(dataSource);
-//        }
-//
-//        @Bean
-//        protected AuthorizationCodeServices authorizationCodeServices() {
-//            return new JdbcAuthorizationCodeServices(dataSource);
-//        }
 
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter() {
@@ -143,6 +139,13 @@ public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
         }
 
     }
+    @Override
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uaa/css/**", "/uaa/fonts/**")
+                .addResourceLocations("/css/")
+                .addResourceLocations("/fonts/");
+    }
+
 
     public static void main(String[] args) {
 		SpringApplication.run(AdlyAuthApplication.class, args);
