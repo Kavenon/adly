@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" ng-app="adlyApp">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Adly.io auth</title>
+    <meta name="author" content="Kamil Chlebek" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <script type="text/javascript" th:src="@{/frontend/dist/vendor.bundle.js}"></script>
+    <script type="text/javascript" th:src="@{/frontend/dist/app.bundle.js}"></script>
+
+    <th:block layout:fragment="scripts" />
+
+</head>
+<body ng-controller="App" sn-demo="" ng-class="{'nav-static': app.state['nav-static'], 'login-page': $state.is('login'), 'error-page': $state.is('error')}">
+
+    <div layout:fragment="content"></div>
+
+</body>
+</html>
