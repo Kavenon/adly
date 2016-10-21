@@ -32,6 +32,11 @@ public class AdlyUiApplication extends WebSecurityConfigurerAdapter {
 			registry.setOrder( Ordered.HIGHEST_PRECEDENCE );
 			super.addViewControllers( registry );
 		}
+
+
+
+
+
 	}
 
 	@Override
@@ -54,5 +59,6 @@ public class AdlyUiApplication extends WebSecurityConfigurerAdapter {
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         // @formatter:on
 	}
+
 
 }
