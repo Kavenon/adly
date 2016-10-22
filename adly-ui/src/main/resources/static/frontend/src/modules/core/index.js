@@ -14,7 +14,7 @@ var core = angular.module('adlyApp.core', [
     'ngStorage'
 ]);
 
-core.config(function($stateProvider, $urlRouterProvider) {
+core.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     $stateProvider
         .state('app', {
             url: '/app',
@@ -26,9 +26,19 @@ core.config(function($stateProvider, $urlRouterProvider) {
         var $state = $injector.get('$state');
         $state.go('app.dashboard');
     });
+
+    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    $httpProvider.defaults.headers.common['Accept'] = 'application/json';
+
+
 });
 
-core.controller('App', function(config, $scope, $localStorage, $state) {
+core.controller('App', function(config, $scope, $localStorage, $state, $http) {
+
+
+    $http.get('api/beacon').then(function(response) {
+        console.log('rep',response);
+    });
 
     var vm = this;
 

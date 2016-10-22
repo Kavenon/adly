@@ -112,9 +112,10 @@ module.exports = function(module){
       },
 
       changeActiveNavigationItem: function(event, toState, toParams){
-        var $newActiveLink = this.$el.find('a[href="' + $state.href(toState, toParams) + '"]');
 
-        // collapse .collapse only if new and old active links belong to different .collapse
+        var $newActiveLink =  this.$el.find('a').filter(function(i, a){
+              return $state.href(toState, toParams).indexOf(jQuery(a).attr('href')) !== -1;
+          });
 
         if (!$newActiveLink.is('.active > .collapse > li > a')){
           this.$el.find('.active .active').closest('.collapse').collapse('hide');

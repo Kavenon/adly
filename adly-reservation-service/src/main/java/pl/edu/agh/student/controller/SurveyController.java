@@ -19,7 +19,7 @@ public class SurveyController {
         this.surveyService = surveyService;
     }
 
-    @RequestMapping(value = "/accounts/{accountNumber}/surveys", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/{accountNumber}/surveys", method = RequestMethod.GET)
     public ResponseEntity getSurveysForUser(@PathVariable("accountNumber") Long accountNumber){
         return new ResponseEntity<>(surveyService.getSurveysForUserId(accountNumber), HttpStatus.OK);
     }

@@ -27,6 +27,7 @@
         <module>adly-zipkin-service</module>
         <module>adly-edge</module>
         <module>adly-reservation-service</module>
+        <module>adly-beacon-service</module>
     </modules>
 
     <properties>

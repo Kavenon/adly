@@ -25,7 +25,7 @@ module.exports = new Config.Config().merge({
             // **IMPORTANT** This is needed so that each bootstrap js file required by
             // bootstrap-webpack has access to the jQuery object
             { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
-            { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader'] },
+        { test: /\.scss$/,        loaders: ["style", "css", "sass"]},
             {test: /\.css$/, loader: 'style-loader!css-loader'},
             {
                 test: /\.html$/,
