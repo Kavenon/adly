@@ -16,9 +16,6 @@ import org.springframework.stereotype.Controller;
 @EnableZuulProxy
 @EnableResourceServer
 @EnableHystrix
-@ImportAutoConfiguration(FeignAutoConfiguration.class)
-@EnableFeignClients
-@Controller
 public class AdlyEdgeApplication  {
 
     public static void main(String[] args) {

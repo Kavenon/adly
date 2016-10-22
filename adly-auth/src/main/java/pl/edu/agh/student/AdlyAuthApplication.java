@@ -3,6 +3,7 @@ package pl.edu.agh.student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import pl.edu.agh.student.model.User;
+import pl.edu.agh.student.service.UserService;
 
 import java.security.KeyPair;
 import java.security.Principal;
@@ -33,12 +36,22 @@ import java.security.Principal;
 @Controller
 @SessionAttributes("authorizationRequest")
 @EnableResourceServer
+@EnableEurekaClient
 public class AdlyAuthApplication extends WebMvcConfigurerAdapter {
 
     @RequestMapping("/user")
     @ResponseBody
     public Principal user(Principal user) {
         return user;
+    }
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping("/userId")
+    @ResponseBody
+    public Long userId(Principal user) {
+        return ((User) userService.loadUserByUsername(user.getName())).getId();
     }
 
     @Override

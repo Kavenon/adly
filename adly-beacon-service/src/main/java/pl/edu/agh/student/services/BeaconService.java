@@ -1,7 +1,6 @@
 package pl.edu.agh.student.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +19,16 @@ public class BeaconService {
     private OAuth2RestTemplate oAuth2RestTemplate;
 
     @Autowired
-    public BeaconService(BeaconRepository beaconRepository, @LoadBalanced  OAuth2RestTemplate oAuth2RestTemplate) {
+    public BeaconService(BeaconRepository beaconRepository, OAuth2RestTemplate oAuth2RestTemplate) {
         this.beaconRepository = beaconRepository;
         this.oAuth2RestTemplate = oAuth2RestTemplate;
     }
 
     public List<Beacon> getBeacons() {
 
-        Long user = oAuth2RestTemplate.getForObject("http://adly-auth/uaa/userId", Long.class);
-
+        Long user = oAuth2RestTemplate.getForObject("http://localhost:9191/uaa/userId", Long.class);
         return beaconRepository.findByUserId(user);
+
     }
 
     public Beacon addBeacon(Beacon beacon) {
