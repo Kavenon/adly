@@ -5,9 +5,9 @@
   var core = module.factory('config', configFactory);
 
   var config = {
-    name: 'sing',
-    title: 'Sing - Dashboard',
-    version: '2.0.0',
+    name: 'Adly',
+    title: 'Adly - Dashboard',
+    version: '1.0.0',
     /**
      * Whether to print and alert some log information
      */

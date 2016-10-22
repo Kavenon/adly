@@ -6,6 +6,7 @@ require('angular-animate');
 require('ngstorage');
 
 
+var coreTemplate = require('modules/core/core.html');
 var core = angular.module('adlyApp.core', [
     'ui.router',
     'ui.bootstrap',
@@ -18,7 +19,7 @@ core.config(function($stateProvider, $urlRouterProvider) {
         .state('app', {
             url: '/app',
             abstract: true,
-            template: require('modules/core/core.html')
+            templateUrl: coreTemplate
         });
 
     $urlRouterProvider.otherwise(function ($injector) {
@@ -58,6 +59,7 @@ core.factory('$exceptionHandler', function($log, $window, $injector) {
 
 require('modules/core/navigation')(core);
 require('modules/core/config.js')(core);
+require('modules/core/notifications')(core);
 
 
 

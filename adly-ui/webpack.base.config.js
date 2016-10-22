@@ -27,7 +27,10 @@ module.exports = new Config.Config().merge({
             { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
             { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader'] },
             {test: /\.css$/, loader: 'style-loader!css-loader'},
-
+            {
+                test: /\.html$/,
+                loader: 'ngtemplate!html'
+            },
             // Needed for the css-loader when [bootstrap-webpack](https://github.com/bline/bootstrap-webpack)
             // loads bootstrap's css.
             { test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/, loader: 'url-loader?limit=100000' },
@@ -36,10 +39,7 @@ module.exports = new Config.Config().merge({
             { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,    loader: 'file' },
             { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,    loader: 'url?limit=10000&mimetype=image/svg+xml' },
             
-            {
-                test: /\.html$/,
-                loader: 'html'
-            },
+          
             {test: /src.*\.js$/, loaders: ['ng-annotate']}
         ]
     },

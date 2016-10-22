@@ -1,4 +1,5 @@
 
+var sidebarTemplate = require('modules/core/navigation/sidebar.html');
 
 var Slimscroll = require('slimscroll');
 
@@ -35,7 +36,7 @@ module.exports = function(module){
       restrict: 'A',
       link: function (scope, $_el, attrs){
           var $el = jQuery($_el);
-          
+
         if (angular.isDefined(attrs.snAction) && attrs.snAction !== '') {
           $el.on('click', function(e) {
             scope.$apply(function(){
@@ -180,7 +181,7 @@ module.exports = function(module){
     };
     return {
       replace: true,
-      template: require('modules/core/navigation/sidebar.html'),
+      templateUrl: sidebarTemplate ,
       link: function (scope, $el){
         var d = new SnNavigationDirective($el, scope);
 
