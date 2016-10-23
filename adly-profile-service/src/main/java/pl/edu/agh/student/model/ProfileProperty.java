@@ -1,23 +1,47 @@
 package pl.edu.agh.student.model;
 
-import javax.persistence.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import pl.edu.agh.student.hibernate.JsonBinaryType;
+import pl.edu.agh.student.hibernate.JsonStringType;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class ProfileProperty {
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonStringType.class),
+        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
+public abstract class ProfileProperty  {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private PropertyType type;
+    @Type(type = "json")
+    @Column(columnDefinition = "json")
+    private IPropertyType type;
 
-    public Long getId() {
+    private Boolean deleted = false;
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,11 +53,12 @@ public abstract class ProfileProperty {
         this.name = name;
     }
 
-    public PropertyType getType() {
+    public IPropertyType getType() {
         return type;
     }
 
-    public void setType(PropertyType type) {
+    public void setType(IPropertyType type) {
         this.type = type;
     }
+
 }

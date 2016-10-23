@@ -28,11 +28,22 @@ module.controller('UserProfileController', function ($scope, PredefinedProperty,
     $scope.predefinedProperties = PredefinedProperty.query();
     $scope.userProperties = UserProperty.query();
 
+
+    $scope.deleteProperty = function(item, $index) {
+        item.$delete(function() {
+            $scope.userProperties.splice($index, 1);
+        });
+    };
+
 });
 module.controller('UserProfileFormController', function ($scope, $stateParams, UserProperty, $state) {
 
     if($stateParams.propertyId === ""){
         $scope.property = new UserProperty();
+        // @todo: create directive for property types (input json -> output form)
+        $scope.property.type = {
+            type: '.SimplePropertyType'
+        };
         $scope.upsert = function() {
             $scope.property.$save(function() {
                 $state.go('app.user-profile', {}, { reload: true});

@@ -14,4 +14,5 @@ public class UserProperty extends ProfileProperty {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
 }
