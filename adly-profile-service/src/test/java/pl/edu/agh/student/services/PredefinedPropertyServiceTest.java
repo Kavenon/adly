@@ -21,7 +21,7 @@ public class PredefinedPropertyServiceTest {
     public void test(){
 
         PredefinedProperty predefinedProperty = new PredefinedProperty();
-        predefinedProperty.setName("somename");
+        predefinedProperty.setName("to delete");
         predefinedProperty.setType(new EnumeratedPropertyType(GenderPropertyEnum.stringNames()));
 
 

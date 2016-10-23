@@ -20,6 +20,7 @@
 
     <modules>
         <module>adly-ui</module>
+        <module>adly-hibernate-commons</module>
         <module>adly-config-server</module>
         <module>adly-auth</module>
         <module>adly-eureka-service</module>
