@@ -1,10 +1,7 @@
-package pl.edu.agh.student.model;
+package pl.edu.agh.student.model.property;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-import pl.edu.agh.student.hibernate.JsonBinaryType;
-import pl.edu.agh.student.hibernate.JsonStringType;
+import pl.edu.agh.student.hibernate.JsonBaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -12,11 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-@TypeDefs({
-        @TypeDef(name = "json", typeClass = JsonStringType.class),
-        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
-public abstract class ProfileProperty  {
+public abstract class ProfileProperty extends JsonBaseEntity {
 
     @Id
     @GeneratedValue

@@ -4,24 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.student.model.property.PredefinedProperty;
-import pl.edu.agh.student.services.property.PredefinedPropertyService;
+import pl.edu.agh.student.model.survey.PredefinedSurvey;
+import pl.edu.agh.student.services.survey.PredefinedSurveyService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/profile/predefined-property")
-public class PredefinedPropertyRestController {
+@RequestMapping("/profile/predefined-survey")
+public class PredefinedSurveyRestController {
 
-    private PredefinedPropertyService service;
+    private PredefinedSurveyService service;
 
     @Autowired
-    public PredefinedPropertyRestController(PredefinedPropertyService service) {
+    public PredefinedSurveyRestController(PredefinedSurveyService service) {
         this.service = service;
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<PredefinedProperty> getProperties() {
+    public List<PredefinedSurvey> getProperties() {
         return service.findAll();
     }
 

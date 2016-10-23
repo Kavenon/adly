@@ -2,9 +2,9 @@ package pl.edu.agh.student.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.edu.agh.student.model.property.PredefinedProperty;
+import pl.edu.agh.student.model.survey.PredefinedSurvey;
 
 @Repository
-public interface PredefinedPropertyRepository extends CrudRepository<PredefinedProperty, Long> {
+public interface PredefinedSurveyRepository extends CrudRepository<PredefinedSurvey, Integer> {
 
 }

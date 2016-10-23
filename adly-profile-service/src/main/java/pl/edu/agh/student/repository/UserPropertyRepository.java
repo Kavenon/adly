@@ -2,7 +2,7 @@ package pl.edu.agh.student.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.edu.agh.student.model.UserProperty;
+import pl.edu.agh.student.model.property.UserProperty;
 
 import java.util.List;
 

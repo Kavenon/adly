@@ -1,7 +1,6 @@
-package pl.edu.agh.student.model;
+package pl.edu.agh.student.model.survey;
 
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -10,21 +9,19 @@ public class SurveyField {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     private String name;
-
-    @Enumerated
-    private SurveyFieldType type;
+    private Integer profilePropertyId;
 
     public SurveyField() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,12 +33,12 @@ public class SurveyField {
         this.name = name;
     }
 
-    public SurveyFieldType getType() {
-        return type;
+    public Integer getType() {
+        return profilePropertyId;
     }
 
-    public void setType(SurveyFieldType type) {
-        this.type = type;
+    public void setType(Integer typeId) {
+        this.profilePropertyId = typeId;
     }
 
     @Override
@@ -49,7 +46,7 @@ public class SurveyField {
         return "SurveyField{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", type=" + type +
+                ", profilePropertyId=" + profilePropertyId +
                 '}';
     }
 }

@@ -5,9 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.edu.agh.student.model.EnumeratedPropertyType;
-import pl.edu.agh.student.model.PredefinedProperty;
-import pl.edu.agh.student.model.type.GenderPropertyEnum;
+import pl.edu.agh.student.model.property.EnumeratedPropertyType;
+import pl.edu.agh.student.model.property.PredefinedProperty;
+import pl.edu.agh.student.model.property.type.GenderPropertyEnum;
 import pl.edu.agh.student.repository.PredefinedPropertyRepository;
 
 @RunWith(SpringRunner.class)

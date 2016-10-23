@@ -1,4 +1,4 @@
-package pl.edu.agh.student.model;
+package pl.edu.agh.student.model.property;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
