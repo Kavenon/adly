@@ -1,10 +1,17 @@
 package pl.edu.agh.student.model;
 
+import javax.persistence.*;
+
+@MappedSuperclass
 public abstract class ProfileProperty {
 
-    protected Long id;
-    protected String name;
-    protected PropertyType type;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private PropertyType type;
 
     public Long getId() {
         return id;
