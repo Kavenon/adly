@@ -8,12 +8,14 @@ require('parsleyjs');
 var adlyApp = angular.module('adlyApp', [
     'adlyApp.core',
     'adlyApp.dashboard',
-    'adlyApp.beacon'
+    'adlyApp.beacon',
+    'adlyApp.userProfile'
 ]);
 
 require('modules/core');
 require('modules/dashboard');
 require('modules/beacon');
+require('modules/user-profile');
 
 adlyApp.directive('validateForm', function() {
     return function(scope, elm, attr) {
