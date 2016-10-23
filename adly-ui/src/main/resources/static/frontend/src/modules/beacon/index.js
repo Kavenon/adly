@@ -29,23 +29,21 @@ module.controller('BeaconController', function ($scope, Beacon) {
     $scope.beacons = Beacon.query();
 
     $scope.deleteBeacon = function(beacon, $index) {
-        if (popupService.showPopup('Your beacon will be deleted')) {
-            beacon.$delete(function() {
-                $scope.beacons.splice($index, 1);
-            });
-        }
+        beacon.$delete(function() {
+            $scope.beacons.splice($index, 1);
+        });
     };
 
 
 });
 
-module.controller('BeaconFormController', function ($scope, $stateParams, Beacon) {
+module.controller('BeaconFormController', function ($scope, $stateParams, Beacon, $state) {
 
     if($stateParams.beaconId === ""){
         $scope.beacon = new Beacon();
         $scope.upsert = function() {
             $scope.beacon.$save(function() {
-                $state.go('^');
+                $state.go('app.beacon', {}, { reload: true});
             });
         };
     }
@@ -53,7 +51,7 @@ module.controller('BeaconFormController', function ($scope, $stateParams, Beacon
         $scope.beacon = Beacon.get({ id: $stateParams.beaconId });
         $scope.upsert = function() {
             $scope.beacon.$update(function() {
-                $state.go('^');
+                $state.go('app.beacon', {}, { reload: true});
             });
         };
     }
@@ -61,6 +59,10 @@ module.controller('BeaconFormController', function ($scope, $stateParams, Beacon
 });
 
 module.factory('Beacon', function($resource) {
-    return $resource('/api/beacon/:id', { id: '@id' });
+    return $resource('/api/beacon/:id', { id: '@id' }, {
+        update: {
+            method: 'PUT'
+        }
+    });
 });
 

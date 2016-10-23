@@ -25,15 +25,16 @@ public class BeaconService {
     }
 
     public List<Beacon> getBeacons() {
+        return beaconRepository.findByUserId(getUserId());
+    }
 
-        Long user = oAuth2RestTemplate.getForObject("http://localhost:9191/uaa/userId", Long.class);
-        return beaconRepository.findByUserId(user);
-
+    private Long getUserId() {
+        return oAuth2RestTemplate.getForObject("http://localhost:9191/uaa/userId", Long.class);
     }
 
     public Beacon addBeacon(Beacon beacon) {
         beacon.setId(null);
-        beacon.setUserId(null);
+        beacon.setUserId(getUserId());
         return beaconRepository.save(beacon);
     }
 
@@ -41,17 +42,21 @@ public class BeaconService {
 
         Beacon one = beaconRepository.findOne(updatedItem.getId());
 
-        if(!Objects.equals(null, one.getUserId())){
+        if(!Objects.equals(getUserId(), one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
         updatedItem.setId(id);
-        updatedItem.setUserId(null);
+        updatedItem.setUserId(getUserId());
         return beaconRepository.save(updatedItem);
 
     }
 
     public void deleteBeacon(Integer beaconId) {
-        beaconRepository.deleteByIdAndUserId(beaconId, null);
+        beaconRepository.deleteByIdAndUserId(beaconId, getUserId());
+    }
+
+    public Beacon getBeacon(Integer id) {
+        return beaconRepository.findByIdAndUserId(id, getUserId());
     }
 }

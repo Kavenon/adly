@@ -11,7 +11,7 @@ module.config(function($stateProvider) {
         .state('app.dashboard', {
             url: '/dashboard',
             templateUrl: dashboardTemplate,
-            controller: 'BeaconController'
+            controller: 'DashboardController'
         })
 });
 

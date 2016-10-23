@@ -12,4 +12,7 @@ public interface BeaconRepository extends CrudRepository<Beacon, Integer> {
     List<Beacon> findByUserId(Long userId);
 
     void deleteByIdAndUserId(Integer beaconId, Long userId);
+
+    Beacon findByIdAndUserId(Integer id, Long userId);
+
 }

@@ -26,7 +26,7 @@
                             <td>{{beacon.name}}</td>
                             <td class="text-align-right">
                                 <i class="fa fa-pencil adly-icon mr-xs" ui-sref=".upsert({beaconId: beacon.id})"></i>
-                                <i class="fa fa-trash adly-icon"></i>
+                                <i class="fa fa-trash adly-icon" ng-click="deleteBeacon(beacon, $index);"></i>
                             </td>
                         </tr>
                     </tbody>
