@@ -1,7 +1,7 @@
 <nav id="sidebar" role="navigation" class="sidebar">
     <div class="js-sidebar-content">
         <header class="logo hidden-xs">
-            <a href="index.html">{{app.name}}</a>
+            <a ui-sref="app.dashboard">{{app.name}}</a>
         </header>
         <div class="sidebar-status visible-xs">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -41,6 +41,16 @@
                     User profile
                 </a>
             </li>
+
+            <li>
+                <a data-ui-sref="app.survey">
+                    <span class="icon">
+                        <i class="fa fa-check-square-o"></i>
+                    </span>
+                    Surveys
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>

@@ -3,8 +3,8 @@ package pl.edu.agh.student.services.property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.agh.student.model.property.PredefinedProperty;
-import pl.edu.agh.student.repository.PredefinedPropertyRepository;
+import pl.edu.agh.student.model.property.ProfileProperty;
+import pl.edu.agh.student.repository.ProfilePropertyRepository;
 
 import java.util.List;
 
@@ -12,15 +12,14 @@ import java.util.List;
 @Transactional
 public class PredefinedPropertyService {
 
-    private PredefinedPropertyRepository repository;
+    private ProfilePropertyRepository repository;
 
     @Autowired
-    public PredefinedPropertyService(PredefinedPropertyRepository repository) {
+    public PredefinedPropertyService(ProfilePropertyRepository repository) {
         this.repository = repository;
     }
 
-    public List<PredefinedProperty> findAll() {
-        return (List<PredefinedProperty>) repository.findAll();
+    public List<ProfileProperty> findAllPredefined() {
+        return repository.findByUserIdIsNull();
     }
-
 }

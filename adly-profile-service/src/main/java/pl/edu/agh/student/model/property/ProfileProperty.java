@@ -3,13 +3,10 @@ package pl.edu.agh.student.model.property;
 import org.hibernate.annotations.Type;
 import pl.edu.agh.student.hibernate.JsonBaseEntity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
-@MappedSuperclass
-public abstract class ProfileProperty extends JsonBaseEntity {
+@Entity
+public class ProfileProperty extends JsonBaseEntity {
 
     @Id
     @GeneratedValue
@@ -21,6 +18,15 @@ public abstract class ProfileProperty extends JsonBaseEntity {
     private IPropertyType type;
 
     private Boolean deleted = false;
+    private Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Boolean getDeleted() {
         return deleted;

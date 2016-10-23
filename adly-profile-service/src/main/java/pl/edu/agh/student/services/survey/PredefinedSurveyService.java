@@ -3,8 +3,8 @@ package pl.edu.agh.student.services.survey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pl.edu.agh.student.model.survey.PredefinedSurvey;
-import pl.edu.agh.student.repository.PredefinedSurveyRepository;
+import pl.edu.agh.student.model.survey.Survey;
+import pl.edu.agh.student.repository.UserSurveyRepository;
 
 import java.util.List;
 
@@ -12,15 +12,14 @@ import java.util.List;
 @Transactional
 public class PredefinedSurveyService {
 
-    private PredefinedSurveyRepository repository;
+    private UserSurveyRepository repository;
 
     @Autowired
-    public PredefinedSurveyService(PredefinedSurveyRepository repository) {
+    public PredefinedSurveyService(UserSurveyRepository repository) {
         this.repository = repository;
     }
 
-    public List<PredefinedSurvey> findAll() {
-        return (List<PredefinedSurvey>) repository.findAll();
+    public List<Survey> findAllPredefined() {
+        return repository.findByUserIdIsNull();
     }
-
 }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.student.model.survey.PredefinedSurvey;
+import pl.edu.agh.student.model.survey.Survey;
 import pl.edu.agh.student.services.survey.PredefinedSurveyService;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class PredefinedSurveyRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<PredefinedSurvey> getProperties() {
-        return service.findAll();
+    public List<Survey> getProperties() {
+        return service.findAllPredefined();
     }
 
 }

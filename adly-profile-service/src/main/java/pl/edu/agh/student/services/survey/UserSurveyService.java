@@ -5,7 +5,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
-import pl.edu.agh.student.model.survey.UserSurvey;
+import pl.edu.agh.student.model.survey.Survey;
 import pl.edu.agh.student.repository.UserSurveyRepository;
 
 import java.util.List;
@@ -28,15 +28,15 @@ public class UserSurveyService {
         return oAuth2RestTemplate.getForObject("http://localhost:9191/uaa/userId", Long.class);
     }
 
-    public UserSurvey add(UserSurvey userSurvey) {
+    public Survey add(Survey userSurvey) {
         userSurvey.setId(null);
         userSurvey.setUserId(getUserId());
         return repository.save(userSurvey);
     }
 
-    public UserSurvey update(UserSurvey updatedItem, Integer id) {
+    public Survey update(Survey updatedItem, Integer id) {
 
-        UserSurvey one = repository.findOne(updatedItem.getId());
+        Survey one = repository.findOne(updatedItem.getId());
 
         if(!Objects.equals(getUserId(), one.getUserId())){
             throw new UnauthorizedAccessException();
@@ -50,7 +50,7 @@ public class UserSurveyService {
 
     public void delete(Integer id) {
 
-        UserSurvey one = repository.findOne(id);
+        Survey one = repository.findOne(id);
 
         if(!Objects.equals(getUserId(), one.getUserId())){
             throw new UnauthorizedAccessException();
@@ -61,11 +61,11 @@ public class UserSurveyService {
 
     }
 
-    public UserSurvey get(Integer id) {
+    public Survey get(Integer id) {
         return repository.findByIdAndUserId(id, getUserId());
     }
 
-    public List<UserSurvey> get() {
+    public List<Survey> get() {
         return repository.findByUserIdAndDeleted(getUserId(), false);
     }
 }

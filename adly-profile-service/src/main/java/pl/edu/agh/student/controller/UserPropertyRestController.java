@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.agh.student.model.property.UserProperty;
+import pl.edu.agh.student.model.property.ProfileProperty;
 import pl.edu.agh.student.services.property.UserPropertyService;
 
 import java.util.List;
@@ -22,17 +22,17 @@ public class UserPropertyRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<UserProperty> get() {
+    public List<ProfileProperty> get() {
         return service.get();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public UserProperty add(@RequestBody UserProperty property) {
+    public ProfileProperty add(@RequestBody ProfileProperty property) {
         return service.add(property);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<UserProperty> get(@PathVariable Integer id) throws Exception {
+    public ResponseEntity<ProfileProperty> get(@PathVariable Integer id) throws Exception {
         return Optional.ofNullable(service.get(id))
                 .map(a -> new ResponseEntity<>(a, HttpStatus.OK))
                 .orElseThrow(() -> new Exception("Propety with requested id does not exist"));
@@ -40,7 +40,7 @@ public class UserPropertyRestController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public UserProperty update(@RequestBody UserProperty updatedItem, @PathVariable Integer id) {
+    public ProfileProperty update(@RequestBody ProfileProperty updatedItem, @PathVariable Integer id) {
         return service.update(updatedItem, id);
     }
 

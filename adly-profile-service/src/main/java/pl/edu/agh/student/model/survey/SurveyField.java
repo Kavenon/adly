@@ -33,12 +33,12 @@ public class SurveyField {
         this.name = name;
     }
 
-    public Integer getType() {
+    public Integer getProfilePropertyId() {
         return profilePropertyId;
     }
 
-    public void setType(Integer typeId) {
-        this.profilePropertyId = typeId;
+    public void setProfilePropertyId(Integer profilePropertyId) {
+        this.profilePropertyId = profilePropertyId;
     }
 
     @Override

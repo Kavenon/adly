@@ -3,8 +3,8 @@ package pl.edu.agh.student.model.survey;
 import javax.persistence.*;
 import java.util.Set;
 
-@MappedSuperclass
-public abstract class Survey {
+@Entity
+public class Survey {
 
     @Id
     @GeneratedValue
@@ -13,10 +13,21 @@ public abstract class Survey {
     private String name;
     private Boolean deleted = false;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<SurveyField> fieldList;
 
+    private Long userId;
+
+
     public Survey() {
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {

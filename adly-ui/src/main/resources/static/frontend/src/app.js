@@ -9,13 +9,15 @@ var adlyApp = angular.module('adlyApp', [
     'adlyApp.core',
     'adlyApp.dashboard',
     'adlyApp.beacon',
-    'adlyApp.userProfile'
+    'adlyApp.userProfile',
+    'adlyApp.survey'
 ]);
 
 require('modules/core');
 require('modules/dashboard');
 require('modules/beacon');
 require('modules/user-profile');
+require('modules/survey');
 
 adlyApp.directive('validateForm', function() {
     return function(scope, elm, attr) {
@@ -30,4 +32,16 @@ adlyApp.directive('validateForm', function() {
     };
 });
 
-
+adlyApp.directive('convertToNumber', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function(val) {
+                return val != null ? parseInt(val, 10) : null;
+            });
+            ngModel.$formatters.push(function(val) {
+                return val != null ? '' + val : null;
+            });
+        }
+    };
+});

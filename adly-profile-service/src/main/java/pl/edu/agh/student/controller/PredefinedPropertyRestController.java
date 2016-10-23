@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.student.model.property.PredefinedProperty;
+import pl.edu.agh.student.model.property.ProfileProperty;
 import pl.edu.agh.student.services.property.PredefinedPropertyService;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class PredefinedPropertyRestController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<PredefinedProperty> getProperties() {
-        return service.findAll();
+    public List<ProfileProperty> getProperties() {
+        return service.findAllPredefined();
     }
 
 }

@@ -1,0 +1,38 @@
+<section class="widget">
+    <form class="form-horizontal ng-pristine ng-valid" role="form"  data-ui-jq="parsley"
+          data-parsley-priority-enabled="false"
+          novalidate="novalidate" ng-submit="upsert()" validate-form>
+        <fieldset>
+            <legend><strong>Survey</strong> form</legend>
+            <div class="form-group">
+                <label for="name-field" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-8">
+                    <input type="text" id="name-field" class="form-control" required ng-model="survey.name">
+                </div>
+            </div>
+            <legend><strong>Survey</strong> fields <i class="fa fa-plus pull-right adly-pointer" ng-click="addField();"></i></legend>
+
+            <div class="form-group" ng-repeat="field in survey.fieldList">
+                <div class="col-sm-3">
+                    <input type="text" placeholder="Name" class="form-control" required ng-model="field.name">
+                </div>
+                <div class="col-sm-8">
+                    <select class="form-control" ng-model="field.profilePropertyId" ng-disabled="survey.id != null" required convert-to-number>
+                        <option value="">User profile field</option>
+                        <option ng-repeat="property in userProperties" value="{{property.id}}">{{property.name}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <p class="form-control-static">
+                        <i class="fa fa-times adly-pointer" ng-click="removeField($index)"></i>
+                    </p>
+                </div>
+            </div>
+
+        </fieldset>
+        <div class="btn-toolbar">
+            <button type="button" class="btn btn-sm btn-default pull-right" ui-sref="^">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-success pull-right">Save</button>
+        </div>
+    </form>
+</section>
