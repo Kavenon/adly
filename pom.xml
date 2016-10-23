@@ -26,7 +26,7 @@
         <module>adly-hystrix-dashboard</module>
         <module>adly-zipkin-service</module>
         <module>adly-edge</module>
-        <module>adly-reservation-service</module>
+        <module>adly-profile-service</module>
         <module>adly-beacon-service</module>
     </modules>
 

@@ -50,12 +50,12 @@ module.controller('UserProfileFormController', function ($scope, $stateParams, U
 
 });
 module.factory('PredefinedProperty', function($resource) {
-    return $resource('/api/predefined/property');
+    return $resource('/api/profile/predefined-property');
 });
 
 
 module.factory('UserProperty', function($resource) {
-    return $resource('/api/user/property/:id', { id: '@id' }, {
+    return $resource('/api/profile/user-property/:id', { id: '@id' }, {
         update: {
             method: 'PUT'
         }
