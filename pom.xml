@@ -30,6 +30,7 @@
         <module>adly-edge</module>
         <module>adly-profile-service</module>
         <module>adly-beacon-service</module>
+        <module>adly-device-service</module>
     </modules>
 
     <properties>
