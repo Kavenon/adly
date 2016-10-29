@@ -16,6 +16,11 @@ public class Profile {
     private List<UUID> devices = new ArrayList<>();
 
     public Profile() {
+        this.uuid = UUID.randomUUID();
+    }
+
+    public Profile(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public Profile(UUID uuid, List<UUID> devices) {
@@ -37,5 +42,9 @@ public class Profile {
 
     public void setDevices(List<UUID> devices) {
         this.devices = devices;
+    }
+
+    public void addDevice(UUID uuid){
+        this.devices.add(uuid);
     }
 }
