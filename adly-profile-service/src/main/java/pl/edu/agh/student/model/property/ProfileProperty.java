@@ -3,7 +3,10 @@ package pl.edu.agh.student.model.property;
 import org.hibernate.annotations.Type;
 import pl.edu.agh.student.hibernate.JsonBaseEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class ProfileProperty extends JsonBaseEntity {
