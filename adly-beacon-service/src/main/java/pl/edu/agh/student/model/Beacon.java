@@ -15,10 +15,10 @@ public class Beacon {
     private Integer id;
 
     private String name;
-    private String uuid;
+    private String uid;
     private int minor;
     private int major;
-    private String guid;
+    private String puuid;
 
     private Long userId;
 
@@ -31,14 +31,6 @@ public class Beacon {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public int getMinor() {
@@ -65,12 +57,20 @@ public class Beacon {
         this.name = name;
     }
 
-    public String getGuid() {
-        return guid;
+    public String getUid() {
+        return uid;
     }
 
-    public void setGuid(String guid) {
-        this.guid = guid;
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getPuuid() {
+        return puuid;
+    }
+
+    public void setPuuid(String puuid) {
+        this.puuid = puuid;
     }
 
     public Long getUserId() {
@@ -86,9 +86,11 @@ public class Beacon {
         return "Beacon{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", uuid='" + uuid + '\'' +
+                ", uid='" + uid + '\'' +
                 ", minor=" + minor +
                 ", major=" + major +
+                ", puuid='" + puuid + '\'' +
+                ", userId=" + userId +
                 '}';
     }
 
