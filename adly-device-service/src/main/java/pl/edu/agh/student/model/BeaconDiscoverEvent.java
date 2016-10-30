@@ -1,4 +1,4 @@
-package pl.edu.agh.student;
+package pl.edu.agh.student.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -6,7 +6,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class BeaconDiscoverEvent {
 
     private String uuid;
-    private String gummy;
+    private Beacon beacon;
+
+    public BeaconDiscoverEvent() {
+    }
 
     public String getUuid() {
         return uuid;
@@ -16,19 +19,21 @@ public class BeaconDiscoverEvent {
         this.uuid = uuid;
     }
 
-    public String getGummy() {
-        return gummy;
+
+
+    public Beacon getBeacon() {
+        return beacon;
     }
 
-    public void setGummy(String gummy) {
-        this.gummy = gummy;
+    public void setBeacon(Beacon beacon) {
+        this.beacon = beacon;
     }
 
     @Override
     public String toString() {
         return "BeaconDiscoverEvent{" +
                 "uuid='" + uuid + '\'' +
-                ", gummy='" + gummy + '\'' +
+                ", beacon=" + beacon +
                 '}';
     }
 }

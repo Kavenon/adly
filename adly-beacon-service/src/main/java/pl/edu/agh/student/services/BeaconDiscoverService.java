@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.student.BeaconDiscoverEvent;
+import pl.edu.agh.student.model.BeaconDiscoverEvent;
 import pl.edu.agh.student.BeaconWriter;
 import pl.edu.agh.student.model.Beacon;
 import pl.edu.agh.student.model.BeaconDiscoverHistory;
@@ -40,17 +40,24 @@ public class BeaconDiscoverService {
             return ;
         }
 
+        saveBeaconDiscoverHistory(request, beacon);
+        publishBeaconDiscoverEvent(request, beacon);
+
+        LOG.info("Discovered beacon {}", request.toString());
+
+    }
+
+    private void saveBeaconDiscoverHistory(BeaconDiscoverRequest request, Beacon beacon) {
         UuidAndDateKey key = new UuidAndDateKey(request.getUuid(), new Date());
         BeaconDiscoverHistory beaconDiscoverHistory = new BeaconDiscoverHistory(
                 key,
                 beacon.getId()
         );
         beaconDiscoverHistoryRepository.save(beaconDiscoverHistory);
-
-        //todo: publish event (action handler will take it, and profile service to save
-
-        BeaconDiscoverEvent event = new BeaconDiscoverEvent();
-        event.setUuid(request.getUuid().toString());
-        beaconWriter.write(event);
     }
+
+    private void publishBeaconDiscoverEvent(BeaconDiscoverRequest request, Beacon beacon) {
+        beaconWriter.write(new BeaconDiscoverEvent(request.getUuid().toString(),beacon));
+    }
+
 }
