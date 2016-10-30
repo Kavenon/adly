@@ -13,13 +13,13 @@ import java.util.Objects;
 
 @Component
 @Transactional
-public class UserSurveyService {
+public class SurveyCrudService {
 
     private UserSurveyRepository repository;
     private OAuth2RestTemplate oAuth2RestTemplate;
 
     @Autowired
-    public UserSurveyService(UserSurveyRepository repository, OAuth2RestTemplate oAuth2RestTemplate) {
+    public SurveyCrudService(UserSurveyRepository repository, OAuth2RestTemplate oAuth2RestTemplate) {
         this.repository = repository;
         this.oAuth2RestTemplate = oAuth2RestTemplate;
     }
@@ -68,4 +68,7 @@ public class UserSurveyService {
     public List<Survey> get() {
         return repository.findByUserIdAndDeleted(getUserId(), false);
     }
+
+
+
 }

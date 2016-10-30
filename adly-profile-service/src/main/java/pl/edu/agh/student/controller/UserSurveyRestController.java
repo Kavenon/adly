@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.student.model.survey.Survey;
-import pl.edu.agh.student.services.survey.UserSurveyService;
+import pl.edu.agh.student.services.survey.SurveyCrudService;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +14,10 @@ import java.util.Optional;
 @RequestMapping("/profile/user-survey")
 public class UserSurveyRestController {
 
-    private UserSurveyService service;
+    private SurveyCrudService service;
 
     @Autowired
-    public UserSurveyRestController(UserSurveyService service) {
+    public UserSurveyRestController(SurveyCrudService service) {
         this.service = service;
     }
 
