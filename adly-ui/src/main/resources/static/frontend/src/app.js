@@ -3,14 +3,15 @@
 require('./app.scss');
 require('angular');
 require('parsleyjs');
-
+require('angular-bootstrap-checkbox');
 
 var adlyApp = angular.module('adlyApp', [
     'adlyApp.core',
     'adlyApp.dashboard',
     'adlyApp.beacon',
     'adlyApp.userProfile',
-    'adlyApp.survey'
+    'adlyApp.survey',
+    'adlyApp.rule'
 ]);
 
 require('modules/core');
@@ -18,6 +19,7 @@ require('modules/dashboard');
 require('modules/beacon');
 require('modules/user-profile');
 require('modules/survey');
+require('modules/rule');
 
 adlyApp.directive('validateForm', function() {
     return function(scope, elm, attr) {
