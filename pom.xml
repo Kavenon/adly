@@ -31,6 +31,7 @@
         <module>adly-profile-service</module>
         <module>adly-beacon-service</module>
         <module>adly-device-service</module>
+        <module>adly-rule-service</module>
     </modules>
 
     <properties>

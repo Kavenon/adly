@@ -14,11 +14,12 @@ public class SurveyResponseKey implements Serializable {
     @PrimaryKeyColumn(name = "profile_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private UUID profileId;
 
-    @PrimaryKeyColumn(name = "date", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    @PrimaryKeyColumn(name = "survey_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Integer surveyId;
+
+    @PrimaryKeyColumn(name = "date", ordinal = 2, type = PrimaryKeyType.CLUSTERED)
     private Date date;
 
-    @PrimaryKeyColumn(name = "survey_id", ordinal = 2, type = PrimaryKeyType.CLUSTERED)
-    private Integer surveyId;
 
     public SurveyResponseKey() {
     }
