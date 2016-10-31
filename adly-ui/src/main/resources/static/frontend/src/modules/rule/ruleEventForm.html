@@ -1,0 +1,72 @@
+<div class="modal fade wizard in" style="display: block;">
+    <div class="modal-dialog wizard-dialog" style="width: 700px; margin-top: 78px; padding-top: 0px;">
+        <div class="modal-content wizard-content" style="height: 498px;">
+            <div class="modal-header wizard-header">
+                <button type="button" class="close wizard-close" ui-sref="^">×</button>
+                <h3 class="modal-title wizard-title">{{title}}</h3>
+                <span class="wizard-subtitle"></span>
+            </div>
+            <div class="modal-body wizard-body" style="height: 430px;">
+                <div class="pull-left wizard-steps" style="height: 430px;">
+                    <div class="wizard-nav-container">
+                        <ul class="nav wizard-nav-list">
+
+                            <li class="wizard-nav-item" ng-class="{'active':selectedEvent==key}" ng-repeat="(key, value) in events" ng-click="selectedEvent=key" ui-sref=".type({eventType:key})">
+                                <a class="wizard-nav-link">
+                                    <span class="glyphicon glyphicon-chevron-right"></span> {{key}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <form class="form-horizontal">
+                    <div class="wizard-cards" style="height: 430px;">
+                        <div class="wizard-card-container" style="height: 356px;">
+                            <div ui-view></div>
+                            <!--<div class="wizard-card" data-cardname="name" style="display: block;"><h3>Name &amp;-->
+                                <!--FQDN</h3>-->
+                                <!--<div class="wizard-input-section">-->
+                                    <!--<div class="form-group">-->
+                                        <!--<div class="col-sm-6"><input type="text" class="form-control" id="label"-->
+                                                                     <!--name="label" placeholder="Server label"-->
+                                                                     <!--data-validate="validateServerLabel"></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="wizard-input-section"><p>Full Qualified Domain Name</p>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<div class="col-sm-8">-->
+                                            <!--<div class="input-group"><input type="text" class="form-control" id="fqdn"-->
+                                                                            <!--name="fqdn" placeholder="FQDN"-->
+                                                                            <!--data-validate="validateFQDN"-->
+                                                                            <!--data-is-valid="0" data-lookup="0"> <span-->
+                                                    <!--class="input-group-btn" id="btn-fqdn"><button-->
+                                                    <!--class="btn btn-default" type="button"-->
+                                                    <!--onclick="lookup();">Lookup</button></span></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="wizard-input-section"><p>Server ip.</p>-->
+                                    <!--<div class="form-group">-->
+                                        <!--<div class="col-sm-8"><input type="text" class="form-control" id="ip" name="ip"-->
+                                                                     <!--placeholder="IP" data-serialize="1"></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="wizard-footer">
+                            <div class="wizard-buttons-container">
+                                <button class="btn wizard-cancel wizard-close" type="button" style="display: none;">
+                                    Cancel
+                                </button>
+                                <div class="btn-group-single pull-right">
+                                    <button class="btn wizard-back disabled" type="button">Back</button>
+                                    <button class="btn wizard-next btn-primary" type="button">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

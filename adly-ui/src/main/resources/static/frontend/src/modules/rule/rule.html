@@ -10,7 +10,7 @@
             <header>
                 <h4>Created <span class="fw-semi-bold">rules</span></h4>
                 <div class="widget-controls">
-                    <a ui-sref=".upsert"><i class="fa fa-plus" ></i></a>
+                    <a ui-sref=".upsert({ruleId:0})"><i class="fa fa-plus" ></i></a>
                 </div>
             </header>
             <div class="widget-table-overflow">
@@ -25,7 +25,7 @@
                         <tr ng-repeat="rule in rules">
                             <td>{{rule.name}}</td>
                             <td class="text-align-right">
-                                <i class="fa fa-pencil adly-icon mr-xs" ui-sref=".upsert({beaconId: rule.id})"></i>
+                                <i class="fa fa-pencil adly-icon mr-xs" ui-sref=".upsert({ruleId: rule.id})"></i>
                                 <i class="fa fa-trash adly-icon" ng-click="deleteRule(rule, $index);"></i>
                             </td>
                         </tr>
@@ -33,6 +33,10 @@
                 </table>
             </div>
         </section>
+    </div>
+
+    <div class="col-md-8">
+        <div class="fade-up" ui-view></div>
     </div>
 
 </div>
