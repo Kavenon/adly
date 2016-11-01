@@ -33,7 +33,8 @@
 
             </fieldset>
             <fieldset>
-                <legend>Action <i class="fa fa-plus pull-right adly-pointer" ng-show="rule.actions.length==0"></i></legend>
+                <legend>Action <i class="fa fa-plus pull-right adly-pointer" ng-show="rule.actions.length==0" ui-sref=".action"></i></legend>
+                <adly-rule-actions data="rule" ></adly-rule-actions>
 
             </fieldset>
             <div class="btn-toolbar">

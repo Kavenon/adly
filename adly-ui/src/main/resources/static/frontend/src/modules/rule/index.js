@@ -5,12 +5,14 @@ var ruleTemplate = require('modules/rule/rule.html');
 var ruleFormTemplate = require('modules/rule/ruleForm.html');
 
 require('modules/rule/event/ruleEvents.js')('app.rule.upsert');
+require('modules/rule/action/ruleActions.js')('app.rule.upsert');
 
 var module = angular.module('adlyApp.rule', [
     'ui.router',
     'ui.checkbox',
     'ngResource',
-    'adlyApp.rule.events'
+    'adlyApp.rule.events',
+    'adlyApp.rule.actions'
 ]);
 
 module.config(function($stateProvider) {
