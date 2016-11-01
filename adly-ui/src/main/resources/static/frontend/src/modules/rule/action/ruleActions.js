@@ -15,6 +15,8 @@ module.exports = function(parentState){
     ]);
 
     registerAction(require('modules/rule/action/sendPlainPush')(module));
+    registerAction(require('modules/rule/action/sendUrlNotification')(module));
+    registerAction(require('modules/rule/action/sendSurvey')(module));
 
     module.config(function($stateProvider) {
         $stateProvider

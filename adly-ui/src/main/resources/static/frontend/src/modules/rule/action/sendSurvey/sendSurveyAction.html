@@ -12,5 +12,15 @@
                 <input class="form-control" type="text" ng-model="editingAction.config.text" required />
             </div>
         </div>
+        <p>Survey</p>
+        <div class="form-group">
+            <div class="col-sm-8">
+                <select class="form-control" ng-model="editingAction.config.surveyId" required convert-to-number>
+                    <option value="">-- select survey --</option>
+                    <option value="1">test!</option>
+                    <option value="2">test!222</option>
+                </select>
+            </div>
+        </div>
     </div>
 </div>
