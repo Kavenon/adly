@@ -3,7 +3,7 @@
         <p>Beacon</p>
         <div class="form-group">
             <div class="col-sm-8">
-                <select class="form-control" ng-model="config.beaconId" required convert-to-number>
+                <select class="form-control" ng-model="rule.events[0].config.beaconId" required convert-to-number>
                     <option value="">-- select beacon --</option>
                     <option ng-repeat="beacon in beacons" value="{{beacon.id}}">{{beacon.name}}</option>
                     <option value="1">test!</option>

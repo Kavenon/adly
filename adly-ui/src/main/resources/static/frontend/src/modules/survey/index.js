@@ -1,5 +1,6 @@
 require('angular-ui-router');
 require('angular-resource');
+require('angular-ui-bootstrap');
 
 var surveyTemplate = require('modules/survey/survey.html');
 var surveyFormTemplate = require('modules/survey/surveyForm.html');

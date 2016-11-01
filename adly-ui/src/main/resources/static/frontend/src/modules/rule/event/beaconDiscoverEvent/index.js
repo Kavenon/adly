@@ -2,8 +2,9 @@
 
 module.exports = function(module) {
     
-    module.controller('BeaconDiscoverEventController', function($scope, $stateParams){
-        $scope.config = $stateParams.config;
+    module.controller('BeaconDiscoverEventController', function($scope, $stateParams, $uibModal){
+
+
     });
     
     return {

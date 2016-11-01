@@ -4,6 +4,7 @@ require('./app.scss');
 require('angular');
 require('parsleyjs');
 require('angular-bootstrap-checkbox');
+require('bootstrap-webpack');
 
 var adlyApp = angular.module('adlyApp', [
     'adlyApp.core',

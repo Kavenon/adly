@@ -24,7 +24,7 @@
             <fieldset>
                 <legend>Event <i class="fa fa-plus pull-right adly-pointer" ng-show="rule.events.length==0" ui-sref=".event"></i></legend>
 
-                <adly-rule-events events="rule.events" control="eventsControl"></adly-rule-events>
+                <adly-rule-events data="rule"></adly-rule-events>
 
 
             </fieldset>
@@ -37,8 +37,7 @@
 
             </fieldset>
             <div class="btn-toolbar">
-                <button type="button" class="btn btn-sm btn-default pull-right" ui-sref="^">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-success pull-right">Save</button>
+                <button type="submit" class="btn btn-sm btn-success pull-right" ui-sref="^">Save</button>
             </div>
         </form>
         <div ui-view></div>

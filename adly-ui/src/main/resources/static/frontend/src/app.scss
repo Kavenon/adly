@@ -15,3 +15,8 @@
   cursor:pointer;
 }
 
+.wizard-nav-item .already-visited .active,
+.wizard-nav-list li.active>a {
+    background-color: #f2be35 !important; /*todo: remove !important */
+}
+

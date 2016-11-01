@@ -3,27 +3,14 @@ require('angular-resource');
 
 var ruleTemplate = require('modules/rule/rule.html');
 var ruleFormTemplate = require('modules/rule/ruleForm.html');
-var ruleEventFormTemplate = require('modules/rule/ruleEventForm.html');
 
-var events = {};
-
-var eventNames = [];
-var registerEvent = function(event){
-    "use strict";
-    events[event.name] = event.body;
-    eventNames.push(event.name);
-};
-
-
-require('modules/rule/ruleEvents.js');
+require('modules/rule/ruleEvents.js')('app.rule.upsert');
 var module = angular.module('adlyApp.rule', [
     'ui.router',
     'ui.checkbox',
     'ngResource',
     'adlyApp.rule.events'
 ]);
-
-registerEvent(require('modules/rule/event/beaconDiscoverEvent')(module));
 
 module.config(function($stateProvider) {
     $stateProvider
@@ -36,38 +23,9 @@ module.config(function($stateProvider) {
             url: '/upsert/:ruleId',
             templateUrl: ruleFormTemplate,
             controller: 'RuleFormController'
-        })
-        .state('app.rule.upsert.event', {
-            url: '/event',
-            templateUrl: ruleEventFormTemplate,
-            controller: 'RuleEventListController'
-        })
-        .state('app.rule.upsert.event.type', {
-            url: '/:eventType',
-            templateUrl: function ($stateParams){
-                return events[$stateParams.eventType].templateUrl;
-            },
-            controllerProvider: function($stateParams) {
-                return events[$stateParams.eventType].controller;
-            },
-            params : {
-                config: null
-            },
-            data: function($stateParams){
-                console.log($stateParams);
-                return {};
-            }
         });
+     
 });
-
-
-module.controller('RuleEventListController', function ($scope,$state) {
-
-    $scope.selectedEvent = $state.params.eventType;
-    $scope.events = events;
-
-});
-
 
 module.controller('RuleController', function ($scope, Rule) {
 
