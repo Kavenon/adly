@@ -4,7 +4,8 @@ require('angular-resource');
 var ruleTemplate = require('modules/rule/rule.html');
 var ruleFormTemplate = require('modules/rule/ruleForm.html');
 
-require('modules/rule/ruleEvents.js')('app.rule.upsert');
+require('modules/rule/event/ruleEvents.js')('app.rule.upsert');
+
 var module = angular.module('adlyApp.rule', [
     'ui.router',
     'ui.checkbox',

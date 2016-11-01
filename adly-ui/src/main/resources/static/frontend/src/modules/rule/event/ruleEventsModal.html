@@ -10,7 +10,7 @@
                     <div class="wizard-nav-container">
                         <ul class="nav wizard-nav-list">
 
-                            <li class="wizard-nav-item" ng-class="{'active':selectedEvent==key}" ng-repeat="(key, value) in events" ng-click="selectedEvent=key" ui-sref=".type({eventType:key})">
+                            <li class="wizard-nav-item adly-pointer" ng-class="{'active':selectedEvent==key}" ng-repeat="(key, value) in events" ng-click="selectedEvent=key" ui-sref=".type({eventType:key})">
                                 <a class="wizard-nav-link">
                                     <span class="glyphicon glyphicon-chevron-right"></span> {{key}}
                                 </a>
@@ -20,7 +20,7 @@
                 </div>
                 <form class="form-horizontal" data-ui-jq="parsley"
                       data-parsley-priority-enabled="false"
-                      novalidate="novalidate" ng-submit="back()" validate-form>
+                      novalidate="novalidate" ng-submit="save()" validate-form >
                     <div class="wizard-cards" style="height: 430px;">
                         <div class="wizard-card-container" style="height: 356px;">
                             <div ui-view></div>
@@ -28,7 +28,8 @@
                         <div class="wizard-footer">
                             <div class="wizard-buttons-container">
                                 <div class="btn-group-single pull-right">
-                                    <button class="btn wizard-next btn-primary" type="submit" ng-click="save()">Ok</button>
+                                    <button class="btn wizard-next btn-default" type="button" ng-click="back()">Cancel</button>
+                                    <button class="btn wizard-next btn-success" type="submit">Ok</button>
                                 </div>
                             </div>
                         </div>

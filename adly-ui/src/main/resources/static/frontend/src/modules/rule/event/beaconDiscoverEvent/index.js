@@ -1,8 +1,6 @@
-
-
 module.exports = function(module) {
     
-    module.controller('BeaconDiscoverEventController', function($scope, $stateParams, $uibModal){
+    module.controller('BeaconDiscoverEventController', function($scope, $state, $stateParams, $uibModal){
 
 
     });
@@ -11,7 +9,8 @@ module.exports = function(module) {
         name: '.BeaconDiscoverEvent',
         body: {
             templateUrl: require('./beaconDiscoverEvent.html'),
-            controller: 'BeaconDiscoverEventController'
+            controller: 'BeaconDiscoverEventController',
+            icon: 'fa-bluetooth-b'
         }
     }
    
