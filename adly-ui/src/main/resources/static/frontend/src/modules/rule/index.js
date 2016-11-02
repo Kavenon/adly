@@ -6,13 +6,15 @@ var ruleFormTemplate = require('modules/rule/ruleForm.html');
 
 require('modules/rule/event/ruleEvents.js')('app.rule.upsert');
 require('modules/rule/action/ruleActions.js')('app.rule.upsert');
+require('modules/rule/condition/ruleConditions.js')('app.rule.upsert');
 
 var module = angular.module('adlyApp.rule', [
     'ui.router',
     'ui.checkbox',
     'ngResource',
     'adlyApp.rule.events',
-    'adlyApp.rule.actions'
+    'adlyApp.rule.actions',
+    'adlyApp.rule.conditions'
 ]);
 
 module.config(function($stateProvider) {
@@ -40,21 +42,13 @@ module.controller('RuleController', function ($scope, Rule) {
         });
     };
 
-    $scope.eventsControl = {};
-
-
 });
 
 module.controller('RuleFormController', function ($scope, $stateParams, Rule, $state) {
 
     if($stateParams.ruleId === "" || $stateParams.ruleId == 0){
         $scope.rule = new Rule({
-            events: [{
-                type: '.BeaconDiscoverEvent',
-                config: {
-                    beaconId: 1
-                }
-            }],
+            events: [],
             conditions: [],
             actions: []
         });

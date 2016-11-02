@@ -1,0 +1,37 @@
+<div class="wizard-card" style="display: block;">
+    <div class="wizard-input-section">
+        <p>Properties check</p>
+
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Operator</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="check in editingCondition.config.checks">
+                    <td>
+                        <select ng-model="check.propertyId" ng-change="check.operator=''" required class="form-control" convert-to-number="">
+                            <option value=""></option>
+
+                            <option ng-repeat="property in profileProperties" value="{{property.id}}">{{property.name}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select ng-model="check.operator" required class="form-control">
+                            <option value=""></option>
+                            <option ng-repeat="operator in getOperators(check.propertyId)" value="{{operator}}">{{operator}}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="check.value" class="form-control"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success btn-sm" type="button" ng-click="addProperty()">Add property</button>
+
+    </div>
+</div>

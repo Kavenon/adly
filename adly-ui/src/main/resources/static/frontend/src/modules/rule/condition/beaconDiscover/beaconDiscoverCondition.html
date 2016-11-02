@@ -1,0 +1,39 @@
+<div class="wizard-card" style="display: block;">
+    <div class="wizard-input-section">
+        <p>Beacon</p>
+        <div class="form-group">
+            <div class="col-sm-8">
+                <select class="form-control" ng-model="editingCondition.config.beaconId" required convert-to-number>
+                    <option value="">-- select beacon --</option>
+                    <option ng-repeat="beacon in beacons" value="{{beacon.id}}">{{beacon.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <p>Date</p>
+        <div class="form-group">
+            <div class="col-sm-1">
+                <checkbox ng-model="editingCondition.config.checkDate" class="mt-xs"></checkbox>
+            </div>
+            <div ng-show="editingCondition.config.checkDate">
+                <div class="col-sm-2">
+                    <p class="form-control-static">
+                        in last
+                    </p>
+                </div>
+                <div class="col-sm-3">
+                    <input type="number" ng-model="editingCondition.config.timeValue" class="form-control" />
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-model="editingCondition.config.timeUnit" class="form-control">
+                        <option value="">--</option>
+                        <option value="DAYS">Days</option>
+                        <option value="MONTHS">Months</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
