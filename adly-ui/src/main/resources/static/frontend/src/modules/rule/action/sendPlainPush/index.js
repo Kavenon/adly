@@ -1,7 +1,7 @@
 module.exports = function(module) {
     
     module.controller('SendPlainPushActionController', function($scope, $state, $stateParams, $uibModal){
-
+        $scope.selected.action = '.SendPlainPush';
 
     });
     

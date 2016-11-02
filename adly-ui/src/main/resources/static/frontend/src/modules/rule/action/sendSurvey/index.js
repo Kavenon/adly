@@ -1,6 +1,8 @@
 module.exports = function(module) {
     
     module.controller('SendSurveyActionController', function($scope, $state, $stateParams, $uibModal){
+        $scope.selected.action = '.SendSurvey';
+
     });
     
     return {

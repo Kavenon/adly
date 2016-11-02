@@ -55,7 +55,9 @@ module.exports = function(parentState){
             }
         };
 
-        $scope.selectedAction = $state.params.actionType;
+        $scope.selected = $scope.selected || {};
+        $scope.selected.action = $state.params.actionType;
+
         $scope.actions = registeredActions;
         $scope.editingAction = getEditingActionObject();
 

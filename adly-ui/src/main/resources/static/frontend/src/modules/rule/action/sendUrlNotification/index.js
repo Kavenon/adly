@@ -1,6 +1,8 @@
 module.exports = function(module) {
     
     module.controller('SendUrlNotificationController', function($scope, $state, $stateParams, $uibModal){
+        $scope.selected.action = '.SendUrlNotification';
+
     });
     
     return {

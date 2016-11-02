@@ -10,8 +10,8 @@
                     <div class="wizard-nav-container">
                         <ul class="nav wizard-nav-list">
 
-                            <li class="wizard-nav-item adly-pointer" ng-repeat="(key, value) in actions"  ui-sref=".type({actionType:key})">
-                                <a class="wizard-nav-link">
+                            <li class="wizard-nav-item ng-class:{'active':selected.action==key}" ng-repeat="(key, value) in actions"  ui-sref=".type({actionType:key})">
+                                <a class="wizard-nav-link adly-pointer">
                                     <span class="glyphicon glyphicon-chevron-right"></span> {{key}}
                                 </a>
                             </li>
