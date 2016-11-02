@@ -64,6 +64,7 @@ module.exports = function(parentState){
         $scope.saveAction = function(){
 
             if(isEditingAction()){
+                $scope.editingAction.type = $state.params.actionType;
                 $scope.rule.actions[$state.params.index] = $scope.editingAction;
             }
             else {

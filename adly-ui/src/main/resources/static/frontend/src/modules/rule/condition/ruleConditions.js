@@ -64,6 +64,7 @@ module.exports = function(parentState){
         $scope.saveCondition = function(){
 
             if(isEditingCondition()){
+                $scope.editingCondition.type = $state.params.conditionType;
                 $scope.rule.conditions[$state.params.index] = $scope.editingCondition;
             }
             else {

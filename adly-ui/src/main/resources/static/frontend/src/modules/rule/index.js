@@ -54,7 +54,7 @@ module.controller('RuleFormController', function ($scope, $stateParams, Rule, $s
         });
         $scope.upsertRule = function() {
             $scope.rule.$save(function() {
-                // $state.go('app.rule', {}, { reload: true});
+                $state.go('app.rule', {}, { reload: true});
             });
         };
     }

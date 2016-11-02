@@ -62,6 +62,7 @@ module.exports = function(parentState){
         $scope.saveEvent = function(){
 
             if(isEditingEvent()){
+                $scope.editingEvent.type = $state.params.eventType;
                 $scope.rule.events[$state.params.index] = $scope.editingEvent;
             }
             else {

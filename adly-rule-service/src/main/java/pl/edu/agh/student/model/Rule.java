@@ -1,15 +1,18 @@
 package pl.edu.agh.student.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.deploy.security.ruleset.RuleAction;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.annotations.Type;
+import pl.edu.agh.student.model.action.RuleAction;
 import pl.edu.agh.student.model.condition.RuleCondition;
 import pl.edu.agh.student.model.event.RuleEvent;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.Arrays;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -19,13 +22,23 @@ public class Rule {
     @GeneratedValue
     private Integer id;
 
+    private String name;
     private Long userId;
 
     private boolean deleted = false;
     private boolean active = false;
-    private List<RuleEvent> events = new ArrayList<>();
-    private List<RuleCondition> conditions = new ArrayList<>();
-    private List<RuleAction> actions = new ArrayList<>();
+
+    @Type(type = "json")
+    @Column(columnDefinition = "json")
+    private RuleEvent[] events = new RuleEvent[]{};
+
+    @Type(type = "json")
+    @Column(columnDefinition = "json")
+    private RuleCondition[] conditions = new RuleCondition[]{};
+
+    @Type(type = "json")
+    @Column(columnDefinition = "json")
+    private RuleAction[] actions = new RuleAction[]{};
 
     public Rule() {
     }
@@ -36,6 +49,14 @@ public class Rule {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getUserId() {
@@ -54,27 +75,27 @@ public class Rule {
         this.active = active;
     }
 
-    public List<RuleEvent> getEvents() {
+    public RuleEvent[] getEvents() {
         return events;
     }
 
-    public void setEvents(List<RuleEvent> events) {
+    public void setEvents(RuleEvent[] events) {
         this.events = events;
     }
 
-    public List<RuleCondition> getConditions() {
+    public RuleCondition[] getConditions() {
         return conditions;
     }
 
-    public void setConditions(List<RuleCondition> conditions) {
+    public void setConditions(RuleCondition[] conditions) {
         this.conditions = conditions;
     }
 
-    public List<RuleAction> getActions() {
+    public RuleAction[] getActions() {
         return actions;
     }
 
-    public void setActions(List<RuleAction> actions) {
+    public void setActions(RuleAction[] actions) {
         this.actions = actions;
     }
 
@@ -90,11 +111,19 @@ public class Rule {
     public String toString() {
         return "Rule{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", userId=" + userId +
+                ", deleted=" + deleted +
                 ", active=" + active +
-                ", events=" + events +
-                ", conditions=" + conditions +
-                ", actions=" + actions +
+                ", events=" + Arrays.toString(events) +
+                ", conditions=" + Arrays.toString(conditions) +
+                ", actions=" + Arrays.toString(actions) +
                 '}';
+    }
+
+    public static void main(String[] args) throws IOException {
+        ObjectMapper om = new ObjectMapper();
+        Rule rule = om.readValue("{\"id\":28,\"name\":\"Rule\",\"userId\":1,\"deleted\":false,\"active\":true,\"events\":[{\"type\":\".BeaconDiscoverEvent\",\"config\":{\"beaconId\":1}}],\"conditions\":[{\"type\":\".UserProfileCondition\",\"config\":{\"checks\":[{\"propertyId\":22,\"operator\":\"EQUAL\",\"value\":\"adfadf\"}]}}],\"actions\":[{\"type\":\".SendPlainPushAction\",\"config\":{\"title\":\"adfadf\",\"text\":\"adfadfadfadf\"}}]}", Rule.class);
+        System.out.println(rule);
     }
 }

@@ -5,8 +5,18 @@ import java.time.temporal.ChronoUnit;
 public class SurveySentConditionConfig {
 
     private Integer surveyId;
+
+    private boolean checkDate = false;
     private Integer timeValue;
     private ChronoUnit timeUnit;
+
+    public boolean isCheckDate() {
+        return checkDate;
+    }
+
+    public void setCheckDate(boolean checkDate) {
+        this.checkDate = checkDate;
+    }
 
     public Integer getSurveyId() {
         return surveyId;

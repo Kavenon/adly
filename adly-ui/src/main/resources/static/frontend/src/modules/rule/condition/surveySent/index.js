@@ -12,7 +12,7 @@ module.exports = function(module) {
         body: {
             templateUrl: require('./surveySentCondition.html'),
             controller: 'SurveySentConditionController',
-            icon: 'fa-square-o'
+            icon: 'fa-check-square-o'
         }
     }
    
