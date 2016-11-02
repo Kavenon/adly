@@ -54,7 +54,7 @@ module.exports = function(parentState){
         };
 
         $scope.selected = $scope.selected || {};
-        $scope.selected.action = $state.params.actionType;
+        $scope.selected.event = $state.params.eventType;
 
         $scope.events = registeredEvents;
         $scope.editingEvent = getEditingEventObject();

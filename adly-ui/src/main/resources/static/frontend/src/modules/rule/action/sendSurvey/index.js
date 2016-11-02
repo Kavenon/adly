@@ -1,8 +1,10 @@
 module.exports = function(module) {
-    
-    module.controller('SendSurveyActionController', function($scope, $state, $stateParams, $uibModal){
-        $scope.selected.action = '.SendSurvey';
 
+    require('components/dao/Survey.js')(module);
+
+    module.controller('SendSurveyActionController', function($scope, AdlyDaoUserSurvey){
+        $scope.selected.action = '.SendSurvey';
+        $scope.surveys = AdlyDaoUserSurvey.query();
     });
     
     return {

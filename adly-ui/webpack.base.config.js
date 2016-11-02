@@ -53,6 +53,7 @@ module.exports = new Config.Config().merge({
         modulesDirectories: ['node_modules'],
         alias: {
             modules:  path.resolve(env.ROOT, 'modules'),
+            components:  path.resolve(env.ROOT, 'components'),
             assets:  path.resolve(env.ROOT, 'assets'),
             npm:  env.NODE
         }

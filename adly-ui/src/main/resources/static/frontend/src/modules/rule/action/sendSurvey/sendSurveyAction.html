@@ -17,8 +17,8 @@
             <div class="col-sm-8">
                 <select class="form-control" ng-model="editingAction.config.surveyId" required convert-to-number>
                     <option value="">-- select survey --</option>
-                    <option value="1">test!</option>
-                    <option value="2">test!222</option>
+                    <option ng-repeat="survey in surveys" value="{{survey.id}}">{{survey.name}}</option>
+
                 </select>
             </div>
         </div>

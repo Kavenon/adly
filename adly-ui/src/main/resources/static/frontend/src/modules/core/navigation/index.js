@@ -62,8 +62,6 @@ module.exports = function(module){
     var SnNavigationDirective = function($el, scope){
       this.$el = jQuery($el);
       this.scope = scope;
-
-      console.log(scope,scope.app);
       this.helpers = scope.app.helpers;
 
       // publish method to global scope to allow navigation collapsing via api

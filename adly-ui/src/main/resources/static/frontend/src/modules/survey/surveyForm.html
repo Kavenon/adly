@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-sm-8">
                     <select class="form-control" ng-model="field.profilePropertyId" ng-disabled="survey.id != null" required convert-to-number>
-                        <option value="">User profile field</option>
+                        <option value="">-----</option>
                         <option ng-repeat="property in userProperties" value="{{property.id}}">{{property.name}}</option>
                     </select>
                 </div>

@@ -1,8 +1,10 @@
 module.exports = function(module) {
     
-    module.controller('BeaconDiscoverEventController', function($scope, $state, $stateParams, $uibModal){
+    require('components/dao/Beacon.js')(module);
+    
+    module.controller('BeaconDiscoverEventController', function($scope, AdlyDaoBeacon){
         $scope.selected.event = '.BeaconDiscoverEvent';
-
+        $scope.beacons = AdlyDaoBeacon.query();
     });
     
     return {
