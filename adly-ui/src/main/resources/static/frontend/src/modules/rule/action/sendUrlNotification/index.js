@@ -1,12 +1,12 @@
 module.exports = function(module) {
     
     module.controller('SendUrlNotificationController', function($scope, $state, $stateParams, $uibModal){
-        $scope.selected.action = '.SendUrlNotification';
+        $scope.selected.action = '.SendUrlNotificationAction';
 
     });
     
     return {
-        name: '.SendUrlNotification',
+        name: '.SendUrlNotificationAction',
         body: {
             templateUrl: require('./sendUrlNotificationAction.html'),
             controller: 'SendUrlNotificationController',
