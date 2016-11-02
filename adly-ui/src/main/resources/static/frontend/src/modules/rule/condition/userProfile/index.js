@@ -55,7 +55,7 @@ module.exports = function(module) {
         body: {
             templateUrl: require('./userProfileCondition.html'),
             controller: 'UserProfileConditionController',
-            icon: 'fa-users'
+            icon: 'fa-user'
         }
     }
    

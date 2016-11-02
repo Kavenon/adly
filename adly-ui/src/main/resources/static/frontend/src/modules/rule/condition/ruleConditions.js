@@ -61,7 +61,7 @@ module.exports = function(parentState){
 
         $scope.conditions = registeredConditions;
         $scope.editingCondition = getEditingConditionObject();
-        $scope.save = function(){
+        $scope.saveCondition = function(){
 
             if(isEditingCondition()){
                 $scope.rule.conditions[$state.params.index] = $scope.editingCondition;

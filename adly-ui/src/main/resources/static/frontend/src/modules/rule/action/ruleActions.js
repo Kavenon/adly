@@ -61,7 +61,7 @@ module.exports = function(parentState){
         $scope.actions = registeredActions;
         $scope.editingAction = getEditingActionObject();
 
-        $scope.save = function(){
+        $scope.saveAction = function(){
 
             if(isEditingAction()){
                 $scope.rule.actions[$state.params.index] = $scope.editingAction;

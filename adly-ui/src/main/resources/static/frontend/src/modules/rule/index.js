@@ -52,15 +52,15 @@ module.controller('RuleFormController', function ($scope, $stateParams, Rule, $s
             conditions: [],
             actions: []
         });
-        $scope.upsert = function() {
+        $scope.upsertRule = function() {
             $scope.rule.$save(function() {
-                $state.go('app.rule', {}, { reload: true});
+                // $state.go('app.rule', {}, { reload: true});
             });
         };
     }
     else {
         $scope.rule = Rule.get({ id: $stateParams.ruleId });
-        $scope.upsert = function() {
+        $scope.upsertRule = function() {
             $scope.rule.$update(function() {
                 $state.go('app.rule', {}, { reload: true});
             });

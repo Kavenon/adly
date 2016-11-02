@@ -35,11 +35,6 @@ core.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
 core.controller('App', function(config, $scope, $localStorage, $state, $http) {
 
-
-    $http.get('api/beacon').then(function(response) {
-        console.log('rep',response);
-    });
-
     var vm = this;
 
     vm.title = config.appTitle;

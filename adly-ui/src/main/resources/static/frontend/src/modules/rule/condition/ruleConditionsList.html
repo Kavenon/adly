@@ -1,15 +1,15 @@
 <table class="table table-striped">
     <tbody>
-    <tr ng-repeat="event in data.events">
+    <tr ng-repeat="condition in data.conditions">
         <td class="text-center" width="30">
-            <i class="fa {{getEvent(event.type).icon}}"></i>
+            <i class="fa {{getEvent(condition.type).icon}}"></i>
         </td>
         <td>
-            {{event.type}}
+            {{condition.type}}
         </td>
         <td class="text-right">
-            <i class="fa fa-pencil mr-sm adly-pointer" ui-sref=".event.type({eventType:event.type, index: $index})"></i>
-            <i class="fa fa-trash adly-pointer" ng-click="removeEvent(event, $index)"></i>
+            <i class="fa fa-pencil mr-sm adly-pointer" ui-sref=".condition.type({conditionType:condition.type, index: $index})"></i>
+            <i class="fa fa-trash adly-pointer" ng-click="removeCondition(condition, $index)"></i>
         </td>
     </tr>
     </tbody>
