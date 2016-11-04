@@ -1,8 +1,7 @@
-package pl.edu.agh.student.model.event;
+package pl.edu.agh.student.model.rule.condition;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.MINIMAL_CLASS, include = JsonTypeInfo.As.PROPERTY, property = "type")
-public interface RuleEvent {
-
+public interface RuleCondition {
 }

@@ -1,11 +1,11 @@
-package pl.edu.agh.student.model;
+package pl.edu.agh.student.model.rule;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.Type;
-import pl.edu.agh.student.model.action.RuleAction;
-import pl.edu.agh.student.model.condition.RuleCondition;
-import pl.edu.agh.student.model.event.RuleEvent;
+import pl.edu.agh.student.model.rule.action.RuleAction;
+import pl.edu.agh.student.model.rule.condition.RuleCondition;
+import pl.edu.agh.student.model.rule.event.RuleEvent;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

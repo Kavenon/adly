@@ -5,7 +5,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
-import pl.edu.agh.student.model.Rule;
+import pl.edu.agh.student.model.rule.Rule;
 import pl.edu.agh.student.repository.RuleRepository;
 
 import java.util.List;

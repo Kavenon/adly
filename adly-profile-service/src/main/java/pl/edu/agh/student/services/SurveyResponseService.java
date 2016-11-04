@@ -1,4 +1,4 @@
-package pl.edu.agh.student.controller;
+package pl.edu.agh.student.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,6 @@ import pl.edu.agh.student.model.SurveyResponse;
 import pl.edu.agh.student.model.SurveyResponseKey;
 import pl.edu.agh.student.model.survey.SurveyResponseRequest;
 import pl.edu.agh.student.repository.SurveyResponseRepository;
-import pl.edu.agh.student.services.ProfileService;
 
 import java.util.Date;
 import java.util.UUID;
@@ -16,18 +15,21 @@ import java.util.UUID;
 public class SurveyResponseService {
 
     private SurveyResponseRepository surveyResponseRepository;
+    private ProfileCardService profileCardService;
     private ProfileService profileService;
 
     @Autowired
-    public SurveyResponseService(SurveyResponseRepository surveyResponseRepository, ProfileService profileService) {
+    public SurveyResponseService(SurveyResponseRepository surveyResponseRepository, ProfileCardService profileCardService, ProfileService profileService) {
         this.surveyResponseRepository = surveyResponseRepository;
+        this.profileCardService = profileCardService;
         this.profileService = profileService;
     }
 
     public void handleResponse(SurveyResponseRequest responseRequest) {
 
+        UUID profileId = UUID.fromString(profileService.getProfileId(responseRequest.getUuid()));
         SurveyResponseKey surveyResponseKey = new SurveyResponseKey(
-                UUID.fromString(profileService.getProfileId(responseRequest.getUuid())),
+                profileId,
                 new Date(),
                 responseRequest.getSurveyId()
         );
@@ -39,6 +41,8 @@ public class SurveyResponseService {
                         UUID.fromString(responseRequest.getUuid()));
 
         surveyResponseRepository.save(surveyResponse);
+
+        profileCardService.handleSurveyResponse(profileId, responseRequest.getFieldList());
 
     }
 

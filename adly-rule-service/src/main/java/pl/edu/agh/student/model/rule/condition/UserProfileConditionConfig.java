@@ -1,4 +1,4 @@
-package pl.edu.agh.student.model.condition;
+package pl.edu.agh.student.model.rule.condition;
 
 import java.util.ArrayList;
 import java.util.List;

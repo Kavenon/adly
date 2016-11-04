@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.agh.student.model.survey.SurveyResponseRequest;
+import pl.edu.agh.student.services.SurveyResponseService;
 
 @RestController
 @RequestMapping("/survey/response")

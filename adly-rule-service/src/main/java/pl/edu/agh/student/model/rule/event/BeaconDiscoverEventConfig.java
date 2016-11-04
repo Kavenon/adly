@@ -1,4 +1,4 @@
-package pl.edu.agh.student.model.event;
+package pl.edu.agh.student.model.rule.event;
 
 public class BeaconDiscoverEventConfig {
 
