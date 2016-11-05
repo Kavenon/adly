@@ -22,14 +22,14 @@ public class SurveySentService {
     public boolean surveySent(UUID profileUuid, Integer surveyId){
 
         List<SurveySent> byDeviceUuidAndSurveyId = surveySentRepository.findByDeviceUuidAndSurveyId(profileUuid, surveyId);
-        return byDeviceUuidAndSurveyId.size() == 0;
+        return byDeviceUuidAndSurveyId.size() > 0;
 
     }
 
     public boolean surveySent(UUID profileUuid, Integer surveyId, Date since){
 
         List<SurveySent> byDeviceUuidAndSurveyIdAndSince = surveySentRepository.findByDeviceUuidAndSurveyIdAndSince(profileUuid, surveyId, since);
-        return byDeviceUuidAndSurveyIdAndSince.size() == 0;
+        return byDeviceUuidAndSurveyIdAndSince.size() > 0;
 
     }
 }

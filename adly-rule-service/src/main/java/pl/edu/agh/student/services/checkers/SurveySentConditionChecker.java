@@ -6,7 +6,7 @@ import pl.edu.agh.student.event.UserEvent;
 import pl.edu.agh.student.model.rule.condition.RuleCondition;
 import pl.edu.agh.student.model.rule.condition.SurveySentCondition;
 import pl.edu.agh.student.services.SurveySentService;
-import pl.edu.agh.student.services.external.ProfileService;
+import pl.edu.agh.student.services.external.DeviceService;
 import pl.edu.agh.student.services.helpers.TimeCalculator;
 
 import java.util.UUID;
@@ -16,10 +16,10 @@ public class SurveySentConditionChecker implements ISpecificConditionChecker {
 
     private SurveySentService surveySentService;
     private TimeCalculator timeCalculator;
-    private ProfileService profileService;
+    private DeviceService profileService;
 
     @Autowired
-    public SurveySentConditionChecker(SurveySentService surveySentService, TimeCalculator timeCalculator, ProfileService profileService) {
+    public SurveySentConditionChecker(SurveySentService surveySentService, TimeCalculator timeCalculator, DeviceService profileService) {
         this.surveySentService = surveySentService;
         this.timeCalculator = timeCalculator;
         this.profileService = profileService;
