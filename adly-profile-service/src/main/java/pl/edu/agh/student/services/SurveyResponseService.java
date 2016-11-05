@@ -16,10 +16,10 @@ public class SurveyResponseService {
 
     private SurveyResponseRepository surveyResponseRepository;
     private ProfileCardService profileCardService;
-    private ProfileService profileService;
+    private DeviceService profileService;
 
     @Autowired
-    public SurveyResponseService(SurveyResponseRepository surveyResponseRepository, ProfileCardService profileCardService, ProfileService profileService) {
+    public SurveyResponseService(SurveyResponseRepository surveyResponseRepository, ProfileCardService profileCardService, DeviceService profileService) {
         this.surveyResponseRepository = surveyResponseRepository;
         this.profileCardService = profileCardService;
         this.profileService = profileService;

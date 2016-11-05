@@ -31,4 +31,15 @@ public class ProfileCardService {
         });
 
     }
+
+    public String getPropertyValueForUuid(UUID profileUuid, Integer propertyId) {
+
+        ProfileCard byProfileIdAndPropertyId = profileCardRepository.findByProfileIdAndPropertyId(profileUuid, propertyId);
+
+        if(byProfileIdAndPropertyId == null){
+            return null;
+        }
+        return byProfileIdAndPropertyId.getValue();
+
+    }
 }

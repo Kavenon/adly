@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "adly-device-service")
-public interface ProfileService {
+public interface DeviceService {
 
     @RequestMapping(method = RequestMethod.GET, value = "/device/profile")
     String getProfileId(@RequestParam("deviceId") String deviceId);

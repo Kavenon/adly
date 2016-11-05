@@ -6,13 +6,12 @@ import org.springframework.stereotype.Repository;
 import pl.edu.agh.student.model.ProfileCard;
 import pl.edu.agh.student.model.ProfileCardKey;
 
-import java.util.List;
 import java.util.UUID;
 
 @Repository
 public interface ProfileCardRepository extends CrudRepository<ProfileCard, ProfileCardKey> {
 
     @Query("select * from profile_card where profile_id = ?0 and property_id = ?1")
-    List<ProfileCard> findByProfileIdAndPropertyId(UUID profileId, Integer propertyId);
+    ProfileCard findByProfileIdAndPropertyId(UUID profileId, Integer propertyId);
 
 }

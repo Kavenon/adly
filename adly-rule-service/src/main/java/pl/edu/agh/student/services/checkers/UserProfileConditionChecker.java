@@ -15,7 +15,6 @@ import pl.edu.agh.student.services.property.PropertyMatcherFactory;
 
 import java.util.UUID;
 
-
 @Component
 public class UserProfileConditionChecker implements ISpecificConditionChecker {
 
@@ -45,12 +44,19 @@ public class UserProfileConditionChecker implements ISpecificConditionChecker {
     private boolean testSingleCheck(UserProfileConditionCheck singleCheck, UUID profileUuid) {
 
         IPropertyType propertyType = profileService.getPropertyTypeById(singleCheck.getPropertyId());
+
+        if(propertyType == null){
+            LOG.info("Property id {0} not found, returning false", singleCheck.getPropertyId());
+            return false;
+        }
+
         String propertyValue = profileService.getPropertyValueForUuid(profileUuid, singleCheck.getPropertyId());
 
         if(propertyValue == null){
             LOG.info("Property id {0} not found for profile {1}, returning false", singleCheck.getPropertyId(), profileUuid);
             return false;
         }
+
         return PropertyMatcherFactory.getMatcher(propertyType).match(singleCheck,propertyValue);
 
     }

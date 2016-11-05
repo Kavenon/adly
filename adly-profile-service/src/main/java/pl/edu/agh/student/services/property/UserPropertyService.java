@@ -5,6 +5,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
+import pl.edu.agh.student.model.property.IPropertyType;
 import pl.edu.agh.student.model.property.ProfileProperty;
 import pl.edu.agh.student.repository.ProfilePropertyRepository;
 
@@ -68,5 +69,15 @@ public class UserPropertyService {
 
     public List<ProfileProperty> get() {
         return repository.findByUserIdAndDeleted(getUserId(), false);
+    }
+
+    public IPropertyType getPropertyTypeById(Integer propertyId) {
+
+        ProfileProperty one = repository.findOne(propertyId);
+        if(one == null){
+            return null;
+        }
+        return one.getType();
+
     }
 }
