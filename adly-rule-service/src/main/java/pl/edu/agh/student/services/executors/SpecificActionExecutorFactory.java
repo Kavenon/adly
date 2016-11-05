@@ -21,13 +21,13 @@ public class SpecificActionExecutorFactory {
 
     public ISpecificActionExecutor getFactory(RuleAction action) {
 
-        if(action.getClass().isInstance(SendSurveyAction.class)){
+        if(action instanceof SendSurveyAction){
             return sendSurveyActionExecutor;
         }
-        else if(action.getClass().isInstance(SendPlainPushAction.class)){
+        else if(action instanceof SendPlainPushAction){
             return sendPlainPushActionExecutor;
         }
-        else if(action.getClass().isInstance(SendUrlNotificationAction.class)){
+        else if(action instanceof SendUrlNotificationAction){
             return sendUrlNotificationActionExecutor;
         }
 

@@ -38,7 +38,7 @@ public class EventHandler {
         LOG.info("Received event: " + userEvent);
 
         List<Rule> activeRulesForEvent =
-                ruleRepository.findByUserIdAndActiveAndEventType(userEvent.getUserId(), true, userEvent.getModelType());
+                ruleRepository.findByUserIdAndActiveAndEventType(userEvent.getUserId(), true, buildPqJsonParam(userEvent));
 
         LOG.info("Found rules: " + activeRulesForEvent.size());
 
@@ -59,6 +59,12 @@ public class EventHandler {
          *   4. Dla każdej akcji wykonać execute ( np. SendPush executor rzuci na kolejke push)
          *   5. done (+sprawdzic, czy push payload jest dostepny z zewnatrz, a pewnie nie jest bo nie zapisuje nigdzie pusha na bazie)
          */
+    }
+
+
+    // todo: create custom interface impementation and simplify query
+    private String buildPqJsonParam(UserEvent userEvent) {
+        return "[{\"type\":\""+userEvent.getModelType()+"\"}]";
     }
 
 }

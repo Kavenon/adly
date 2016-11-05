@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 public class BeaconDiscoverConditionConfig {
 
     private Integer beaconId;
-    private boolean checkDate = false;
 
     private Integer timeValue;
     private ChronoUnit timeUnit;
@@ -16,14 +15,6 @@ public class BeaconDiscoverConditionConfig {
 
     public void setBeaconId(Integer beaconId) {
         this.beaconId = beaconId;
-    }
-
-    public boolean isCheckDate() {
-        return checkDate;
-    }
-
-    public void setCheckDate(boolean checkDate) {
-        this.checkDate = checkDate;
     }
 
     public Integer getTimeValue() {
@@ -47,7 +38,6 @@ public class BeaconDiscoverConditionConfig {
         return "BeaconDiscoverConditionConfig{" +
                 "timeUnit=" + timeUnit +
                 ", timeValue=" + timeValue +
-                ", checkDate=" + checkDate +
                 ", beaconId=" + beaconId +
                 '}';
     }

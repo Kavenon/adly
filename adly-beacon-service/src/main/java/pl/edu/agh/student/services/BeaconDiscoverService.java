@@ -50,10 +50,10 @@ public class BeaconDiscoverService {
     }
 
     private void saveBeaconDiscoverHistory(BeaconDiscoverRequest request, Beacon beacon, UUID traceId) {
-        UuidAndDateKey key = new UuidAndDateKey(request.getUuid(), new Date());
+        UuidAndDateKey key = new UuidAndDateKey(request.getUuid(), beacon.getId());
         BeaconDiscoverHistory beaconDiscoverHistory = new BeaconDiscoverHistory(
                 key,
-                beacon.getId(),
+                new Date(),
                 traceId);
         beaconDiscoverHistoryRepository.save(beaconDiscoverHistory);
     }

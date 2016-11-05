@@ -8,12 +8,21 @@ public class BeaconDiscoverUserEvent implements UserEvent {
 
     private String uuid;
     private Beacon beacon;
+    private String traceId;
 
     public BeaconDiscoverUserEvent() {
     }
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getTraceId() {
+        return traceId;
+    }
+
+    public void setTraceId(String traceId) {
+        this.traceId = traceId;
     }
 
     @Override

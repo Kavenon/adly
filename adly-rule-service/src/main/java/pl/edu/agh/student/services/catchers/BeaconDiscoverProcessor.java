@@ -23,7 +23,7 @@ public class BeaconDiscoverProcessor {
     public void onBeaconDiscover(BeaconDiscoverUserEvent event){
 
         LOG.info("Received beacon discover event " + event);
-//        eventHandler.handleEvent(event);
+        eventHandler.handleEvent(event);
 
 	}
 }

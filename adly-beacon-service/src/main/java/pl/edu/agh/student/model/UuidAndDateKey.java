@@ -5,7 +5,6 @@ import org.springframework.data.cassandra.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 @PrimaryKeyClass
@@ -14,12 +13,12 @@ public class UuidAndDateKey implements Serializable {
     @PrimaryKeyColumn(name = "uuid", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private UUID uuid;
 
-    @PrimaryKeyColumn(name = "date", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
-    private Date date;
+    @PrimaryKeyColumn(name = "beacon_id", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Integer beaconId;
 
-    public UuidAndDateKey(UUID uuid, Date date) {
+    public UuidAndDateKey(UUID uuid, Integer beaconId) {
         this.uuid = uuid;
-        this.date = date;
+        this.beaconId = beaconId;
     }
 
     public UUID getUuid() {
@@ -30,19 +29,19 @@ public class UuidAndDateKey implements Serializable {
         this.uuid = uuid;
     }
 
-    public Date getDate() {
-        return date;
+    public Integer getBeaconId() {
+        return beaconId;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setBeaconId(Integer beaconId) {
+        this.beaconId = beaconId;
     }
 
     @Override
     public String toString() {
         return "UuidAndDateKey{" +
-                "date=" + date +
-                ", uuid=" + uuid +
+                "uuid=" + uuid +
+                ", beaconId=" + beaconId +
                 '}';
     }
 }

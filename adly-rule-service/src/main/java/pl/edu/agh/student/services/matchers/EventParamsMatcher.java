@@ -28,7 +28,7 @@ public class EventParamsMatcher {
 
         return ruleEvents
                 .stream()
-                .filter(event -> event.getClass().isInstance(userEvent.getRuleEvent()))
+                .filter(event -> event.getClass() == userEvent.getRuleEvent()) //todo: instance of?
                 .anyMatch(event -> checkIfEventMatches(userEvent, event));
     }
 

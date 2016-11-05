@@ -13,7 +13,7 @@ public class SpecificEventParamsMatcherFactory {
 
     public ISpecificEventParamsMatcher getFactory(RuleEvent event) {
 
-        if(event.getClass().isInstance(BeaconDiscoverEvent.class)){
+        if(event instanceof BeaconDiscoverEvent){
             return beaconDiscoverEventMatcher;
         }
 

@@ -21,16 +21,16 @@ public class SpecificConditionCheckedFactory {
 
     public ISpecificConditionChecker getFactory(RuleCondition condition) {
 
-        if(condition.getClass().isInstance(BeaconDiscoverCondition.class)){
+        if(condition instanceof BeaconDiscoverCondition){
             return beaconDiscoverConditionChecker;
         }
-        else if(condition.getClass().isInstance(NotificationSentCondition.class)){
+        else if(condition instanceof NotificationSentCondition){
             return notificationSentConditionChecker;
         }
-        else if(condition.getClass().isInstance(SurveySentCondition.class)){
+        else if(condition instanceof SurveySentCondition){
             return surveySentConditionChecker;
         }
-        else if(condition.getClass().isInstance(UserProfileCondition.class)){
+        else if(condition instanceof UserProfileCondition){
             return userProfileConditionChecker;
         }
 
