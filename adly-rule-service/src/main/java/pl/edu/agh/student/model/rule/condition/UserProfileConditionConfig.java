@@ -3,7 +3,7 @@ package pl.edu.agh.student.model.rule.condition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserProfileConditionConfig {
+public class UserProfileConditionConfig extends BaseCondition {
 
     private List<UserProfileConditionCheck> checks = new ArrayList<>();
 

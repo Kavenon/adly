@@ -6,6 +6,7 @@ import pl.edu.agh.student.event.BeaconDiscoverUserEvent;
 import pl.edu.agh.student.model.rule.condition.BeaconDiscoverCondition;
 import pl.edu.agh.student.model.rule.condition.BeaconDiscoverConditionConfig;
 import pl.edu.agh.student.services.external.BeaconService;
+import pl.edu.agh.student.services.helpers.TimeCalculator;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class BeaconDiscoverConditionCheckerTest {
     @Before
     public void setUp(){
         beaconService = mock(BeaconService.class);
-        beaconDiscoverConditionChecker = new BeaconDiscoverConditionChecker(beaconService, timeCalculator);
+        beaconDiscoverConditionChecker = new BeaconDiscoverConditionChecker(beaconService, new TimeCalculator());
     }
 
     @Test

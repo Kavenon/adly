@@ -9,8 +9,6 @@ import pl.edu.agh.student.model.rule.condition.RuleCondition;
 import pl.edu.agh.student.services.external.BeaconService;
 import pl.edu.agh.student.services.helpers.TimeCalculator;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,6 +34,20 @@ public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker
 
         List<UUID> discoveredBeaconsTraceId = beaconService.getDiscoveredBeaconsTraceId(uuid, condition.getConfig().getBeaconId(), sinceMillis);
 
+        return conditionResult(userEvent, condition, discoveredBeaconsTraceId);
+
+    }
+
+    private boolean conditionResult(UserEvent userEvent, BeaconDiscoverCondition condition, List<UUID> discoveredBeaconsTraceId) {
+        boolean hasDiscoverBeacon = hasDiscoverBeacon(userEvent, discoveredBeaconsTraceId);
+
+        if(condition.getConfig().isNegation()){
+            return !hasDiscoverBeacon;
+        }
+        return hasDiscoverBeacon;
+    }
+
+    private boolean hasDiscoverBeacon(UserEvent userEvent, List<UUID> discoveredBeaconsTraceId) {
         if(discoveredBeaconsTraceId.size() == 0){
             return true;
         }
@@ -47,7 +59,6 @@ public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker
             }
         }
         return false;
-
     }
 
 }

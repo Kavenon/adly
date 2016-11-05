@@ -32,12 +32,25 @@ public class SurveySentConditionChecker implements ISpecificConditionChecker {
 
         UUID profileUuid = UUID.fromString(profileService.getProfileId(userEvent.getUuid()));
 
+        return conditionResult(condition, profileUuid);
+
+    }
+
+    private boolean conditionResult(SurveySentCondition condition, UUID profileUuid) {
+        boolean wasSurveySent = wasSurveySent(condition, profileUuid);
+
+        if(condition.getConfig().isNegation()){
+            return !wasSurveySent;
+        }
+        return wasSurveySent;
+    }
+
+    private boolean wasSurveySent(SurveySentCondition condition, UUID profileUuid) {
         if(condition.getConfig().isCheckDate()){
             return surveySentService.surveySent(profileUuid,condition.getConfig().getSurveyId(), timeCalculator.dateFromNow(condition.getConfig().getTimeValue(),condition.getConfig().getTimeUnit()));
         }
         else {
             return surveySentService.surveySent(profileUuid,condition.getConfig().getSurveyId());
         }
-
     }
 }

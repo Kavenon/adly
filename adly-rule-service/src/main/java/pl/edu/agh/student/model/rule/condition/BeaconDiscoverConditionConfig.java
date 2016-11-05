@@ -2,7 +2,7 @@ package pl.edu.agh.student.model.rule.condition;
 
 import java.time.temporal.ChronoUnit;
 
-public class BeaconDiscoverConditionConfig {
+public class BeaconDiscoverConditionConfig extends BaseCondition  {
 
     private Integer beaconId;
 

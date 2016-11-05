@@ -2,7 +2,7 @@ package pl.edu.agh.student.model.rule.condition;
 
 import java.time.temporal.ChronoUnit;
 
-public class SurveySentConditionConfig {
+public class SurveySentConditionConfig extends BaseCondition {
 
     private Integer surveyId;
 

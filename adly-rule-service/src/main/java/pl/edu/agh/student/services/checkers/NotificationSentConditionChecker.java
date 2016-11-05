@@ -10,5 +10,11 @@ public class NotificationSentConditionChecker implements ISpecificConditionCheck
     @Override
     public boolean check(RuleCondition condition, UserEvent userEvent) {
         return false;
+
+//        if(condition.getConfig().isNegation()){
+//            return !hasDiscoverBeacon;
+//        }
+//        return hasDiscoverBeacon;
+
     }
 }
