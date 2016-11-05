@@ -1,13 +1,9 @@
 package pl.edu.agh.student.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.student.services.ProfileCardService;
 
-import javax.websocket.server.PathParam;
 import java.util.UUID;
 
 @RestController
@@ -22,7 +18,7 @@ public class ProfileCardController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{propertyId}")
-    public String getPropertyValueForUuid(@RequestParam("profileUuid") UUID profileUuid, @PathParam("propertyId") Integer propertyId){
+    public String getPropertyValueForUuid(@RequestParam("profileUuid") UUID profileUuid, @PathVariable("propertyId") Integer propertyId){
         return profileCardService.getPropertyValueForUuid(profileUuid, propertyId);
     }
 

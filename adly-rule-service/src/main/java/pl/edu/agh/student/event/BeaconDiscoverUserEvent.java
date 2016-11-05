@@ -55,9 +55,10 @@ public class BeaconDiscoverUserEvent implements UserEvent {
 
     @Override
     public String toString() {
-        return "BeaconDiscoverEvent{" +
+        return "BeaconDiscoverUserEvent{" +
                 "uuid='" + uuid + '\'' +
                 ", beacon=" + beacon +
+                ", traceId='" + traceId + '\'' +
                 '}';
     }
 }

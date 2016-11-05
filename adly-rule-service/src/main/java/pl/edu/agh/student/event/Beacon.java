@@ -24,4 +24,11 @@ public class Beacon {
         this.userId = userId;
     }
 
+    @Override
+    public String toString() {
+        return "Beacon{" +
+                "id=" + id +
+                ", userId=" + userId +
+                '}';
+    }
 }
