@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pl.edu.agh.student.model.rule.event.RuleEvent;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BeaconDiscoverEvent implements UserEvent {
+public class BeaconDiscoverUserEvent implements UserEvent {
 
     private String uuid;
     private Long userId;
 
     private Beacon beacon;
 
-    public BeaconDiscoverEvent() {
+    public BeaconDiscoverUserEvent() {
     }
 
     public void setUuid(String uuid) {
