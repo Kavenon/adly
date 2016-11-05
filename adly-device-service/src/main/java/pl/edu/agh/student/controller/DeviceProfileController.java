@@ -27,4 +27,16 @@ public class DeviceProfileController {
 
     }
 
+    @RequestMapping(value = "/token", method = RequestMethod.GET)
+    public ResponseEntity<Object> getToken(@RequestParam String deviceId) {
+
+        try {
+            return new ResponseEntity<>(service.getDeviceToken(deviceId), HttpStatus.OK);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
 }

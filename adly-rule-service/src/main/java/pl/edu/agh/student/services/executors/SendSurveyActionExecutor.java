@@ -1,16 +1,21 @@
 package pl.edu.agh.student.services.executors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.edu.agh.student.event.UserEvent;
-import pl.edu.agh.student.model.rule.action.RuleAction;
-import pl.edu.agh.student.model.rule.condition.RuleCondition;
-import pl.edu.agh.student.services.checkers.ISpecificConditionChecker;
+import pl.edu.agh.student.model.notification.NotificationType;
+import pl.edu.agh.student.services.NotificationWriter;
+import pl.edu.agh.student.services.external.DeviceService;
 
 @Component
-public class SendSurveyActionExecutor implements ISpecificActionExecutor {
+public class SendSurveyActionExecutor extends AbstractSendNotificationExecutor implements ISpecificActionExecutor {
+
+    @Autowired
+    public SendSurveyActionExecutor(NotificationWriter notificationWriter, DeviceService deviceService) {
+        super(notificationWriter, deviceService);
+    }
 
     @Override
-    public void execute(RuleAction action, UserEvent userEvent) {
-
+    NotificationType getNotificationType() {
+        return NotificationType.F;
     }
 }

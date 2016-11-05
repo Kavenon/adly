@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.event.UserEvent;
 import pl.edu.agh.student.model.rule.Rule;
-import pl.edu.agh.student.model.rule.action.RuleAction;
 
 @Component
 public class ActionExecutor {
@@ -21,7 +20,7 @@ public class ActionExecutor {
         rule.getActions()
             .stream()
             .forEach(action ->
-                    specificActionExecutorFactory.getFactory(action.getRuleAction()).execute((RuleAction) action, userEvent));
+                    specificActionExecutorFactory.getFactory(action.getRuleAction()).execute(action, userEvent));
 
     }
 }

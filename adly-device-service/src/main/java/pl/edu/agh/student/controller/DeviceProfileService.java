@@ -30,4 +30,15 @@ public class DeviceProfileService {
         throw new DeviceNotFoundException();
 
     }
+
+    public String getDeviceToken(String deviceId) {
+        UUID deviceUuid = UUID.fromString(deviceId);
+        Device one = deviceRepository.findOne(deviceUuid);
+
+        if(one != null){
+            return one.getToken();
+        }
+
+        throw new DeviceNotFoundException();
+    }
 }
