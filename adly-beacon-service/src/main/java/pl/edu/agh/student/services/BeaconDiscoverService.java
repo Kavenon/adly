@@ -14,6 +14,7 @@ import pl.edu.agh.student.repository.BeaconDiscoverHistoryRepository;
 import pl.edu.agh.student.repository.BeaconRepository;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class BeaconDiscoverService {
@@ -40,24 +41,25 @@ public class BeaconDiscoverService {
             return ;
         }
 
-        saveBeaconDiscoverHistory(request, beacon);
-        publishBeaconDiscoverEvent(request, beacon);
+        UUID traceId = UUID.randomUUID();
+        saveBeaconDiscoverHistory(request, beacon, traceId);
+        publishBeaconDiscoverEvent(request, beacon, traceId);
 
         LOG.info("Discovered beacon {}", request.toString());
 
     }
 
-    private void saveBeaconDiscoverHistory(BeaconDiscoverRequest request, Beacon beacon) {
+    private void saveBeaconDiscoverHistory(BeaconDiscoverRequest request, Beacon beacon, UUID traceId) {
         UuidAndDateKey key = new UuidAndDateKey(request.getUuid(), new Date());
         BeaconDiscoverHistory beaconDiscoverHistory = new BeaconDiscoverHistory(
                 key,
-                beacon.getId()
-        );
+                beacon.getId(),
+                traceId);
         beaconDiscoverHistoryRepository.save(beaconDiscoverHistory);
     }
 
-    private void publishBeaconDiscoverEvent(BeaconDiscoverRequest request, Beacon beacon) {
-        beaconWriter.write(new BeaconDiscoverEvent(request.getUuid().toString(),beacon));
+    private void publishBeaconDiscoverEvent(BeaconDiscoverRequest request, Beacon beacon, UUID traceId) {
+        beaconWriter.write(new BeaconDiscoverEvent(request.getUuid().toString(),traceId.toString(),beacon));
     }
 
 }

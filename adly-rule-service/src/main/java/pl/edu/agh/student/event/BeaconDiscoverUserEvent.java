@@ -7,8 +7,6 @@ import pl.edu.agh.student.model.rule.event.RuleEvent;
 public class BeaconDiscoverUserEvent implements UserEvent {
 
     private String uuid;
-    private Long userId;
-
     private Beacon beacon;
 
     public BeaconDiscoverUserEvent() {
@@ -16,10 +14,6 @@ public class BeaconDiscoverUserEvent implements UserEvent {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -39,7 +33,7 @@ public class BeaconDiscoverUserEvent implements UserEvent {
 
     @Override
     public Long getUserId() {
-        return userId;
+        return beacon.getUserId();
     }
 
     public Beacon getBeacon() {

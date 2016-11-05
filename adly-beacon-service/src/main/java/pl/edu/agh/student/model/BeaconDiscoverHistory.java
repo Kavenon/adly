@@ -4,6 +4,8 @@ import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
+import java.util.UUID;
+
 @Table("beacon_discover_history")
 public class BeaconDiscoverHistory {
 
@@ -13,12 +15,16 @@ public class BeaconDiscoverHistory {
     @Column("beacon_id")
     private Integer beaconId;
 
+    @Column("trace_id")
+    private UUID traceId;
+
     public BeaconDiscoverHistory() {
     }
 
-    public BeaconDiscoverHistory(UuidAndDateKey uuidAndDateKey, Integer beaconId) {
+    public BeaconDiscoverHistory(UuidAndDateKey uuidAndDateKey, Integer beaconId, UUID traceId) {
         this.uuidAndDateKey = uuidAndDateKey;
         this.beaconId = beaconId;
+        this.traceId = traceId;
     }
 
     public UuidAndDateKey getUuidAndDateKey() {
@@ -37,11 +43,20 @@ public class BeaconDiscoverHistory {
         this.beaconId = beaconId;
     }
 
+    public UUID getTraceId() {
+        return traceId;
+    }
+
+    public void setTraceId(UUID traceId) {
+        this.traceId = traceId;
+    }
+
     @Override
     public String toString() {
         return "BeaconDiscoverHistory{" +
-                "uuidAndDateKey=" + uuidAndDateKey +
+                "traceId=" + traceId +
                 ", beaconId=" + beaconId +
+                ", uuidAndDateKey=" + uuidAndDateKey +
                 '}';
     }
 }
