@@ -6,9 +6,6 @@ import pl.edu.agh.student.event.UserEvent;
 import pl.edu.agh.student.model.rule.Rule;
 import pl.edu.agh.student.model.rule.action.RuleAction;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Component
 public class ActionExecutor {
 
@@ -21,12 +18,10 @@ public class ActionExecutor {
 
     public void execute(Rule rule, UserEvent userEvent) {
 
-        List<RuleAction> ruleActions = Arrays.asList(rule.getActions());
-
-        ruleActions
+        rule.getActions()
             .stream()
-            .filter(event -> event.getClass().isInstance(userEvent.getRuleEvent()))
-            .forEach(action -> specificActionExecutorFactory.getFactory(action).execute(action, userEvent));
+            .forEach(action ->
+                    specificActionExecutorFactory.getFactory(action.getRuleAction()).execute((RuleAction) action, userEvent));
 
     }
 }

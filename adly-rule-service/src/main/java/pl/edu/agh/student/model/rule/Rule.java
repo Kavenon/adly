@@ -1,18 +1,14 @@
 package pl.edu.agh.student.model.rule;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.Type;
-import pl.edu.agh.student.model.rule.action.RuleAction;
 import pl.edu.agh.student.model.rule.condition.RuleCondition;
 import pl.edu.agh.student.model.rule.event.RuleEvent;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.IOException;
+import javax.persistence.*;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,9 +32,8 @@ public class Rule {
     @Column(columnDefinition = "json")
     private RuleCondition[] conditions = new RuleCondition[]{};
 
-    @Type(type = "json")
-    @Column(columnDefinition = "json")
-    private RuleAction[] actions = new RuleAction[]{};
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<RuleActionEntity> actions = new HashSet<>();
 
     public Rule() {
     }
@@ -91,11 +86,11 @@ public class Rule {
         this.conditions = conditions;
     }
 
-    public RuleAction[] getActions() {
+    public Set<RuleActionEntity> getActions() {
         return actions;
     }
 
-    public void setActions(RuleAction[] actions) {
+    public void setActions(Set<RuleActionEntity> actions) {
         this.actions = actions;
     }
 
@@ -117,13 +112,8 @@ public class Rule {
                 ", active=" + active +
                 ", events=" + Arrays.toString(events) +
                 ", conditions=" + Arrays.toString(conditions) +
-                ", actions=" + Arrays.toString(actions) +
+                ", actions=" + actions +
                 '}';
     }
 
-    public static void main(String[] args) throws IOException {
-        ObjectMapper om = new ObjectMapper();
-        Rule rule = om.readValue("{\"id\":28,\"name\":\"Rule\",\"userId\":1,\"deleted\":false,\"active\":true,\"events\":[{\"type\":\".BeaconDiscoverEvent\",\"config\":{\"beaconId\":1}}],\"conditions\":[{\"type\":\".UserProfileCondition\",\"config\":{\"checks\":[{\"propertyId\":22,\"operator\":\"EQUAL\",\"value\":\"adfadf\"}]}}],\"actions\":[{\"type\":\".SendPlainPushAction\",\"config\":{\"title\":\"adfadf\",\"text\":\"adfadfadfadf\"}}]}", Rule.class);
-        System.out.println(rule);
-    }
 }
