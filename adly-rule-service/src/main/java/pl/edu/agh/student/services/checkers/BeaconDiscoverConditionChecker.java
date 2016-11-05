@@ -7,6 +7,7 @@ import pl.edu.agh.student.event.UserEvent;
 import pl.edu.agh.student.model.rule.condition.BeaconDiscoverCondition;
 import pl.edu.agh.student.model.rule.condition.RuleCondition;
 import pl.edu.agh.student.services.external.BeaconService;
+import pl.edu.agh.student.services.helpers.TimeCalculator;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -17,10 +18,12 @@ import java.util.UUID;
 public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker {
 
     private BeaconService beaconService;
+    private TimeCalculator timeCalculator;
 
     @Autowired
-    public BeaconDiscoverConditionChecker(BeaconService beaconService) {
+    public BeaconDiscoverConditionChecker(BeaconService beaconService, TimeCalculator timeCalculator) {
         this.beaconService = beaconService;
+        this.timeCalculator = timeCalculator;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker
         BeaconDiscoverCondition condition = (BeaconDiscoverCondition) _condition;
         String uuid = userEvent.getUuid();
 
-        long sinceMillis = getSinceMillis(condition);
+        long sinceMillis = timeCalculator.millisFromNow(condition.getConfig().getTimeValue(),condition.getConfig().getTimeUnit());
 
         List<UUID> discoveredBeaconsTraceId = beaconService.getDiscoveredBeaconsTraceId(uuid, condition.getConfig().getBeaconId(), sinceMillis);
 
@@ -47,11 +50,4 @@ public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker
 
     }
 
-
-    private long getSinceMillis(BeaconDiscoverCondition condition) {
-        return LocalDateTime
-                    .now()
-                    .minus(condition.getConfig().getTimeValue(), condition.getConfig().getTimeUnit())
-                    .toEpochSecond(ZoneOffset.UTC) * 1000;
-    }
 }

@@ -25,7 +25,7 @@ public class BeaconDiscoverConditionCheckerTest {
     @Before
     public void setUp(){
         beaconService = mock(BeaconService.class);
-        beaconDiscoverConditionChecker = new BeaconDiscoverConditionChecker(beaconService);
+        beaconDiscoverConditionChecker = new BeaconDiscoverConditionChecker(beaconService, timeCalculator);
     }
 
     @Test
