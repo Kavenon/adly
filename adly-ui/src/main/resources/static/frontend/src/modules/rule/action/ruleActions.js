@@ -48,7 +48,7 @@ module.exports = function(parentState){
 
         var getEditingActionObject = function () {
             if (isEditingAction()) {
-                return angular.copy($scope.rule.actions[$state.params.index]);
+                return angular.copy($scope.rule.actions[$state.params.index].ruleAction);
             }
             else {
                 return {};
@@ -65,13 +65,15 @@ module.exports = function(parentState){
 
             if(isEditingAction()){
                 $scope.editingAction.type = $state.params.actionType;
-                $scope.rule.actions[$state.params.index] = $scope.editingAction;
+                $scope.rule.actions[$state.params.index].ruleAction = $scope.editingAction;
             }
             else {
                 $scope.rule.actions.push({
-                    type: $state.params.actionType,
-                    config: $scope.editingAction.config
-                })
+                    ruleAction : {
+                        type: $state.params.actionType,
+                        config: $scope.editingAction.config
+                    }
+                });
             }
             $state.go(parentState);
 

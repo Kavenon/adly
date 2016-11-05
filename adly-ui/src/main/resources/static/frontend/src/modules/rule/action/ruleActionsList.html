@@ -2,14 +2,14 @@
     <tbody>
     <tr ng-repeat="action in data.actions">
         <td class="text-center" width="30">
-            <i class="fa {{getAction(action.type).icon}}"></i>
+            <i class="fa {{getAction(action.ruleAction.type).icon}}"></i>
         </td>
         <td>
-            {{action.type}}
+            {{action.ruleAction.type}}
         </td>
         <td class="text-right">
-            <i class="fa fa-pencil mr-sm adly-pointer" ui-sref=".action.type({actionType:action.type, index: $index})"></i>
-            <i class="fa fa-trash adly-pointer" ng-click="removeAction(action, $index)"></i>
+            <i class="fa fa-pencil mr-sm adly-pointer" ui-sref=".action.type({actionType:action.ruleAction.type, index: $index})"></i>
+            <i class="fa fa-trash adly-pointer" ng-click="removeAction(action.ruleAction, $index)"></i>
         </td>
     </tr>
     </tbody>
