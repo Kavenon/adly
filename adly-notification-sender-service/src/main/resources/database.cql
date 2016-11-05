@@ -1,0 +1,1 @@
+CREATE TABLE notification_sent (device_id uuid, date timestamp, notification text, PRIMARY KEY((device_id), date)) WITH CLUSTERING ORDER BY (date DESC);

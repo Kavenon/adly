@@ -16,10 +16,12 @@ public class SenderService {
     private static final Log LOG = LogFactory.getLog(FcmSender.class);
 
     private SenderFactory senderFactory;
+    private NotificationSentService notificationSentService;
 
     @Autowired
-    public SenderService(SenderFactory senderFactory) {
+    public SenderService(SenderFactory senderFactory, NotificationSentService notificationSentService) {
         this.senderFactory = senderFactory;
+        this.notificationSentService = notificationSentService;
     }
 
     @StreamListener("input")
@@ -28,6 +30,9 @@ public class SenderService {
         Sender sender = senderFactory.getSender(notificationSendRequest.getRecipient().getSystem());
         try {
             sender.send(notificationSendRequest.getNotification(),notificationSendRequest.getRecipient());
+            if(notificationSendRequest.getRecipient().getDeviceId() != null){
+                notificationSentService.record(notificationSendRequest);
+            }
         }
         catch(Exception e){
             LOG.error("Could not send notification " + notificationSendRequest.toString(),e);

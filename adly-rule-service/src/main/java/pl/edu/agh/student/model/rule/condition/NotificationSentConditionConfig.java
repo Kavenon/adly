@@ -4,8 +4,17 @@ import java.time.temporal.ChronoUnit;
 
 public class NotificationSentConditionConfig {
 
+    private boolean negation;
     private Integer timeValue;
     private ChronoUnit timeUnit;
+
+    public boolean isNegation() {
+        return negation;
+    }
+
+    public void setNegation(boolean negation) {
+        this.negation = negation;
+    }
 
     public Integer getTimeValue() {
         return timeValue;
@@ -25,9 +34,10 @@ public class NotificationSentConditionConfig {
 
     @Override
     public String toString() {
-        return "BeaconDiscoverConditionConfig{" +
-                "timeUnit=" + timeUnit +
+        return "NotificationSentConditionConfig{" +
+                "negation=" + negation +
                 ", timeValue=" + timeValue +
+                ", timeUnit=" + timeUnit +
                 '}';
     }
 }

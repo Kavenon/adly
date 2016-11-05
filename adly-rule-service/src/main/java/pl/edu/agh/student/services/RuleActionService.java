@@ -20,7 +20,7 @@ public class RuleActionService {
         RuleActionEntity one = repository.findOne(actionId);
 
         if(one != null){
-            return one.getRuleAction();
+            return one.getRuleAction().getConfig();
         }
         else {
             throw new IllegalArgumentException("Requested action does not exist");
