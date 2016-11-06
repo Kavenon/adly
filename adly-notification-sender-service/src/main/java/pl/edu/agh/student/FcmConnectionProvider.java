@@ -17,10 +17,10 @@ public class FcmConnectionProvider implements IFcmConnectionProvider {
     private static final Log LOG = LogFactory.getLog(FcmConnectionProvider.class);
 
     public FcmConnectionProvider(
-            @Value("fcm.endpoint") String fcmEndpoint,
-            @Value("fcm.port") String fcmPort,
-            @Value("fcm.sender.id") String fcmSenderId,
-            @Value("fcm.api.key") String fcmApiKey) {
+            @Value("${fcm.endpoint}") String fcmEndpoint,
+            @Value("${fcm.port}") String fcmPort,
+            @Value("${fcm.sender.id}") String fcmSenderId,
+            @Value("${fcm.api.key}") String fcmApiKey) {
 
         fcmConnection =
                 new FcmConnection(

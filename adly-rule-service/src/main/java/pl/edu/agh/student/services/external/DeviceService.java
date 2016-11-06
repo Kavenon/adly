@@ -11,6 +11,6 @@ public interface DeviceService {
     @RequestMapping(method = RequestMethod.GET, value = "/device/profile")
     String getProfileId(@RequestParam("deviceId") String deviceId);
 
-    @RequestMapping(method = RequestMethod.GET, value = "/device/token")
+    @RequestMapping(method = RequestMethod.GET, value = "/device/getToken")
     String getDeviceToken(@RequestParam("deviceId") String deviceId);
 }

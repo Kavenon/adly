@@ -24,12 +24,15 @@ public class EventParamsMatcher {
 
     public boolean match(Rule rule, UserEvent userEvent) {
 
+        LOG.info("Event matching for rule" + rule);
+
         List<RuleEvent> ruleEvents = Arrays.asList(rule.getEvents());
 
         return ruleEvents
                 .stream()
                 .filter(event -> event.getClass() == userEvent.getRuleEvent()) //todo: instance of?
                 .anyMatch(event -> checkIfEventMatches(userEvent, event));
+
     }
 
     private boolean checkIfEventMatches(UserEvent userEvent, RuleEvent event) {

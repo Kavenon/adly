@@ -27,7 +27,7 @@ public class DeviceProfileController {
 
     }
 
-    @RequestMapping(value = "/token", method = RequestMethod.GET)
+    @RequestMapping(value = "/getToken", method = RequestMethod.GET)
     public ResponseEntity<Object> getToken(@RequestParam String deviceId) {
 
         try {

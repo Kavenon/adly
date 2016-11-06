@@ -26,6 +26,8 @@ public class ConditionChecker {
 
     public boolean check(Rule rule, UserEvent userEvent) {
 
+        LOG.info("Checking conditions for rule: " + rule);
+
         List<RuleCondition> ruleConditions = Arrays.asList(rule.getConditions());
 
         return ruleConditions
