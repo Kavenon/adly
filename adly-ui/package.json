@@ -50,6 +50,7 @@
     "masonry": "0.0.2",
     "masonry-layout": "^4.1.1",
     "metismenu": "^2.5.2",
+    "metrojs": "^0.9.77",
     "moment": "^2.15.0",
     "ng-annotate-webpack-plugin": "^0.1.3",
     "ngstorage": "^0.3.11",
