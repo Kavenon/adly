@@ -41,7 +41,7 @@ public class SurveyClientService {
                     ClientSurveyField field = new ClientSurveyField();
                     field.setFieldId(x.getId());
                     field.setFieldName(x.getName());
-                    field.setFieldType(profilePropertyRepository.findOne(x.getId()).getType());
+                    field.setFieldType(profilePropertyRepository.findOne(x.getProfilePropertyId()).getType());
                     return field;
                 })
                 .collect(Collectors.toList());

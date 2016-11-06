@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import pl.edu.agh.student.event.UserEvent;
 import pl.edu.agh.student.model.rule.Rule;
 import pl.edu.agh.student.model.rule.condition.RuleCondition;
-import pl.edu.agh.student.services.matchers.EventParamsMatcher;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 @Component
 public class ConditionChecker {
 
-    private static final Log LOG = LogFactory.getLog(EventParamsMatcher.class);
+    private static final Log LOG = LogFactory.getLog(ConditionChecker.class);
 
     private SpecificConditionCheckedFactory specificConditionCheckedFactory;
 

@@ -4,7 +4,7 @@ import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
-@Table("profile_properties")
+@Table("profile_card")
 public class ProfileCard {
 
     @PrimaryKey
@@ -12,6 +12,9 @@ public class ProfileCard {
 
     @Column("property_value")
     private String value;
+
+    public ProfileCard() {
+    }
 
     public ProfileCard(ProfileCardKey profilePropertyKey, String value) {
         this.profilePropertyKey = profilePropertyKey;

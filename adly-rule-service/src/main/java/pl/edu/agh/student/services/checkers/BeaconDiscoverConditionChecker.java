@@ -1,5 +1,7 @@
 package pl.edu.agh.student.services.checkers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.event.BeaconDiscoverUserEvent;
@@ -14,6 +16,8 @@ import java.util.UUID;
 
 @Component
 public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker {
+
+    private static final Log LOG = LogFactory.getLog(ConditionChecker.class);
 
     private BeaconService beaconService;
     private TimeCalculator timeCalculator;
@@ -49,16 +53,23 @@ public class BeaconDiscoverConditionChecker implements ISpecificConditionChecker
 
     private boolean hasDiscoverBeacon(UserEvent userEvent, List<UUID> discoveredBeaconsTraceId) {
         if(discoveredBeaconsTraceId.size() == 0){
-            return true;
+            LOG.debug("No discovered beacons for uuid {0}" + userEvent.getUuid());
+            return false;
         }
         else {
-            if(userEvent instanceof BeaconDiscoverUserEvent && discoveredBeaconsTraceId.size() == 1){
-                BeaconDiscoverUserEvent beaconDiscoverUserEvent = (BeaconDiscoverUserEvent) userEvent;
-                UUID traceId = UUID.fromString(beaconDiscoverUserEvent.getTraceId());
-                return discoveredBeaconsTraceId.contains(traceId);
+            if (userEvent instanceof BeaconDiscoverUserEvent) {
+                // todo: do not fetch all traceId's
+                if (discoveredBeaconsTraceId.size() == 1) {
+                    LOG.debug("Found only one discovered beacon for {0}" + userEvent.getUuid());
+
+                    BeaconDiscoverUserEvent beaconDiscoverUserEvent = (BeaconDiscoverUserEvent) userEvent;
+                    UUID traceId = UUID.fromString(beaconDiscoverUserEvent.getTraceId());
+                    return !discoveredBeaconsTraceId.contains(traceId);
+                }
             }
         }
-        return false;
+
+        return true;
     }
 
 }

@@ -16,4 +16,10 @@ public class BeaconDiscoverCondition implements RuleCondition {
         this.config = config;
     }
 
+    @Override
+    public String toString() {
+        return "BeaconDiscoverCondition{" +
+                "config=" + config +
+                '}';
+    }
 }

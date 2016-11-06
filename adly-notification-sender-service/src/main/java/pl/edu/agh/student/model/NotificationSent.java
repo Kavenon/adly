@@ -13,6 +13,9 @@ public class NotificationSent {
     @Column(value = "notification")
     private String notificationJson;
 
+    public NotificationSent() {
+    }
+
     public NotificationSent(NotificationSentKey notificationSentKey, String notificationJson) {
         this.notificationSentKey = notificationSentKey;
         this.notificationJson = notificationJson;

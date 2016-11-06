@@ -11,7 +11,7 @@ import pl.edu.agh.student.model.survey.SurveyResponseRequest;
 import pl.edu.agh.student.services.SurveyResponseService;
 
 @RestController
-@RequestMapping("/survey/response")
+@RequestMapping("/profile/survey/response")
 public class SurveyResponseController {
 
     private SurveyResponseService service;
@@ -23,8 +23,10 @@ public class SurveyResponseController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Object> handleResponse(@RequestBody SurveyResponseRequest responseRequest) {
+
         service.handleResponse(responseRequest);
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
 }

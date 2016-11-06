@@ -57,7 +57,13 @@ public class UserProfileConditionChecker implements ISpecificConditionChecker {
             return false;
         }
 
-        return PropertyMatcherFactory.getMatcher(propertyType).match(singleCheck,propertyValue);
+        boolean match = PropertyMatcherFactory.getMatcher(propertyType).match(singleCheck, propertyValue);
+
+        if(!match){
+            LOG.info("Profile property not matched, expected " + singleCheck + " but was: " + propertyValue);
+        }
+
+        return match;
 
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.agh.student.services.RuleActionService;
 
 @RestController
+@RequestMapping("/rule/notification/payload")
 public class RuleActionPayloadController {
 
     private RuleActionService service;
@@ -17,7 +18,7 @@ public class RuleActionPayloadController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/notification/payload", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Object getPayload(@RequestParam("_anid") Integer id) {
         return service.getActionPayload(id);
     }
