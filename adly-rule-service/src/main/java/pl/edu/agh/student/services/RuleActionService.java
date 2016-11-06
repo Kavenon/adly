@@ -9,10 +9,12 @@ import pl.edu.agh.student.repository.RuleActionRepository;
 public class RuleActionService {
 
     private RuleActionRepository repository;
+    private PayloadFetcherFactory payloadFetcherFactory;
 
     @Autowired
-    public RuleActionService(RuleActionRepository repository) {
+    public RuleActionService(RuleActionRepository repository, PayloadFetcherFactory payloadFetcherFactory) {
         this.repository = repository;
+        this.payloadFetcherFactory = payloadFetcherFactory;
     }
 
     public Object getActionPayload(Integer actionId){
@@ -20,7 +22,7 @@ public class RuleActionService {
         RuleActionEntity one = repository.findOne(actionId);
 
         if(one != null){
-            return one.getRuleAction().getConfig();
+            return payloadFetcherFactory.getFetcher(one.getRuleAction()).payload(one.getRuleAction());
         }
         else {
             throw new IllegalArgumentException("Requested action does not exist");

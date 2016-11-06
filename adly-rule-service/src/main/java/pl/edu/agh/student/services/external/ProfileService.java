@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.edu.agh.student.model.rule.property.type.IPropertyType;
+import pl.edu.agh.student.model.survey.Survey;
 
 import java.util.UUID;
 
@@ -14,6 +15,9 @@ public interface ProfileService {
 
     @RequestMapping(method = RequestMethod.GET, value = "/device/profile")
     String getProfileId(@RequestParam("deviceId") String deviceId);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/survey/client")
+    Survey getClientSurvey(@RequestParam("id") Integer surveyId);
 
     // todo : add cache (short)
     @RequestMapping(method = RequestMethod.GET, value = "/profile/card/{propertyId}")
