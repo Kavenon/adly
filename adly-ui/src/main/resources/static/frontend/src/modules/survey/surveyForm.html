@@ -17,7 +17,7 @@
                     <input type="text" placeholder="Name" class="form-control" required ng-model="field.name">
                 </div>
                 <div class="col-sm-8">
-                    <select class="form-control" ng-model="field.profilePropertyId" ng-disabled="survey.id != null" required convert-to-number>
+                    <select class="form-control" ng-model="field.profilePropertyId" ng-disabled="survey.id != null && field.profilePropertyId" required convert-to-number>
                         <option value="">-----</option>
                         <option ng-repeat="property in userProperties" value="{{property.id}}">{{property.name}}</option>
                     </select>
