@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.event.UserEvent;
+import pl.edu.agh.student.model.rule.condition.ConditionOperator;
 import pl.edu.agh.student.model.rule.condition.RuleCondition;
 import pl.edu.agh.student.model.rule.condition.UserProfileCondition;
 import pl.edu.agh.student.model.rule.condition.UserProfileConditionCheck;
@@ -55,8 +56,8 @@ public class UserProfileConditionChecker implements ISpecificConditionChecker {
         String propertyValue = profileService.getPropertyValueForUuid(profileUuid, singleCheck.getPropertyId());
 
         if(propertyValue == null){
-            LOG.info("Property id {0} not found for profile {1}, returning false", singleCheck.getPropertyId(), profileUuid);
-            return false;
+            LOG.info("Property id {0} not found for profile {1}", singleCheck.getPropertyId(), profileUuid);
+            return singleCheck.getOperator() == ConditionOperator.NULL;
         }
 
         boolean match = propertyMatcherFactory.getMatcher(propertyType).match(singleCheck, propertyValue);

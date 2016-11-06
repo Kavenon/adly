@@ -2,6 +2,7 @@ package pl.edu.agh.student.services.checkers;
 
 import org.junit.Before;
 import org.junit.Test;
+import pl.edu.agh.student.model.rule.condition.ConditionOperator;
 import pl.edu.agh.student.model.rule.condition.UserProfileCondition;
 import pl.edu.agh.student.model.rule.condition.UserProfileConditionCheck;
 import pl.edu.agh.student.model.rule.condition.UserProfileConditionConfig;
@@ -46,7 +47,7 @@ public class UserProfileConditionCheckerTest  {
 
         when(profileService.getPropertyTypeById(any())).thenReturn(null);
 
-        boolean check = checker.check(getCondition(),new MockUserEvent());
+        boolean check = checker.check(getCondition(ConditionOperator.EQUAL),new MockUserEvent());
         assertThat(check).isFalse();
 
     }
@@ -57,11 +58,22 @@ public class UserProfileConditionCheckerTest  {
         when(profileService.getPropertyTypeById(any())).thenReturn(mock(IPropertyType.class));
         when(profileService.getPropertyValueForUuid(any(),any())).thenReturn(null);
 
-        boolean check = checker.check(getCondition(),new MockUserEvent());
+        boolean check = checker.check(getCondition(ConditionOperator.EQUAL),new MockUserEvent());
         assertThat(check).isFalse();
 
     }
 
+
+    @Test
+    public void checkNotExistingPropertyValueTrue() throws Exception {
+
+        when(profileService.getPropertyTypeById(any())).thenReturn(mock(IPropertyType.class));
+        when(profileService.getPropertyValueForUuid(any(),any())).thenReturn(null);
+
+        boolean check = checker.check(getCondition(ConditionOperator.NULL),new MockUserEvent());
+        assertThat(check).isTrue();
+
+    }
 
     @Test
     public void checkMatcherTrue() throws Exception {
@@ -70,7 +82,7 @@ public class UserProfileConditionCheckerTest  {
         when(profileService.getPropertyValueForUuid(any(),any())).thenReturn("");
         when(propertyMatcher.match(any(),any())).thenReturn(true);
 
-        boolean check = checker.check(getCondition(),new MockUserEvent());
+        boolean check = checker.check(getCondition(ConditionOperator.NULL),new MockUserEvent());
         assertThat(check).isTrue();
 
     }
@@ -83,7 +95,7 @@ public class UserProfileConditionCheckerTest  {
         when(profileService.getPropertyValueForUuid(any(),any())).thenReturn("");
         when(propertyMatcher.match(any(),any())).thenReturn(false);
 
-        boolean check = checker.check(getCondition(),new MockUserEvent());
+        boolean check = checker.check(getCondition(ConditionOperator.NULL),new MockUserEvent());
         assertThat(check).isFalse();
 
     }
@@ -91,7 +103,7 @@ public class UserProfileConditionCheckerTest  {
     @Test
     public void checkWithoutCheckers() throws Exception {
 
-        UserProfileCondition condition = getCondition();
+        UserProfileCondition condition = getCondition(ConditionOperator.NULL);
         condition.getConfig().setChecks(new ArrayList<>());
         boolean check = checker.check(condition,new MockUserEvent());
         assertThat(check).isTrue();
@@ -99,9 +111,11 @@ public class UserProfileConditionCheckerTest  {
     }
 
 
-    private UserProfileCondition getCondition() {
+    private UserProfileCondition getCondition(ConditionOperator operator) {
         UserProfileConditionConfig config = new UserProfileConditionConfig();
-        config.setChecks(Collections.singletonList(new UserProfileConditionCheck()));
+        UserProfileConditionCheck check = new UserProfileConditionCheck();
+        check.setOperator(operator);
+        config.setChecks(Collections.singletonList(check));
         UserProfileCondition condition = new UserProfileCondition();
         condition.setConfig(config);
         return condition;

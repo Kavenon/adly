@@ -4,13 +4,13 @@ module.exports = function(module) {
         '.SimplePropertyType' : function(property){
             switch(property.type.simpleType){
                 case 'TEXT':
-                    return ['EQUAL', 'NOT_EQUAL', 'CONTAINS', 'NOT_CONTAINS'];
+                    return ['NULL', 'EQUAL', 'NOT_EQUAL', 'CONTAINS', 'NOT_CONTAINS'];
                 break;
                 case 'INTEGER':
-                    return ['EQUAL', 'NOT_EQUAL', 'LESS_THAN', 'MORE_THAN'];
+                    return ['NULL', 'EQUAL', 'NOT_EQUAL', 'LESS_THAN', 'MORE_THAN'];
                 break;
                 case 'DATE':
-                    return ['BEFORE', 'AFTER', 'TODAY'];
+                    return ['NULL', 'BEFORE', 'AFTER', 'TODAY'];
                 break;
             }
         }
