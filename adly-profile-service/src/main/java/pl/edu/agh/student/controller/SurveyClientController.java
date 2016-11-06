@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.agh.student.services.SurveyClientService;
 
 @RestController
-@RequestMapping("/survey/client")
+@RequestMapping("/profile/survey/client")
 public class SurveyClientController {
 
     private SurveyClientService service;

@@ -41,7 +41,7 @@ module.exports = function(module) {
 
         $scope.getOperators = function(propertyId){
             var property = getPropertyById(propertyId);
-            if(property.length){
+            if(property && property.length){
                 return propertyOperators[property[0].type.type](property[0]);
             }
             else {

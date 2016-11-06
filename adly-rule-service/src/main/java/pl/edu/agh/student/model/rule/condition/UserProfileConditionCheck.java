@@ -4,7 +4,7 @@ public class UserProfileConditionCheck {
 
     private Integer propertyId;
     private ConditionOperator operator;
-    private Object value;
+    private String value;
 
     public Integer getPropertyId() {
         return propertyId;
@@ -22,11 +22,11 @@ public class UserProfileConditionCheck {
         this.operator = operator;
     }
 
-    public Object getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

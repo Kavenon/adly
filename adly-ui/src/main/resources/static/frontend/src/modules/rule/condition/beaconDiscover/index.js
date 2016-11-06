@@ -12,7 +12,7 @@ module.exports = function(module) {
         body: {
             templateUrl: require('./beaconDiscoverCondition.html'),
             controller: 'BeaconDiscoverConditionController',
-            icon: 'fa-bluetooh-b'
+            icon: 'fa-bluetooth-b'
         }
     }
    
