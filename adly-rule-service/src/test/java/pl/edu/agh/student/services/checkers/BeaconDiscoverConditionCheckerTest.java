@@ -34,8 +34,8 @@ public class BeaconDiscoverConditionCheckerTest {
 
         when(beaconService.getDiscoveredBeaconsTraceId(any(), any(),any())).thenReturn(new ArrayList<>());
 
-        boolean check = beaconDiscoverConditionChecker.check(getCondition(), new BeaconDiscoverUserEvent());
-        assertThat(check).isTrue();
+        boolean check = beaconDiscoverConditionChecker.check(getCondition(false), new BeaconDiscoverUserEvent());
+        assertThat(check).isFalse();
 
     }
 
@@ -48,8 +48,8 @@ public class BeaconDiscoverConditionCheckerTest {
         BeaconDiscoverUserEvent userEvent = new BeaconDiscoverUserEvent();
         userEvent.setTraceId(traceId.toString());
 
-        boolean check = beaconDiscoverConditionChecker.check(getCondition(), userEvent);
-        assertThat(check).isTrue();
+        boolean check = beaconDiscoverConditionChecker.check(getCondition(false), userEvent);
+        assertThat(check).isFalse();
 
     }
 
@@ -61,8 +61,8 @@ public class BeaconDiscoverConditionCheckerTest {
         BeaconDiscoverUserEvent userEvent = new BeaconDiscoverUserEvent();
         userEvent.setTraceId(UUID.randomUUID().toString());
 
-        boolean check = beaconDiscoverConditionChecker.check(getCondition(), userEvent);
-        assertThat(check).isFalse();
+        boolean check = beaconDiscoverConditionChecker.check(getCondition(false), userEvent);
+        assertThat(check).isTrue();
 
     }
 
@@ -78,16 +78,17 @@ public class BeaconDiscoverConditionCheckerTest {
         BeaconDiscoverUserEvent userEvent = new BeaconDiscoverUserEvent();
         userEvent.setTraceId(traceId.toString());
 
-        boolean check = beaconDiscoverConditionChecker.check(getCondition(), userEvent);
+        boolean check = beaconDiscoverConditionChecker.check(getCondition(false), userEvent);
         assertThat(check).isFalse();
 
     }
 
-    private BeaconDiscoverCondition getCondition() {
+    private BeaconDiscoverCondition getCondition(boolean negation) {
         BeaconDiscoverConditionConfig config = new BeaconDiscoverConditionConfig();
         config.setBeaconId(1);
         config.setTimeUnit(ChronoUnit.DAYS);
         config.setTimeValue(1);
+        config.setNegation(negation);
         BeaconDiscoverCondition condition = new BeaconDiscoverCondition();
         condition.setConfig(config);
         return condition;

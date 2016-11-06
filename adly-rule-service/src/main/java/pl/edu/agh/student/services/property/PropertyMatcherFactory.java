@@ -1,12 +1,14 @@
 package pl.edu.agh.student.services.property;
 
+import org.springframework.stereotype.Component;
 import pl.edu.agh.student.model.rule.property.type.EnumeratedPropertyType;
 import pl.edu.agh.student.model.rule.property.type.IPropertyType;
 import pl.edu.agh.student.model.rule.property.type.SimplePropertyType;
 
+@Component
 public class PropertyMatcherFactory {
 
-    public static IPropertyMatcher getMatcher(IPropertyType propertyType){
+    public IPropertyMatcher getMatcher(IPropertyType propertyType){
 
         if(propertyType instanceof SimplePropertyType){
             return new SimplePropertyMatcher((SimplePropertyType) propertyType);

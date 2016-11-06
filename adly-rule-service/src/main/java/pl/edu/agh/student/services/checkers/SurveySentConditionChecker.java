@@ -16,13 +16,13 @@ public class SurveySentConditionChecker implements ISpecificConditionChecker {
 
     private SurveySentService surveySentService;
     private TimeCalculator timeCalculator;
-    private DeviceService profileService;
+    private DeviceService deviceService;
 
     @Autowired
-    public SurveySentConditionChecker(SurveySentService surveySentService, TimeCalculator timeCalculator, DeviceService profileService) {
+    public SurveySentConditionChecker(SurveySentService surveySentService, TimeCalculator timeCalculator, DeviceService deviceService) {
         this.surveySentService = surveySentService;
         this.timeCalculator = timeCalculator;
-        this.profileService = profileService;
+        this.deviceService = deviceService;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class SurveySentConditionChecker implements ISpecificConditionChecker {
 
         SurveySentCondition condition = (SurveySentCondition) _condition;
 
-        UUID profileUuid = UUID.fromString(profileService.getProfileId(userEvent.getUuid()));
+        UUID profileUuid = UUID.fromString(deviceService.getProfileId(userEvent.getUuid()));
 
         return conditionResult(condition, profileUuid);
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.model.rule.RuleActionEntity;
 import pl.edu.agh.student.repository.RuleActionRepository;
+import pl.edu.agh.student.services.payload.PayloadFetcherFactory;
 
 @Component
 public class RuleActionService {

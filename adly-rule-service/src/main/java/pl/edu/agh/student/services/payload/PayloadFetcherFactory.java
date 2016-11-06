@@ -1,10 +1,11 @@
-package pl.edu.agh.student.services;
+package pl.edu.agh.student.services.payload;
 
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.model.rule.action.RuleAction;
 import pl.edu.agh.student.model.rule.action.SendPlainPushAction;
 import pl.edu.agh.student.model.rule.action.SendSurveyAction;
 import pl.edu.agh.student.model.rule.action.SendUrlNotificationAction;
+import pl.edu.agh.student.services.IPayloadFetcher;
 
 @Component
 public class PayloadFetcherFactory {

@@ -21,11 +21,13 @@ public class UserProfileConditionChecker implements ISpecificConditionChecker {
     private static final Logger LOG = LoggerFactory.getLogger(UserProfileConditionCheck.class);
     private DeviceService deviceService;
     private ProfileService profileService;
+    private PropertyMatcherFactory propertyMatcherFactory;
 
     @Autowired
-    public UserProfileConditionChecker(DeviceService deviceService, ProfileService profileService) {
+    public UserProfileConditionChecker(DeviceService deviceService, ProfileService profileService, PropertyMatcherFactory propertyMatcherFactory) {
         this.deviceService = deviceService;
         this.profileService = profileService;
+        this.propertyMatcherFactory = propertyMatcherFactory;
     }
 
     @Override
@@ -57,7 +59,7 @@ public class UserProfileConditionChecker implements ISpecificConditionChecker {
             return false;
         }
 
-        boolean match = PropertyMatcherFactory.getMatcher(propertyType).match(singleCheck, propertyValue);
+        boolean match = propertyMatcherFactory.getMatcher(propertyType).match(singleCheck, propertyValue);
 
         if(!match){
             LOG.info("Profile property not matched, expected " + singleCheck + " but was: " + propertyValue);
@@ -66,4 +68,5 @@ public class UserProfileConditionChecker implements ISpecificConditionChecker {
         return match;
 
     }
+
 }
