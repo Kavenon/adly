@@ -24,17 +24,30 @@
             <fieldset>
                 <legend class="no-border">Event <i class="fa fa-plus pull-right adly-pointer" ng-show="rule.events.length==0" ui-sref=".event"></i></legend>
 
-                <adly-rule-events data="rule" ></adly-rule-events>
+                <div class="text-muted" ng-show="rule.events.length==0">
+                    No events
+                </div>
 
+                <adly-rule-events data="rule" ></adly-rule-events>
 
             </fieldset>
             <fieldset>
                 <legend class="no-border">Conditions <i class="fa fa-plus pull-right adly-pointer" ui-sref=".condition"></i></legend>
+
+                <div class="text-muted" ng-show="rule.conditions.length==0">
+                    No conditions
+                </div>
+
                 <adly-rule-conditions data="rule" ></adly-rule-conditions>
 
             </fieldset>
             <fieldset>
                 <legend class="no-border">Action <i class="fa fa-plus pull-right adly-pointer" ng-show="rule.actions.length==0" ui-sref=".action"></i></legend>
+
+                <div class="text-muted" ng-show="rule.actions.length==0">
+                    No actions
+                </div>
+
                 <adly-rule-actions data="rule" ></adly-rule-actions>
 
             </fieldset>
