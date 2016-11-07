@@ -1,5 +1,6 @@
 
 var sidebarTemplate = require('modules/core/navigation/sidebar.html');
+var navbarTopTemplate = require('modules/core/navigation/navbar-top.html');
 
 var Slimscroll = require('slimscroll');
 
@@ -10,11 +11,19 @@ module.exports = function(module){
   module
     .directive('snAction', snAction)
     .directive('snNavigation', snNavigation)
+    .directive('snNavbar', snNavbar)
   ;
   /* ========================================================================
    * Sing App actions. Shortcuts available via data-sn-action attribute
    * ========================================================================
    */
+  
+  function snNavbar(){
+      return {
+        templateUrl: navbarTopTemplate
+      }
+  };
+  
   snAction.$inject = ['$rootScope', '$timeout'];
   function snAction($rootScope, $timeout){
     var singActions = {
