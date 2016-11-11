@@ -4,7 +4,6 @@ import pl.edu.agh.student.event.UserEvent;
 import pl.edu.agh.student.model.NotificationSendRequest;
 import pl.edu.agh.student.model.System;
 import pl.edu.agh.student.model.notification.Notification;
-import pl.edu.agh.student.model.notification.NotificationType;
 import pl.edu.agh.student.model.receipent.Recipient;
 import pl.edu.agh.student.model.rule.RuleActionEntity;
 import pl.edu.agh.student.model.rule.action.AbstractSendPushAction;
@@ -15,8 +14,8 @@ import java.util.UUID;
 
 public abstract class AbstractSendNotificationExecutor implements ISpecificActionExecutor {
 
-    private NotificationWriter notificationWriter;
-    private DeviceService deviceService;
+    protected NotificationWriter notificationWriter;
+    protected DeviceService deviceService;
 
     public AbstractSendNotificationExecutor(NotificationWriter notificationWriter, DeviceService deviceService) {
         this.notificationWriter = notificationWriter;
@@ -39,7 +38,6 @@ public abstract class AbstractSendNotificationExecutor implements ISpecificActio
         notification.setId(action.getId());
         notification.setTitle(config.getTitle());
         notification.setText(config.getText());
-        notification.setType(getNotificationType());
 
         Recipient recipient = new Recipient();
         recipient.setToken(deviceService.getDeviceToken(userEvent.getUuid()));
@@ -52,7 +50,5 @@ public abstract class AbstractSendNotificationExecutor implements ISpecificActio
 
         return notificationSendRequest;
     }
-
-    abstract NotificationType getNotificationType();
 
 }

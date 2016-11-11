@@ -1,11 +1,12 @@
 package pl.edu.agh.student.model.notification;
 
+import static org.jivesoftware.smackx.pubsub.ConfigureNodeFields.type;
+
 public class Notification {
 
     private Integer id;
     private String title;
     private String text;
-    private NotificationType type;
 
     public Integer getId() {
         return id;
@@ -31,22 +32,12 @@ public class Notification {
         this.text = text;
     }
 
-    public NotificationType getType() {
-        return type;
-    }
-
-    public void setType(NotificationType type) {
-        this.type = type;
-    }
-
-
     @Override
     public String toString() {
         return "Notification{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                ", type=" + type +
                 '}';
     }
 }

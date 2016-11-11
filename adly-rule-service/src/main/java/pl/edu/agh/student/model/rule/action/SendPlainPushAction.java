@@ -15,4 +15,8 @@ public class SendPlainPushAction implements RuleAction {
         this.config = config;
     }
 
+    @Override
+    public RuleActionExternalType getExternalType() {
+        return RuleActionExternalType.P;
+    }
 }

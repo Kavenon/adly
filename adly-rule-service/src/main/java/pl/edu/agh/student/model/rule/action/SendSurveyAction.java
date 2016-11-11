@@ -16,4 +16,8 @@ public class SendSurveyAction implements RuleAction {
         this.config = config;
     }
 
+    @Override
+    public RuleActionExternalType getExternalType() {
+        return RuleActionExternalType.F;
+    }
 }
