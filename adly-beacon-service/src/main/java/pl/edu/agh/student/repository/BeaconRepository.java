@@ -17,4 +17,7 @@ public interface BeaconRepository extends CrudRepository<Beacon, Integer> {
 
     Beacon findByMinorAndMajorAndUidAndPuuid(Integer minor, Integer major, String uid, String proximityUuid);
 
+    List<Beacon> findByUserIdIsNull();
+
+    List<Beacon> findByUserIdOrUserIdIsNull(Long userId);
 }

@@ -4,7 +4,7 @@ module.exports = function(module) {
 
     module.controller('BeaconDiscoverConditionController', function($scope, AdlyDaoBeacon){
         $scope.selected.condition = '.BeaconDiscoverCondition';
-        $scope.beacons = AdlyDaoBeacon.query();
+        $scope.beacons = AdlyDaoBeacon.query({id: 'all'});
     });
     
     return {

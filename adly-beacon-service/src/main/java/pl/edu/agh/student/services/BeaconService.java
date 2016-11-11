@@ -24,6 +24,8 @@ public class BeaconService {
         this.oAuth2RestTemplate = oAuth2RestTemplate;
     }
 
+    public List<Beacon> getPredefinedBeacons() { return beaconRepository.findByUserIdIsNull(); }
+    public List<Beacon> getAllBeacons() { return beaconRepository.findByUserIdOrUserIdIsNull(getUserId()); }
     public List<Beacon> getBeacons() {
         return beaconRepository.findByUserId(getUserId());
     }

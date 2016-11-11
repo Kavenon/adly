@@ -22,6 +22,16 @@ public class BeaconRestController {
         return service.getBeacons();
     }
 
+    @RequestMapping(value="/predefined", method = RequestMethod.GET)
+    public List<Beacon> getBeaconsPredefined() {
+        return service.getPredefinedBeacons();
+    }
+
+    @RequestMapping(value="/all", method = RequestMethod.GET)
+    public List<Beacon> getAllBeacons() {
+        return service.getAllBeacons();
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public Beacon addBeacon(@RequestBody Beacon beacon) {
         return service.addBeacon(beacon);

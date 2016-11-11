@@ -1,5 +1,7 @@
 package pl.edu.agh.student.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/device")
 public class DeviceProfileController {
 
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private DeviceProfileService service;
 
@@ -22,6 +26,7 @@ public class DeviceProfileController {
             return new ResponseEntity<>(service.getDeviceProfileID(deviceId), HttpStatus.OK);
         }
         catch(Exception e){
+            log.error("Error during profile fetch", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -34,6 +39,7 @@ public class DeviceProfileController {
             return new ResponseEntity<>(service.getDeviceToken(deviceId), HttpStatus.OK);
         }
         catch(Exception e){
+            log.error("Error during get token fetch", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

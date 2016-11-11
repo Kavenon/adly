@@ -46,7 +46,7 @@ public class FcmConnection {
         connection.connect();
 
         // Log all outgoing packets
-        connection.addPacketInterceptor(packet -> log.info("Sent: {0}", packet.toXML()), new PacketTypeFilter(Message.class));
+        connection.addPacketInterceptor(packet -> log.info("Sent: " + packet.toXML()), new PacketTypeFilter(Message.class));
 
     }
 

@@ -4,7 +4,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import pl.edu.agh.student.model.System;
 import pl.edu.agh.student.model.notification.Notification;
-import pl.edu.agh.student.model.notification.NotificationType;
 import pl.edu.agh.student.model.receipent.Recipient;
 import pl.edu.agh.student.sender.FcmSender;
 
@@ -23,10 +22,9 @@ public class AdlyNotificationServiceTest {
         connection.login();
 
         Notification notification = new Notification();
-        notification.setId(1);
+        notification.setId(29);
         notification.setText("Text");
         notification.setTitle("Title");
-        notification.setType(NotificationType.P);
 
         Recipient recipient = new Recipient();
         recipient.setSystem(System.ANDROID);

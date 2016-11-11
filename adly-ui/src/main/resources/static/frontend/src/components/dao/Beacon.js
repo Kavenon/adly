@@ -5,7 +5,7 @@ module.exports = function(module){
         return $resource('/api/beacon/:id', { id: '@id' }, {
             update: {
                 method: 'PUT'
-            }
+            },
         });
     });
 
