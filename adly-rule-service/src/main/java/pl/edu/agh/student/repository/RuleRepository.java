@@ -17,4 +17,6 @@ public interface RuleRepository extends CrudRepository<Rule, Integer> {
     @Query(value = "select * from rule where events \\:\\: jsonb @> cast(?3 as jsonb) and active = ?2 and user_id = ?1 ", nativeQuery = true)
     List<Rule> findByUserIdAndActiveAndEventType(Long userId, boolean active, String eventType);
 
+    @Query(value = "select * from rule where events \\:\\: jsonb @> cast(?2 as jsonb) and active = ?1 ", nativeQuery = true)
+    List<Rule> findByActiveAndEventType(boolean b, String s);
 }

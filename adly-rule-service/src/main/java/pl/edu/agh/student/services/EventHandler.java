@@ -37,8 +37,7 @@ public class EventHandler {
 
         LOG.info("Received event: " + userEvent);
 
-        List<Rule> activeRulesForEvent =
-                ruleRepository.findByUserIdAndActiveAndEventType(userEvent.getUserId(), true, buildPqJsonParam(userEvent));
+        List<Rule> activeRulesForEvent = getActiveRulesForEvent(userEvent);
 
         LOG.info("Found rules: " + activeRulesForEvent.size());
 
@@ -50,6 +49,20 @@ public class EventHandler {
 
         LOG.info("Processing rules finished in: " + (System.currentTimeMillis() - startMillis));
 
+    }
+
+    private List<Rule> getActiveRulesForEvent(UserEvent userEvent) {
+        List<Rule> activeRulesForEvent;
+        if(userEvent.getUserId() == null){
+            //todo: add additional query. Now it will take all active users, will be better to take only this with selected predefined beacon
+            activeRulesForEvent =
+                    ruleRepository.findByActiveAndEventType(true, buildPqJsonParam(userEvent));
+        }
+        else {
+            activeRulesForEvent =
+                    ruleRepository.findByUserIdAndActiveAndEventType(userEvent.getUserId(), true, buildPqJsonParam(userEvent));
+        }
+        return activeRulesForEvent;
     }
 
 

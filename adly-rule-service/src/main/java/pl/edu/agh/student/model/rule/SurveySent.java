@@ -9,6 +9,9 @@ public class SurveySent {
     @PrimaryKey
     private SurveySentKey surveySentKey;
 
+    public SurveySent() {
+    }
+
     public SurveySent(SurveySentKey surveySentKey) {
         this.surveySentKey = surveySentKey;
     }
