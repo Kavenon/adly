@@ -1,6 +1,7 @@
 package pl.edu.agh.student.services.survey;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,13 +20,13 @@ public class SurveyCrudService {
     private OAuth2RestTemplate oAuth2RestTemplate;
 
     @Autowired
-    public SurveyCrudService(UserSurveyRepository repository, OAuth2RestTemplate oAuth2RestTemplate) {
+    public SurveyCrudService(UserSurveyRepository repository, @LoadBalanced OAuth2RestTemplate oAuth2RestTemplate) {
         this.repository = repository;
         this.oAuth2RestTemplate = oAuth2RestTemplate;
     }
 
     private Long getUserId() {
-        return oAuth2RestTemplate.getForObject("http://localhost:9191/uaa/userId", Long.class);
+        return oAuth2RestTemplate.getForObject("http://adly-auth/uaa/userId", Long.class);
     }
 
     public Survey add(Survey userSurvey) {
