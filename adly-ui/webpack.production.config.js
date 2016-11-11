@@ -14,12 +14,6 @@ module.exports = new Config.Config().extend('webpack.base.config.js').merge({
         }),
         new webpack.DefinePlugin({
             __PRODUCTION__: JSON.stringify('true')
-        }),
-        new CopyWebpackPlugin([{
-            context: env.ROOT + '/',
-            from: '**/i18n/**/*.json'
-        }], {
-            copyUnmodified: true
         })
     ]
 });
