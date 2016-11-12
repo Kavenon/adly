@@ -27,9 +27,28 @@ core.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         $state.go('app.dashboard');
     });
 
+    $httpProvider.interceptors.push(function($q, $injector) {
+
+        return {
+            'responseError': function(rejection){
+
+                var defer = $q.defer();
+
+                if(rejection.status == 401){
+                    var $state = $injector.get('$state');
+                    $state.go('app.login');
+                }
+
+                defer.reject(rejection);
+
+                return defer.promise;
+
+            }
+        };
+    });
+
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $httpProvider.defaults.headers.common['Accept'] = 'application/json';
-
 
 });
 
@@ -47,6 +66,14 @@ core.controller('App', function(config, $scope, $localStorage, $state, $http) {
     } else {
         $localStorage.state = $scope.app.state;
     }
+
+    // == AUTH
+
+    $http.defaults.headers.common['Authorization'] = 'Bearer ' + $localStorage.token;
+    $http.get('/uaa/userId').then(function(data){
+        $localStorage.userId = data;
+    });
+
 });
 
 

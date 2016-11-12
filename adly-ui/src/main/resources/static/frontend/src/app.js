@@ -8,6 +8,7 @@ require('bootstrap-webpack');
 
 var adlyApp = angular.module('adlyApp', [
     'adlyApp.core',
+    'adlyApp.login',
     'adlyApp.dashboard',
     'adlyApp.beacon',
     'adlyApp.userProfile',
@@ -16,6 +17,7 @@ var adlyApp = angular.module('adlyApp', [
 ]);
 
 require('modules/core');
+require('modules/login');
 require('modules/dashboard');
 require('modules/beacon');
 require('modules/user-profile');
