@@ -16,18 +16,18 @@ public class SurveyResponseService {
 
     private SurveyResponseRepository surveyResponseRepository;
     private ProfileCardService profileCardService;
-    private DeviceService profileService;
+    private DeviceService deviceService;
 
     @Autowired
-    public SurveyResponseService(SurveyResponseRepository surveyResponseRepository, ProfileCardService profileCardService, DeviceService profileService) {
+    public SurveyResponseService(SurveyResponseRepository surveyResponseRepository, ProfileCardService profileCardService, DeviceService deviceService) {
         this.surveyResponseRepository = surveyResponseRepository;
         this.profileCardService = profileCardService;
-        this.profileService = profileService;
+        this.deviceService = deviceService;
     }
 
     public void handleResponse(SurveyResponseRequest responseRequest) {
 
-        UUID profileId = UUID.fromString(profileService.getProfileId(responseRequest.getUuid()));
+        UUID profileId = UUID.fromString(deviceService.getProfileId(responseRequest.getUuid()));
         SurveyResponseKey surveyResponseKey = new SurveyResponseKey(
                 profileId,
                 new Date(),

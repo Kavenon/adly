@@ -3,6 +3,7 @@ package pl.edu.agh.student.services;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.model.ProfileCard;
 import pl.edu.agh.student.model.ProfileCardKey;
@@ -46,6 +47,7 @@ public class ProfileCardService {
 
     }
 
+    @PreAuthorize("#oauth2.hasScope('server')")
     public String getPropertyValueForUuid(UUID profileUuid, Integer propertyId) {
 
         ProfileCard one = profileCardRepository.findOne(new ProfileCardKey(profileUuid, propertyId));

@@ -1,14 +1,14 @@
 package pl.edu.agh.student.services.survey;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
 import pl.edu.agh.student.model.survey.Survey;
 import pl.edu.agh.student.repository.UserSurveyRepository;
+import pl.edu.agh.student.services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,43 +17,44 @@ import java.util.Objects;
 public class SurveyCrudService {
 
     private UserSurveyRepository repository;
-    private OAuth2RestTemplate oAuth2RestTemplate;
+    private UserService userService;
 
     @Autowired
-    public SurveyCrudService(UserSurveyRepository repository, @LoadBalanced OAuth2RestTemplate oAuth2RestTemplate) {
+    public SurveyCrudService(UserSurveyRepository repository, UserService userService) {
         this.repository = repository;
-        this.oAuth2RestTemplate = oAuth2RestTemplate;
+        this.userService = userService;
     }
 
-    private Long getUserId() {
-        return oAuth2RestTemplate.getForObject("http://adly-auth/uaa/userId", Long.class);
+    private Long getUserId(Principal principal) {
+        return userService.getUserId(principal.getName());
     }
 
-    public Survey add(Survey userSurvey) {
+    public Survey add(Survey userSurvey, Principal principal) {
         userSurvey.setId(null);
-        userSurvey.setUserId(getUserId());
+        userSurvey.setUserId(getUserId(principal));
         return repository.save(userSurvey);
     }
 
-    public Survey update(Survey updatedItem, Integer id) {
+    public Survey update(Survey updatedItem, Integer id, Principal principal) {
 
         Survey one = repository.findOne(updatedItem.getId());
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        Long userId = getUserId(principal);
+        if(!Objects.equals(userId, one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
         updatedItem.setId(id);
-        updatedItem.setUserId(getUserId());
+        updatedItem.setUserId(userId);
         return repository.save(updatedItem);
 
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer id, Principal principal) {
 
         Survey one = repository.findOne(id);
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        if(!Objects.equals(getUserId(principal), one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
@@ -62,12 +63,12 @@ public class SurveyCrudService {
 
     }
 
-    public Survey get(Integer id) {
-        return repository.findByIdAndUserId(id, getUserId());
+    public Survey get(Integer id, Principal principal) {
+        return repository.findByIdAndUserId(id, getUserId(principal));
     }
 
-    public List<Survey> get() {
-        return repository.findByUserIdAndDeleted(getUserId(), false);
+    public List<Survey> get(Principal principal) {
+        return repository.findByUserIdAndDeleted(getUserId(principal), false);
     }
 
 

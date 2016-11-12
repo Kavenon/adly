@@ -1,15 +1,15 @@
 package pl.edu.agh.student.services.property;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
 import pl.edu.agh.student.model.property.IPropertyType;
 import pl.edu.agh.student.model.property.ProfileProperty;
 import pl.edu.agh.student.repository.ProfilePropertyRepository;
+import pl.edu.agh.student.services.UserService;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,44 +18,45 @@ import java.util.Objects;
 public class UserPropertyService {
 
     private ProfilePropertyRepository repository;
-    private OAuth2RestTemplate oAuth2RestTemplate;
+    private UserService userService;
 
     @Autowired
-    public UserPropertyService(ProfilePropertyRepository repository, @LoadBalanced  OAuth2RestTemplate oAuth2RestTemplate) {
+    public UserPropertyService(ProfilePropertyRepository repository,UserService userService) {
         this.repository = repository;
-        this.oAuth2RestTemplate = oAuth2RestTemplate;
+        this.userService = userService;
     }
 
-    private Long getUserId() {
-        return oAuth2RestTemplate.getForObject("http://adly-auth/uaa/userId", Long.class);
+    private Long getUserId(Principal principal) {
+        return userService.getUserId(principal.getName());
     }
 
-    public ProfileProperty add(ProfileProperty userProperty) {
+    public ProfileProperty add(ProfileProperty userProperty, Principal principal) {
         userProperty.setId(null);
-        userProperty.setUserId(getUserId());
+        userProperty.setUserId(getUserId(principal));
         return repository.save(userProperty);
     }
 
-    public ProfileProperty update(ProfileProperty updatedItem, Integer id) {
+    public ProfileProperty update(ProfileProperty updatedItem, Integer id, Principal principal) {
 
         ProfileProperty one = repository.findOne(updatedItem.getId());
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        Long userId = getUserId(principal);
+        if(!Objects.equals(userId, one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
         updatedItem.setId(id);
-        updatedItem.setUserId(getUserId());
+        updatedItem.setUserId(userId);
         updatedItem.setType(one.getType());
         return repository.save(updatedItem);
 
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer id, Principal principal) {
 
         ProfileProperty one = repository.findOne(id);
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        if(!Objects.equals(getUserId(principal), one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
@@ -64,12 +65,12 @@ public class UserPropertyService {
 
     }
 
-    public ProfileProperty get(Integer id) {
-        return repository.findByIdAndUserId(id, getUserId());
+    public ProfileProperty get(Integer id, Principal principal) {
+        return repository.findByIdAndUserId(id, getUserId(principal));
     }
 
-    public List<ProfileProperty> get() {
-        return repository.findByUserIdAndDeleted(getUserId(), false);
+    public List<ProfileProperty> get(Principal principal) {
+        return repository.findByUserIdAndDeleted(getUserId(principal), false);
     }
 
     public IPropertyType getPropertyTypeById(Integer propertyId) {

@@ -1,14 +1,13 @@
 package pl.edu.agh.student.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
 import pl.edu.agh.student.model.Beacon;
 import pl.edu.agh.student.repository.BeaconRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,50 +16,50 @@ import java.util.Objects;
 public class BeaconService {
 
     private BeaconRepository beaconRepository;
-    private OAuth2RestTemplate oAuth2RestTemplate;
+    private UserService userService;
 
     @Autowired
-    public BeaconService(BeaconRepository beaconRepository, @LoadBalanced
-             OAuth2RestTemplate oAuth2RestTemplate) {
+    public BeaconService(BeaconRepository beaconRepository, UserService userService) {
         this.beaconRepository = beaconRepository;
-        this.oAuth2RestTemplate = oAuth2RestTemplate;
+        this.userService = userService;
     }
 
     public List<Beacon> getPredefinedBeacons() { return beaconRepository.findByUserIdIsNull(); }
-    public List<Beacon> getAllBeacons() { return beaconRepository.findByUserIdOrUserIdIsNull(getUserId()); }
-    public List<Beacon> getBeacons() {
-        return beaconRepository.findByUserId(getUserId());
+    public List<Beacon> getAllBeacons(Principal principal) { return beaconRepository.findByUserIdOrUserIdIsNull(getUserId(principal)); }
+    public List<Beacon> getBeacons(Principal principal) {
+        return beaconRepository.findByUserId(getUserId(principal));
     }
 
-    private Long getUserId() {
-        return oAuth2RestTemplate.getForObject("http://adly-auth/uaa/userId", Long.class);
+    private Long getUserId(Principal principal) {
+        return userService.getUserId(principal.getName());
     }
 
-    public Beacon addBeacon(Beacon beacon) {
+    public Beacon addBeacon(Beacon beacon, Principal principal) {
         beacon.setId(null);
-        beacon.setUserId(getUserId());
+        beacon.setUserId(getUserId(principal));
         return beaconRepository.save(beacon);
     }
 
-    public Beacon updateBeacon(Beacon updatedItem, Integer id) {
+    public Beacon updateBeacon(Beacon updatedItem, Integer id, Principal principal) {
 
         Beacon one = beaconRepository.findOne(updatedItem.getId());
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        Long userId = getUserId(principal);
+        if(!Objects.equals(userId, one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
         updatedItem.setId(id);
-        updatedItem.setUserId(getUserId());
+        updatedItem.setUserId(userId);
         return beaconRepository.save(updatedItem);
 
     }
 
-    public void deleteBeacon(Integer beaconId) {
-        beaconRepository.deleteByIdAndUserId(beaconId, getUserId());
+    public void deleteBeacon(Integer beaconId, Principal principal) {
+        beaconRepository.deleteByIdAndUserId(beaconId, getUserId(principal));
     }
 
-    public Beacon getBeacon(Integer id) {
-        return beaconRepository.findByIdAndUserId(id, getUserId());
+    public Beacon getBeacon(Integer id, Principal principal) {
+        return beaconRepository.findByIdAndUserId(id, getUserId(principal));
     }
 }

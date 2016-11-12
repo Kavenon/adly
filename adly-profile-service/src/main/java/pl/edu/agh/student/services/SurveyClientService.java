@@ -1,6 +1,7 @@
 package pl.edu.agh.student.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.model.survey.Survey;
 import pl.edu.agh.student.model.survey.client.survey.ClientSurvey;

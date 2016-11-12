@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import pl.edu.agh.student.model.NotificationSendRequest;
 import pl.edu.agh.student.model.NotificationSent;
@@ -54,6 +55,7 @@ public class NotificationSentService {
 
     }
 
+    @PreAuthorize("#oauth2.hasScope('server')")
     public boolean hasSentToDevice(UUID deviceId, Long sinceMillis) {
 
         List<NotificationSent> notificationSent =

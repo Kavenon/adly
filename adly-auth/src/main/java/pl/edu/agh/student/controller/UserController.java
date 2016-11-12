@@ -1,7 +1,9 @@
 package pl.edu.agh.student.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.agh.student.model.User;
@@ -23,8 +25,9 @@ public class UserController {
 
 	@RequestMapping("/userId")
 	@ResponseBody
-	public Long userId(Principal user) {
-		return ((User) userService.loadUserByUsername(user.getName())).getId();
+	@PreAuthorize("#oauth2.hasScope('server')")
+	public Long userId(@RequestParam(value = "user") String user) {
+		return ((User) userService.loadUserByUsername(user)).getId();
 	}
 
 }

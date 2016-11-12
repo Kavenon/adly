@@ -31,6 +31,11 @@ public class BeaconDiscoverProcessor {
     @StreamListener("input")
     public void onBeaconDiscover(BeaconDiscoverEvent event){
 
+        if(event.getBeacon().getUserId() == null){
+            LOG.info("Discovered predefined beacon, skipping...");
+            return ;
+        }
+
         UUID deviceUuid = UUID.fromString(event.getUuid());
         Device byUuid = deviceRepository.findOne(deviceUuid);
         if(byUuid != null){

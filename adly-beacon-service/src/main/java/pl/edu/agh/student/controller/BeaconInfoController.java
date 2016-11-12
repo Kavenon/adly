@@ -3,6 +3,7 @@ package pl.edu.agh.student.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ public class BeaconInfoController {
     @Autowired
     private BeaconInfoService service;
 
+    @PreAuthorize("#oauth2.hasScope('server')")
     @RequestMapping(value = "/discover", method = RequestMethod.GET)
     public ResponseEntity<Object> getBeacon(@RequestParam(value = "uuid") String uuid,
                                             @RequestParam(value = "beaconId") Integer beaconId,

@@ -1,14 +1,13 @@
 package pl.edu.agh.student.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.agh.student.exceptions.UnauthorizedAccessException;
 import pl.edu.agh.student.model.rule.Rule;
 import pl.edu.agh.student.repository.RuleRepository;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,43 +16,44 @@ import java.util.Objects;
 public class RuleCrudService {
 
     private RuleRepository repository;
-    private OAuth2RestTemplate oAuth2RestTemplate;
+    private UserService userService;
 
     @Autowired
-    public RuleCrudService(RuleRepository repository, @LoadBalanced OAuth2RestTemplate oAuth2RestTemplate) {
+    public RuleCrudService(RuleRepository repository, UserService userService) {
         this.repository = repository;
-        this.oAuth2RestTemplate = oAuth2RestTemplate;
+        this.userService = userService;
     }
 
-    private Long getUserId() {
-        return oAuth2RestTemplate.getForObject("http://adly-auth/uaa/userId", Long.class);
+    private Long getUserId(Principal principal) {
+        return userService.getUserId(principal.getName());
     }
 
-    public Rule add(Rule rule) {
+    public Rule add(Rule rule, Principal principal) {
         rule.setId(null);
-        rule.setUserId(getUserId());
+        rule.setUserId(getUserId(principal));
         return repository.save(rule);
     }
 
-    public Rule update(Rule updatedItem, Integer id) {
+    public Rule update(Rule updatedItem, Integer id, Principal principal) {
 
         Rule one = repository.findOne(updatedItem.getId());
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        Long userId = getUserId(principal);
+        if(!Objects.equals(userId, one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
         updatedItem.setId(id);
-        updatedItem.setUserId(getUserId());
+        updatedItem.setUserId(userId);
         return repository.save(updatedItem);
 
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer id, Principal principal) {
 
         Rule one = repository.findOne(id);
 
-        if(!Objects.equals(getUserId(), one.getUserId())){
+        if(!Objects.equals(getUserId(principal), one.getUserId())){
             throw new UnauthorizedAccessException();
         }
 
@@ -62,12 +62,12 @@ public class RuleCrudService {
 
     }
 
-    public Rule get(Integer id) {
-        return repository.findByIdAndUserId(id, getUserId());
+    public Rule get(Integer id, Principal principal) {
+        return repository.findByIdAndUserId(id, getUserId(principal));
     }
 
-    public List<Rule> get() {
-        return repository.findByUserIdAndDeleted(getUserId(), false);
+    public List<Rule> get(Principal principal) {
+        return repository.findByUserIdAndDeleted(getUserId(principal), false);
     }
 
 
