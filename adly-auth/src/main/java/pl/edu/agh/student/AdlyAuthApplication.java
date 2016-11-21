@@ -86,7 +86,13 @@ public class AdlyAuthApplication {
                     .withClient("internal-service")
                     .secret("internal-secret")
                     .authorizedGrantTypes("client_credentials", "refresh_token")
-                    .scopes("server");
+                    .scopes("server")
+                    .and()
+                    //todo: for production move every vendor should have it's own sceret
+                    .withClient("api")
+                    .secret("secret")
+                    .authorizedGrantTypes("client_credentials", "refresh_token")
+                    .scopes("api");
             // @formatter:on
 
         }

@@ -4,6 +4,7 @@
   "description": "Adly.io",
   "main": "index.js",
   "scripts": {
+    "prebuild": "npm-install-changed",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack-dev-server --inline --hot --port 9090"
