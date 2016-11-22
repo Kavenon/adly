@@ -39,6 +39,17 @@ adly-eureka-service:
   environment:
    - SPRING_PROFILES_ACTIVE=docker
    - DOCKER_IP=$DOCKER_IP
+adly-beacon-service:
+ image: adly/adly-beacon-service
+ ports:
+  - 8100:8100
+ links:
+  - postgres
+  - adly-eureka-service
+  - adly-config-server
+ environment:
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
 #edge-service:
 #  image: adly/edge-service
 #  ports:
