@@ -1,0 +1,1 @@
+INSERT into users (id,password,name) values (1, '$2a$10$m1tJrxWfeRU.63ULMQ/teu4MkCURIa7flqLiTPefe9M19fjXk3hHS', 'admin');
