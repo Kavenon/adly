@@ -7,7 +7,7 @@
 
     <groupId>pl.edu.agh.student</groupId>
     <artifactId>adly</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>adly/parent</name>
     <packaging>pom</packaging>
 

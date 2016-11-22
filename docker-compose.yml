@@ -1,5 +1,5 @@
-adly-config-service:
-  image: adly/adly-config-service
+adly-config-server:
+  image: adly/adly-config-server
   environment:
    - SPRING_PROFILES_ACTIVE=docker
    - DOCKER_IP=$DOCKER_IP
@@ -19,25 +19,26 @@ postgres:
   environment:
    - POSTGRES_PASSWORD=adly
    - POSTGRES_USER=adly
-
 adly-auth-service:
-  image: adly/adly-auth-service:
+  image: adly/adly-auth-service
   ports:
    - 9191:9191
   links:
    - postgres
-   - discovery-service
-   - config-service
+   - adly-eureka-service
+   - adly-config-server
   environment:
    - SPRING_PROFILES_ACTIVE=docker
    - DOCKER_IP=$DOCKER_IP
-#discovery-service:
-#  image: adly/discovery-service
-#  ports:
-#   - 8761:8761
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
+adly-eureka-service:
+  image: adly/adly-eureka-service
+  ports:
+   - 8761:8761
+  links:
+    - adly-config-server
+  environment:
+   - SPRING_PROFILES_ACTIVE=docker
+   - DOCKER_IP=$DOCKER_IP
 #edge-service:
 #  image: adly/edge-service
 #  ports:

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: adly-notification-sender-service
+  profiles:
+    active: development
+---
+spring:
+  profiles: development
+  cloud:
+    config:
+      uri: http://localhost:8888
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      uri: http://${DOCKER_IP:192.168.99.100}:8888
