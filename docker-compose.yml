@@ -19,6 +19,7 @@ postgres:
   environment:
    - POSTGRES_PASSWORD=adly
    - POSTGRES_USER=adly
+   - POSTGRES_DB=adly
 rabbit:
  image: rabbitmq:latest
  ports:
