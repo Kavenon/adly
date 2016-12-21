@@ -61,7 +61,7 @@ adly-beacon-service:
  environment:
   - SPRING_PROFILES_ACTIVE=docker
   - DOCKER_IP=$DOCKER_IP
- mem_limit: 128000000
+ mem_limit: 1000000000
 adly-edge-service:
   image: adly/adly-edge
   ports:

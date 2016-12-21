@@ -23,8 +23,8 @@ public class AdlyNotificationServiceTest {
 
         Notification notification = new Notification();
         notification.setId(29);
-        notification.setText("Text");
-        notification.setTitle("Title");
+        notification.setText("Restauracja Kraków");
+        notification.setTitle("Niesamowita oferta dla Ciebie. Kliknij po więcej!");
 
         Recipient recipient = new Recipient();
         recipient.setSystem(System.ANDROID);
