@@ -22,28 +22,29 @@ postgres:
    - POSTGRES_PASSWORD=adly
    - POSTGRES_USER=adly
    - POSTGRES_DB=adly
-  mem_limit: 256000000
+  mem_limit: 512000000
 rabbit:
- image: rabbitmq:latest
- ports:
+  image: rabbitmq:latest
+  ports:
   - 5672:5672
- mem_limit: 256000000
+  mem_limit: 512000000
 cassandra:
- image: spotify/cassandra
- ports:
+  image: spotify/cassandra
+  ports:
   - 9042:9042
- mem_limit: 256000000
+  mem_limit: 256000000
 adly-auth-service:
   image: adly/adly-auth
   ports:
-   - 9191:9191
+  - 9191:9191
   links:
-   - postgres
-   - adly-eureka-service
-   - adly-config-server
+  - postgres
+  - adly-eureka-service
+  - adly-config-server
   environment:
-   - SPRING_PROFILES_ACTIVE=docker
-   - DOCKER_IP=$DOCKER_IP
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
+  mem_limit: 256000000
 adly-eureka-service:
   image: adly/adly-eureka-service
   ports:
@@ -53,20 +54,22 @@ adly-eureka-service:
   environment:
    - SPRING_PROFILES_ACTIVE=docker
    - DOCKER_IP=$DOCKER_IP
+  mem_limit: 256000000
 adly-beacon-service:
- image: adly/adly-beacon-service
- ports:
+  image: adly/adly-beacon-service
+  ports:
   - 8100:8100
- links:
+  links:
   - postgres
   - cassandra
   - rabbit
+  - adly-auth-service
   - adly-eureka-service
   - adly-config-server
- environment:
+  environment:
   - SPRING_PROFILES_ACTIVE=docker
   - DOCKER_IP=$DOCKER_IP
- mem_limit: 256000000
+  mem_limit: 256000000
 adly-edge-service:
   image: adly/adly-edge
   ports:
@@ -81,63 +84,69 @@ adly-edge-service:
 adly-device-service:
   image: adly/adly-device-service
   ports:
-    - 8300:8300
+  - 8300:8300
   links:
-    - cassandra
-    - rabbit
-    - adly-eureka-service
-    - adly-config-server
+  - cassandra
+  - rabbit
+  - adly-eureka-service
+  - adly-config-server
   environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - DOCKER_IP=$DOCKER_IP
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
   mem_limit: 256000000
 adly-notificaiton-sender-service:
   image: adly/adly-notificaiton-sender-service
   ports:
-    - 8200:8200
+  - 8200:8200
   links:
-    - cassandra
-    - adly-eureka-service
-    - adly-config-server
+  - cassandra
+  - adly-eureka-service
+  - adly-config-server
   environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - DOCKER_IP=$DOCKER_IP
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
   mem_limit: 128000000
 adly-profile-service:
   image: adly/adly-profile-service
   ports:
-    - 8000:8000
+  - 8000:8000
   links:
-    - postgres
-    - cassandra
-    - adly-eureka-service
-    - adly-config-server
+  - postgres
+  - cassandra
+  - adly-auth-service
+  - adly-eureka-service
+  - adly-config-server
   environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - DOCKER_IP=$DOCKER_IP
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
   mem_limit: 256000000
 adly-rule-service:
   image: adly/adly-rule-service
   ports:
-    - 8500:8500
+  - 8500:8500
   links:
-    - rabbit
-    - postgres
-    - cassandra
-    - adly-eureka-service
-    - adly-config-server
+  - rabbit
+  - postgres
+  - cassandra
+  - adly-auth-service
+  - adly-eureka-service
+  - adly-config-server
   environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - DOCKER_IP=$DOCKER_IP
-  mem_limit: 256000000
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
+  mem_limit: 512000000
 adly-ui:
   image: adly/adly-ui
   ports:
-    - 8080:8080
+  - 8080:8080
   links:
-    - adly-eureka-service
-    - adly-config-server
+  - adly-rule-service
+  - adly-beacon-service
+  - adly-profile-service
+  - adly-auth-service
+  - adly-eureka-service
+  - adly-config-server
   environment:
-    - SPRING_PROFILES_ACTIVE=docker
-    - DOCKER_IP=$DOCKER_IP
+  - SPRING_PROFILES_ACTIVE=docker
+  - DOCKER_IP=$DOCKER_IP
   mem_limit: 256000000
