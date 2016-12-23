@@ -84,6 +84,52 @@ adly-device-service:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - DOCKER_IP=$DOCKER_IP
+adly-notificaiton-sender-service:
+  image: adly/adly-notificaiton-sender-service
+  ports:
+    - 8200:8200
+  links:
+    - cassandra
+    - adly-eureka-service
+    - adly-config-server
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    - DOCKER_IP=$DOCKER_IP
+adly-profile-service:
+  image: adly/adly-profile-service
+  ports:
+    - 8000:8000
+  links:
+    - postgres
+    - cassandra
+    - adly-eureka-service
+    - adly-config-server
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    - DOCKER_IP=$DOCKER_IP
+adly-rule-service:
+  image: adly/adly-rule-service
+  ports:
+    - 8500:8500
+  links:
+    - rabbit
+    - postgres
+    - cassandra
+    - adly-eureka-service
+    - adly-config-server
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    - DOCKER_IP=$DOCKER_IP
+adly-ui:
+  image: adly/adly-ui
+  ports:
+    - 8080:8080
+  links:
+    - adly-eureka-service
+    - adly-config-server
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+    - DOCKER_IP=$DOCKER_IP
 #account-service:
 #  image: adly/account-service
 #  links:

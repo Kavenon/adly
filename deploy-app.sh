@@ -42,7 +42,7 @@ while : ;do
 
   # Get the status of this machine from the Cassandra nodetool
   STATUS=`docker exec adlyio_cassandra_1 nodetool status | grep 'UN' | awk '{print $1}'`
-          echo $STATUS
+
   # Once the status is Up and Normal, then we are ready
   if [ $STATUS = "UN" ]; then
         docker cp ./merged.cql adlyio_cassandra_1:/merged.cql
