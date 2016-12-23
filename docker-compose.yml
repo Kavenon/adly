@@ -5,6 +5,7 @@ adly-config-server:
    - DOCKER_IP=$DOCKER_IP
   ports:
    - 8888:8888
+  mem_limit: 128000000
 #adly-hystrix-dashboard:
 #  image: adly/adly-hystrix-dashboard
 #  environment:
@@ -12,6 +13,7 @@ adly-config-server:
 #   - DOCKER_IP=$DOCKER_IP
 #  ports:
 #   - 8010:8010
+#  mem_limit: 128000000
 postgres:
   image: postgres:latest
   ports:
@@ -20,14 +22,17 @@ postgres:
    - POSTGRES_PASSWORD=adly
    - POSTGRES_USER=adly
    - POSTGRES_DB=adly
+  mem_limit: 256000000
 rabbit:
  image: rabbitmq:latest
  ports:
   - 5672:5672
+ mem_limit: 256000000
 cassandra:
  image: spotify/cassandra
  ports:
   - 9042:9042
+ mem_limit: 256000000
 adly-auth-service:
   image: adly/adly-auth
   ports:
@@ -61,7 +66,7 @@ adly-beacon-service:
  environment:
   - SPRING_PROFILES_ACTIVE=docker
   - DOCKER_IP=$DOCKER_IP
- mem_limit: 1000000000
+ mem_limit: 256000000
 adly-edge-service:
   image: adly/adly-edge
   ports:
@@ -72,6 +77,7 @@ adly-edge-service:
   environment:
    - SPRING_PROFILES_ACTIVE=docker
    - DOCKER_IP=$DOCKER_IP
+  mem_limit: 128000000
 adly-device-service:
   image: adly/adly-device-service
   ports:
@@ -84,6 +90,7 @@ adly-device-service:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - DOCKER_IP=$DOCKER_IP
+  mem_limit: 256000000
 adly-notificaiton-sender-service:
   image: adly/adly-notificaiton-sender-service
   ports:
@@ -95,6 +102,7 @@ adly-notificaiton-sender-service:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - DOCKER_IP=$DOCKER_IP
+  mem_limit: 128000000
 adly-profile-service:
   image: adly/adly-profile-service
   ports:
@@ -107,6 +115,7 @@ adly-profile-service:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - DOCKER_IP=$DOCKER_IP
+  mem_limit: 256000000
 adly-rule-service:
   image: adly/adly-rule-service
   ports:
@@ -120,6 +129,7 @@ adly-rule-service:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - DOCKER_IP=$DOCKER_IP
+  mem_limit: 256000000
 adly-ui:
   image: adly/adly-ui
   ports:
@@ -130,64 +140,4 @@ adly-ui:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
     - DOCKER_IP=$DOCKER_IP
-#account-service:
-#  image: adly/account-service
-#  links:
-#   - user-service
-#   - discovery-service
-#   - config-service
-#   - mysql
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
-#inventory-service:
-#  image: adly/inventory-service
-#  links:
-#   - neo4j
-#   - discovery-service
-#   - config-service
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
-#order-service:
-#  image: adly/order-service
-#  links:
-#   - mongo
-#   - discovery-service
-#   - config-service
-#   - user-service
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
-#catalog-service:
-#  image: adly/catalog-service
-#  links:
-#   - redis
-#   - mysql
-#   - discovery-service
-#   - config-service
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
-#shopping-cart-service:
-#  image: adly/shopping-cart-service
-#  links:
-#   - mysql
-#   - discovery-service
-#   - config-service
-#   - user-service
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
-#online-store-web:
-#  image: adly/online-store-web
-#  ports:
-#   - 8787:8787
-#  links:
-#   - discovery-service
-#   - config-service
-#   - user-service
-#   - edge-service
-#  environment:
-#   - SPRING_PROFILES_ACTIVE=docker
-#   - DOCKER_IP=$DOCKER_IP
+  mem_limit: 256000000
