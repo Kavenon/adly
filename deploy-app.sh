@@ -57,9 +57,6 @@ done
 
 echo "Initializing Cassandra - done"
 
-sleep 2
-
-# Start the other containers
 docker-compose up -d
 
 # Attach to the log output of the cluster
