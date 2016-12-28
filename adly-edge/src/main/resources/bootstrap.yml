@@ -14,6 +14,7 @@ spring:
     config:
       uri: http://localhost:8888
 ---
+server.port: 9999
 spring:
   profiles: docker
   cloud:
