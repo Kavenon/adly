@@ -1,0 +1,44 @@
+server.port: 9999
+spring:
+  application:
+    name: adly-edge
+  profiles:
+    active: development
+security:
+  basic:
+    enabled: false
+zuul:
+  ignored-services: '*'
+  ignoredPatterns: /**/api/**
+  routes:
+    adly-beacon-service:
+      path: /beacon/**
+      stripPrefix: false
+      serviceId: adly-beacon-service
+      sensitiveHeaders:
+    adly-profile-service:
+          path: /profile/**
+          stripPrefix: false
+          serviceId: adly-profile-service
+          sensitiveHeaders:
+    adly-device-service:
+          path: /device/**
+          stripPrefix: false
+          serviceId: adly-device-service
+          sensitiveHeaders:
+    adly-rule-service:
+          path: /rule/**
+          stripPrefix: false
+          serviceId: adly-rule-service
+          sensitiveHeaders:
+---
+spring:
+  profiles: docker
+eureka:
+   client:
+      serviceUrl:
+        defaultZone: http://${DOCKER_IP:192.168.99.100}:8761/eureka/
+   instance:
+      prefer-ip-address: true
+
+
