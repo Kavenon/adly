@@ -1,0 +1,26 @@
+======= Serwer =======
+
+1. Zainstalować docker.
+2. Stworzyć maszynę docker'a np.: docker-machine create default --driver=virtualbox --virtualbox-memory=5000 --virtualbox-disk-size=50000
+3. Podłączyć się do aktywnej maszyny: eval "$(docker-machine env default)"
+4. Załadować obrazy dockera za pomocą skryptu ./load-img.sh lub we własnym zakresie.
+5. Uruchomić skrypt ./deploy-app.sh
+6. Umożliwić dostęp do serwisu adly-edge z zewnątrz np.:
+    VBoxManage controlvm $(docker-machine active) natpf1 "adlyedge,tcp,,9999,,9999"
+    można cofnąć przekierowanie portów za pomocą:
+    VBoxManage controlvm default natpf1 delete "adlyedge"
+
+Uwagi:
+ - zakładam, że maszyna docker'a nazywa się "default"
+ - plik merged.cql musi znajdować się w katalogu wywołania skryptu deply-app.sh
+ - proces uruchamiania wszystkich serwisów trwa ok 7 min (na moim środowisku)
+ - po uruchomieniu aplikacji mogą wystąpić błędy 500 podczas requestów do serwisów. Jest to spodziewane zjawisko, które ustępuje po kliku żądaniach.
+ - Login: admin Hasło: admin
+
+======= Android ========
+Uwaga: wyłącznie do celów prezentacyjnych, na osobnym branchu została dodana możliwość wpisania adresu serwisu edgowego na pierwszym ekranie aplikacji. Ostatecznie zostanie oddana wersja bez tego ekranu, gdyż w warunkach produkcyjnych, aplikacja mobilna odwoływała by się wyłącznie do jednego adresu np. https://api.adly.io
+
+1. Zainstalować oraz uruchomić aplikację
+2. Wprowadzić adres serwisu adly-edge (uruchomiony jest on na porcie 9999)
+proszę wpisać adres w takiej formie: http://xx.xx.xx.xx:9999
+- Można najpierw spróbować otworzyć adres http://xx.xx.xx.xx:9999/health w przeglądarce, aby sprawdzić, czy telefon jest w stanie połączyć się z serwisem.
