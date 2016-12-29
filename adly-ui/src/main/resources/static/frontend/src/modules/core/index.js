@@ -70,7 +70,7 @@ core.controller('App', function(config, $scope, $localStorage, $state, $http) {
     // == AUTH
 
     $http.defaults.headers.common['Authorization'] = 'Bearer ' + $localStorage.token;
-    $http.get('/uaa/userId').then(function(data){
+    $http.get('/uaa/myId').then(function(data){
         $localStorage.userId = data;
     });
 

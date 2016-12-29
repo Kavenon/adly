@@ -25,8 +25,15 @@ public class UserController {
 
 	@RequestMapping("/userId")
 	@ResponseBody
+	@PreAuthorize("#oauth2.hasScope('server')")
 	public Long userId(@RequestParam(value = "user") String user) {
 		return ((User) userService.loadUserByUsername(user)).getId();
+	}
+
+	@RequestMapping("/myId")
+	@ResponseBody
+	public Long userId(Principal user) {
+		return ((User) userService.loadUserByUsername(user.getName())).getId();
 	}
 
 }
