@@ -9,5 +9,6 @@ gunzip -c adly-notification-sender-service.tar.gz | docker load
 gunzip -c adly-profile-service.tar.gz | docker load
 gunzip -c adly-rule-service.tar.gz | docker load
 gunzip -c adly-ui.tar.gz | docker load
+gunzip -c adly-zipkin-service.tar.gz | docker load
 
 
