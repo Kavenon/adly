@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
-#eval "$(docker-machine env default)"
 
-# Export the active docker machine IP
+#eval "$(docker-machine env default)"
+#VBoxManage modifyvm "default" --natpf1 "default,tcp,,9999,,9999"
+#VBoxManage controlvm default natpf1 delete "default"
+#VBoxManage controlvm $(docker-machine active) natpf1 "default,tcp,,9999,,9999"
+
 export DOCKER_IP=$(docker-machine ip $(docker-machine active))
 
-# docker-machine doesn't exist in Linux, assign default ip if it's not set
 DOCKER_IP=${DOCKER_IP:-0.0.0.0}
-echo $DOCKER_IP
-# Remove existing containers
+
 docker-compose stop
 docker-compose rm -f
 
-# Start the config service first and wait for it to become available
 docker-compose up -d adly-config-server
-
-
 
 while [ -z ${CONFIG_SERVICE_READY} ]; do
   echo "Waiting for config service..."
@@ -24,7 +22,6 @@ while [ -z ${CONFIG_SERVICE_READY} ]; do
   sleep 2
 done
 
-# Start the discovery service next and wait
 docker-compose up -d adly-eureka-service
 
 while [ -z ${DISCOVERY_SERVICE_READY} ]; do
@@ -37,13 +34,11 @@ done
 
 docker-compose up -d cassandra
 
-echo "Initializing Cassandra"
+echo "Initializing Cassandra (few stack traces are expected)"
 while : ;do
 
-  # Get the status of this machine from the Cassandra nodetool
   STATUS=`docker exec adlyio_cassandra_1 nodetool status | grep 'UN' | awk '{print $1}'`
 
-  # Once the status is Up and Normal, then we are ready
   if [ $STATUS = "UN" ]; then
         docker cp ./merged.cql adlyio_cassandra_1:/merged.cql
         docker exec adlyio_cassandra_1 cqlsh -f ./merged.cql
@@ -54,10 +49,10 @@ while : ;do
 
 done
 
+docker-compose up -d adly-edge-service
 
 echo "Initializing Cassandra - done"
 
 docker-compose up -d
 
-# Attach to the log output of the cluster
 docker-compose logs
