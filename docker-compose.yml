@@ -125,3 +125,11 @@ adly-ui:
   - JVM_OPTS=-Xmx128M -Xms128M
   - SPRING_PROFILES_ACTIVE=docker
   - DOCKER_IP=$DOCKER_IP
+adly-zipkin-service:
+  image: adly/adly-zipkin-service
+  environment:
+   - JVM_OPTS=-Xmx64M -Xms64M
+   - SPRING_PROFILES_ACTIVE=docker
+   - DOCKER_IP=$DOCKER_IP
+  ports:
+   - 9411:9411

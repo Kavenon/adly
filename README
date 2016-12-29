@@ -14,7 +14,7 @@ Uwagi:
  - zakładam, że maszyna docker'a nazywa się "default"
  - plik merged.cql musi znajdować się w katalogu wywołania skryptu deply-app.sh
  - proces uruchamiania wszystkich serwisów trwa ok 7 min (na moim środowisku)
- - po uruchomieniu aplikacji mogą wystąpić błędy 500 podczas requestów do serwisów. Jest to spodziewane zjawisko, które ustępuje po kliku żądaniach.
+ - po uruchomieniu aplikacji mogą wystąpić błędy 500 podczas requestów do serwisów. Jest to spodziewane zjawisko, które ustępuje po kliku żądaniach. Dla pewności po błędnych żądaniach należy odczekać ok 1min aż Eureka wykryje wszystkie usługi (spowodowane jest to tzw czasem heartbeat).
  - Login: admin Hasło: admin
 
 ======= Android ========
