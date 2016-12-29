@@ -10,5 +10,6 @@ docker save adly/adly-profile-service | gzip > adly-profile-service.tar.gz
 docker save adly/adly-rule-service | gzip > adly-rule-service.tar.gz
 docker save adly/adly-ui | gzip > adly-ui.tar.gz
 docker save adly/adly-zipkin-service | gzip > adly-zipkin-service.tar.gz
+docker save anapsix/alpine-java | gzip > java.tar.gz
 
 
