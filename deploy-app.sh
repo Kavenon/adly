@@ -55,4 +55,4 @@ echo "Initializing Cassandra - done"
 
 docker-compose up -d
 
-docker-compose logs
+docker-compose logs -f
