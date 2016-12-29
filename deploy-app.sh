@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-#eval "$(docker-machine env default)"
-#VBoxManage modifyvm "default" --natpf1 "default,tcp,,9999,,9999"
-#VBoxManage controlvm default natpf1 delete "default"
-#VBoxManage controlvm $(docker-machine active) natpf1 "default,tcp,,9999,,9999"
+#VBoxManage controlvm default natpf1 delete "adlyedge"
+#VBoxManage controlvm $(docker-machine active) natpf1 "adlyedge,tcp,,9999,,9999"
 
 export DOCKER_IP=$(docker-machine ip $(docker-machine active))
 

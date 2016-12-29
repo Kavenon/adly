@@ -82,6 +82,7 @@ adly-notification-sender-service:
   ports:
   - 8200:8200
   links:
+  - rabbit
   - adly-eureka-service
   - adly-config-server
   environment:
