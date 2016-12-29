@@ -120,3 +120,5 @@ hs_err_pid*
 .idea/
 *.iml
 adly-ui/src/main/resources/static/frontend/dist
+
+/review
