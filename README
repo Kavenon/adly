@@ -9,18 +9,18 @@
     VBoxManage controlvm $(docker-machine active) natpf1 "adlyedge,tcp,,9999,,9999"
     można cofnąć przekierowanie portów za pomocą:
     VBoxManage controlvm default natpf1 delete "adlyedge"
+7. Aplikacja webowa dostępna jest na porcie 8080
 
 Uwagi:
- - zakładam, że maszyna docker'a nazywa się "default"
  - plik merged.cql musi znajdować się w katalogu wywołania skryptu deply-app.sh
  - proces uruchamiania wszystkich serwisów trwa ok 7 min (na moim środowisku)
  - po uruchomieniu aplikacji mogą wystąpić błędy 500 podczas requestów do serwisów. Jest to spodziewane zjawisko, które ustępuje po kliku żądaniach. Dla pewności po błędnych żądaniach należy odczekać ok 1min aż Eureka wykryje wszystkie usługi (spowodowane jest to tzw czasem heartbeat).
  - Login: admin Hasło: admin
 
 ======= Android ========
-Uwaga: wyłącznie do celów prezentacyjnych, na osobnym branchu została dodana możliwość wpisania adresu serwisu edgowego na pierwszym ekranie aplikacji. Ostatecznie zostanie oddana wersja bez tego ekranu, gdyż w warunkach produkcyjnych, aplikacja mobilna odwoływała by się wyłącznie do jednego adresu np. https://api.adly.io
-
-1. Zainstalować oraz uruchomić aplikację
-2. Wprowadzić adres serwisu adly-edge (uruchomiony jest on na porcie 9999)
-proszę wpisać adres w takiej formie: http://xx.xx.xx.xx:9999
+Uwaga: na potrzeby prezentacyjne należy ręcznie zmienić wartość "adly_url". W warunkach produkcyjnych, aplikacja mobilna odwoływała by się wyłącznie do jednego adresu np. https://api.adly.io
+1. Zmienić wartość "adly_url" na odpowiedni adres serwisu adly-edge (port 9999) np. http://xx.xx.xx.xx:9999
 - Można najpierw spróbować otworzyć adres http://xx.xx.xx.xx:9999/health w przeglądarce, aby sprawdzić, czy telefon jest w stanie połączyć się z serwisem.
+2. Zainstalować oraz uruchomić aplikację przy użyciu Android Studio.
+
+
