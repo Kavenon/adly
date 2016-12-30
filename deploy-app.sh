@@ -38,8 +38,8 @@ while : ;do
   STATUS=`docker exec $(docker ps -aqf "name=cassandra") nodetool status | grep 'UN' | awk '{print $1}'`
 
   if [ $STATUS = "UN" ]; then
-        docker cp ./merged.cql adlyio_cassandra_1:/merged.cql
-        docker exec adlyio_cassandra_1 cqlsh -f ./merged.cql
+        docker cp ./merged.cql $(docker ps -aqf "name=cassandra"):/merged.cql
+        docker exec $(docker ps -aqf "name=cassandra") cqlsh -f ./merged.cql
         break
   fi
 
