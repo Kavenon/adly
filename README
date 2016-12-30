@@ -18,7 +18,10 @@ Uwagi:
  - Login: admin Hasło: admin
 
 ======= Android ========
-Uwaga: na potrzeby prezentacyjne należy ręcznie zmienić wartość "adly_url". W warunkach produkcyjnych, aplikacja mobilna odwoływała by się wyłącznie do jednego adresu np. https://api.adly.io
+Uwaga:
+  - na potrzeby prezentacyjne należy ręcznie zmienić wartość "adly_url". W warunkach produkcyjnych, aplikacja mobilna odwoływała by się wyłącznie do jednego adresu np. https://api.adly.io
+  - telefon musi mieć włączony bluetooth oraz internet
+
 1. Zmienić wartość "adly_url" na odpowiedni adres serwisu adly-edge (port 9999) np. http://xx.xx.xx.xx:9999
 - Można najpierw spróbować otworzyć adres http://xx.xx.xx.xx:9999/health w przeglądarce, aby sprawdzić, czy telefon jest w stanie połączyć się z serwisem.
 2. Zainstalować oraz uruchomić aplikację przy użyciu Android Studio.
