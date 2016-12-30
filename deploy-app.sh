@@ -35,7 +35,7 @@ docker-compose up -d cassandra
 echo "Initializing Cassandra (few stack traces are expected)"
 while : ;do
 
-  STATUS=`docker exec adlyio_cassandra_1 nodetool status | grep 'UN' | awk '{print $1}'`
+  STATUS=`docker exec $(docker ps -aqf "name=cassandra") nodetool status | grep 'UN' | awk '{print $1}'`
 
   if [ $STATUS = "UN" ]; then
         docker cp ./merged.cql adlyio_cassandra_1:/merged.cql
